@@ -1,0 +1,331 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+    <!-- Style -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="{% static 'homestyle.css' %}" rel="stylesheet" >
+    <link href="{% static 'homescripts.js' %}" rel="stylesheet" >
+    <script src="{% static 'homescripts.js' %}"></script>
+
+    <title>JobSnatch</title>
+  </head>
+  <style>
+    #container2>.homediv4:hover{
+      background-image: url("{% static 'images/suitcase1.png' %}"); 
+      background-size: cover;
+      background-blend-mode:normal;
+      color:white
+     }
+    
+  #container2>.homediv5:hover{
+    background-image: url("{% static 'images/coding.webp' %}");
+    background-size: cover;
+    background-blend-mode:normal;
+    color:white
+  }
+  #container2>.homediv6:hover{
+    background-image: url("{% static 'images/analytics1.png' %}");
+    background-size: cover;
+    background-blend-mode:normal;
+    color:white
+  }
+  #container2>.homediv7:hover{
+    background-image: url("{% static 'images/writing1.png' %}");
+    background-size: cover;
+    background-blend-mode:normal;
+    color:white
+  }
+  #container2>.homediv8:hover{
+    background-image: url("{% static 'images/education1.png' %}");
+    background-size: cover;
+    background-blend-mode:normal;
+    color:white
+  }
+  #container2>.homediv9:hover{
+    background-image: url("{% static 'images/food2.webp' %}");
+    background-size: cover;
+    background-blend-mode:normal;
+    color:white
+  }
+  #container2>.homediv10:hover{
+    background-image: url("{% static 'images/editing1.png' %}");
+    background-size: cover;
+    background-blend-mode:normal;
+    color:white;
+    font-weight: bolder;
+  }
+  #container2>.homediv11:hover{
+    background-image: url("{% static 'images/speaker2.jpg' %}");
+    background-size: cover;
+    background-blend-mode:normal;
+    color:rgb(8, 8, 8)
+  }
+  .homebody{
+    background-image: url("{% static 'images/home4.png' %}");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  
+  </style>
+  <body style="background-image: linear-gradient( rgb(198, 201, 202),rgb(50, 147, 166));">
+    <div class="homebody">
+        <div class="header" id="myHeader">
+            <a href="#default" class="logo">JobSnatch</a>
+            <div class="header-right">
+              <a class="active" href="#home">Home</a>
+              <a href="#cat">Categories</a>
+              <a href="#blo">Blog</a>
+              <a href="#con">Contact</a>
+              <a href="{% url 'register' %}" style="width:auto; color:white">Register</a>
+              <a href="{% url 'login' %}" style="width:auto; color:white">Login</a>
+            </div>
+          </div>
+    <script>
+         window.onscroll = function() {myFunction()};
+            
+         var header = document.getElementById("myHeader");
+         var sticky = header.offsetTop;
+            
+         function myFunction() {
+              if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+              } else {
+                header.classList.remove("sticky");
+              }
+            }
+     </script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+  <!-- <div class="content">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6 contents">
+          <div class="row justify-content-center">
+            <div class="col-md-12">
+              <div class="form-block">
+                  <div class="mb-4">
+                      <h1>Welcome Mr. Django </h1>
+                  </div>
+                  <label>Log in if you already have registered!</label>
+                  <div class="form-group last mb-4">
+                      <div><button class="btn btn-pill text-white btn-block btn-primary"><a href="{% url 'login' %}">login</a></button></div>
+                  </div>
+                  <label>If not register here!</label>
+                  <div class="form-group last mb-4">
+                      <div><button class="btn btn-pill text-white btn-block btn-primary"><a href="{% url 'register' %}">register</a></button></div>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div> -->
+
+  <div id="home"></div>
+      <div class="homediv1" >
+        <p class="homep1">Frustrated with your <br> job hiring?Let's try <br>JobSnatch</p>
+        <p class="homep2">A platform that helps you to find your respective job and enrich <br> your future.Along with personal assist
+        to guide you throughout <br> your journey.</p>
+        <p style="margin-bottom: -2.5%">Supported by 4k+ companies </p>
+        <p style="margin-left:-1%"><img align="middle" src="{% static 'images/meta.png' %}" width="80" height="100" hspace="10" ><img  align="middle" src="{% static 'images/google.png'%}" width="30" height="27" hspace="10" > <img align="middle" src="{% static 'images/linkedin.png'%}" width="90" height="90" hspace="10"> <img align="middle" src="{% static 'images/slack.png'%}" width="80" height="80" hspace="10" > </p>
+      </div>
+    </div>
+  <div id="cat" class="homediv2">JOB CATEGORIES</div>
+    
+  <div id="container2" class="row">
+    <div class="col-xs-12 col-sm-6 col-m-4 col-lg-3 col-xl-2 homediv4">
+        <p class="homediv3"><img align="middle" src="{% static 'images/suitcase.png'%}" width="50" height="50" ></p>
+        <p style="font-size: 17px; text-align:center; font-weight: bold; color:white">Accounting and Finance</p>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-m-4 col-lg-3 col-xl-2 homediv5">
+        <p class="homediv3"><img align="middle" src="{% static 'images/monitor.png'%}" width="50" height="50" ></p>
+        <p style="font-size: 17px; text-align:center; font-weight: bold;color:white">Programming and Tech</p>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-m-4 col-lg-3 col-xl-2 homediv6">
+        <p class="homediv3"><img align="middle" src="{% static 'images/analytics.png'%}" width="50" height="50" ></p>
+        <p style="font-size: 17px; text-align:center; font-weight: bold;color:white">Data Science and Analytics</p>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-m-4 col-lg-3 col-xl-2 homediv7">
+        <p class="homediv3"><img align="middle" src="{% static 'images/writing.png'%}" width="50" height="50" ></p>
+        <p style="font-size: 17px; text-align:center; font-weight: bold;color:white">Writing \ Translation  </p>
+    </div>
+
+  </div>
+<br><br><br>
+<div id="container2" class="row">
+    <div class="col-xs-12 col-sm-6 col-m-4 col-lg-3 col-xl-2 homediv8">
+        <p class="homediv3"><img align="middle" src="{% static 'images/education.png'%}" width="50" height="50" ></p>
+        <p style="font-size: 17px; text-align:center; font-weight: bold;color:white">Education \ Training  </p>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-m-4 col-lg-3 col-xl-2 homediv9">
+        <p class="homediv3"><img align="middle" src="{% static 'images/food.png'%}" width="50" height="50" ></p>
+        <p style="font-size: 17px; text-align:center; font-weight: bold;color:white">Restaurant \ Food Service  </p>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-m-4 col-lg-3 col-xl-2 homediv10">
+        <p class="homediv3"><img align="middle" src="{% static 'images/editing.png'%}" width="50" height="50" ></p>
+        <p style="font-size: 17px; text-align:center; font-weight: bold;color:white">Design,Art and Multimedia  </p>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-m-4 col-lg-3 col-xl-2 homediv11">
+        <p class="homediv3"><img align="middle" src="{% static 'images/speaker.png'%}" width="50" height="50" ></p>
+        <p style="font-size: 17px; text-align:center; font-weight: bold;color:white">Sales \ Markeing  </p>
+    </div>
+
+</div>
+<br><br><br><br>
+<div id="container3" class="row" style="background-color: rgba(255, 255, 255, 0.050);width:105%;">
+  <div class="col-xs-2 col-sm-2 col-m-4 col-lg-2 col-xl-2 hiw">
+     <h2 style="text-align:center;">How It Works?</h2>
+  </div>
+  <div class="col-xs-2 col-sm-3 col-m-4 col-lg-6 col-xl-12 hiw1">
+    <p class="homediv3"><img align="middle" src="{% static 'images/user.png'%}" width="50" height="50" ></p>
+    <p style="font-size: 20px; text-align:center; font-weight: bold;color:white">Create an Account  </p>
+    <p style="font-size: 15px; font-weight: bold;color:white">Create a personal acoount by simply clicking the Sign Up and enter the specified details.</p>
+</div>
+<div class="col-xs-2 col-sm-2 col-m-4 col-lg-2 col-xl-2 hiw1">
+  <p class="homediv3"><img align="middle" src="{% static 'images/search.png'%}" width="50" height="50" ></p>
+  <p style="font-size: 20px; text-align:center; font-weight: bold;color:white">Search Jobs </p>
+  <p style="font-size: 15px; font-weight: bold;color:white">Search for jobs as per your preference, capbilities and interest.</p>
+</div>
+<div class="col-xs-2 col-sm-2 col-m-4 col-lg-2 col-xl-2 hiw1">
+  <p class="homediv3"><img align="middle" src="{% static 'images/apply.png'%}" width="50" height="45" ></p>
+  <p style="font-size: 20px; text-align:center; font-weight: bold;color:white">Apply </p>
+  <p style="font-size: 15px; font-weight: bold;color:white">Select apt job from the listings and apply for it and if needed enroll for the training sections.</p>
+</div>
+  </div>
+<br><br><br>
+  <div id="container3" class="row">
+    <div class="col-xs-2 col-sm-2 col-m-4 col-lg-2 col-xl-2 hiw">
+       <h2 id="blo">Blog Post</h2>
+    </div>
+    <div class="col-xs-2 col-sm-3 col-m-4 col-lg-6 col-xl-12 hiw2">
+      <p class="blogpara"><img align="middle" src="{% static 'images/blog1.jpg'%}" width="100%" height="170" ></p>
+      <p style="font-size: 17px; font-weight: bold;color:white">Tips to write an impressive resume online for beginners.  </p>
+      <p>Learn More >></p>
+  </div>
+  <div class="col-xs-2 col-sm-2 col-m-4 col-lg-2 col-xl-2 hiw2">
+    <p class="blogpara"><img align="middle" src="{% static 'images/blog2.jpg'%}" width="100%" height="170" ></p>
+    <p style="font-size: 17px; font-weight: bold;color:white">Tips to help you clear apptitudes with ease </p>
+    <p>Learn More >></p>
+  </div>
+  <div class="col-xs-2 col-sm-2 col-m-4 col-lg-2 col-xl-2 hiw2">
+    <p class="blogpara"><img align="middle" src="{% static 'images/blog3.jpg'%}" width="100%" height="170" ></p>
+    <p style="font-size: 17px; font-weight: bold;color:white">How to convince recruiters <br> and get your deam job </p>
+    <p>Learn More >></p>
+  </div>
+    </div>
+
+
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+    <div id="con" class="body">
+        <footer>
+          <div class="row primary">
+            <div class="column about">
+          
+            <h3>JobSnatch</h3>
+          
+             <p>
+                Your perfect partner thet help your build your best carrier and therby enriching your future.
+                The perfect guide that guides you along your way to success by helping to choose the the right job as per your preference.
+            </p>
+          
+            <div class="social">
+              <i class="fa-brands fa-facebook-square"></i>
+              <i class="fa-brands fa-instagram-square"></i>
+              <i class="fa-brands fa-twitter-square"></i>
+              <i class="fa-brands fa-youtube-square"></i>
+              <i class="fa-brands fa-whatsapp-square"></i>
+            </div>
+          </div>
+          
+          <div class="column links">
+          <h3>Some Links</h3>
+          
+           <ul>
+          
+            <li>
+             <a href="#faq">F.A.Q</a>
+            </li>
+            <li>
+             <a href="#cookies-policy">Cookies Policy</a>
+            </li>
+            <li>
+             <a href="#terms-of-services">Terms Of Service</a>
+            </li>
+            <li>
+             <a href="#support">Support</a>
+            </li>
+           </ul>
+          
+          </div>
+          
+          
+          <div class="column links">
+            <h3>Some Links</h3>
+             <ul>
+              <li>
+               <a href="#faq">F.A.Q</a>
+              </li>
+              <li>
+               <a href="#cookies-policy">Cookies Policy</a>
+              </li>
+              <li>
+              <a href="#terms-of-services">Terms Of Service</a>
+              </li>
+              <li>
+              <a href="#support">Support</a>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="column subscribe">
+           <h3>Newsletter</h3>
+            <div>
+             <input type="email" placeholder="Your email id here" />
+             <button class="foobut">Subscribe</button>
+            </div>
+          
+          </div>
+          
+          </div>
+          
+          <div class="row copyright">
+            <div class="footer-menu">
+          
+            <a href="">Home</a>
+            <a href="">About</a>
+            <a href="">Contact</a>
+            <a href="">Blog</a>
+            <a href="">Social</a>
+            <p style="float: right">Copyright &copy; 2022 JobSnatch</p>
+            </div>
+          </div>
+          </footer>
+        </div>
+    </body>
+    </html>
+    
+  </body>
+</html>

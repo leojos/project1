@@ -21,5 +21,7 @@ urlpatterns = [
     path("avlcandidates", views.avlcandidates, name='avlcandidates'),
     path("comprofile", views.comprofile, name='comprofile'),
     path("comactivity", views.comactivity, name='comactivity'),
+    path("cologin", views.cologin, name='cologin'),
+    path("cotbl", views.cotbl, name='cotbl'),
     # path("showusername", views.showusername, name='showusername'),
 ]

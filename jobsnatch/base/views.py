@@ -3,6 +3,8 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages 
 # from base.models import displayusername
 
+from .models import tblcomp
+
 def index(request):
     return render(request,'index.html')
 
@@ -32,8 +34,8 @@ def register(request):
         return render(request,'index.html')
 
 def login(request):
-    if 'username' in request.session:
-      return redirect('canprofile')
+    # if 'username' in request.session:
+    #   return redirect('canprofile')
     if request.method=='POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -155,6 +157,51 @@ def comprofile(request):
 def comactivity(request):
     # if 'username' in request.session:
     return render(request,'comactivity.html')
+
+def cologin(request):
+    # if 'username' in request.session:
+    #   return redirect('canprofile')
+    if request.method=='POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        # if username in tblcomp and password in tblcomp: 
+        # user = tblcomp(username=username,password=password)
+        user = auth.authenticate(username=username, password=password)
+        if user is not None:
+                request.session['username'] = username
+                # tblcomp.login(request, user)
+                auth.login(request, user)
+                return redirect('comprofile')
+        else:
+                messages.info(request,'Invalid Credentials')
+                return redirect('/')
+    return render(request,'index.html')
+
+def cotbl(request):
+  if request.method == 'POST':
+        username = request.POST['username']
+        name = request.POST['name']
+        email = request.POST['email']
+        password1 = request.POST['p1']
+        password2 = request.POST['p2']
+        if password1==password2 :
+             if User.objects.filter(username=username).exists():
+                messages.info(request,'Username Taken')
+                return redirect('/')
+             elif User.objects.filter(email=email).exists():
+                messages.info(request,'Email Taken')
+                return redirect('/')
+             else:
+                member = tblcomp(username=username,name=name,email=email,password=password1)
+                member.save()
+                messages.info(request,'user created')
+                return redirect('/')
+        else:
+             messages.info(request,'Password not matching')
+             return redirect('/')
+  else:
+       return render(request,'index.html')
+
 # def showusername(request):
 #   displayname=User.objects.all()
 #   return redirect('admin',{'displayusername':displayname})
