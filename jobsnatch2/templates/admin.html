@@ -238,10 +238,22 @@ body {margin:0;font-family:Arial}
           <p style="text-align: center;">{{data2}}</p>
        </div>
        <div style="margin-top:20%">
-        <form action="{% url 'addcat' %}" method="POST">
+        <form action="{% url 'addcat' %}" method="POST" enctype="multipart/form-data">
            {% csrf_token %}
            <input type="text" placeholder="category type" name="cat">
-           <input type="file" name="pics" accept="image/png, image/jpeg">
+           <input type="file"  accept="image/png, image/jpeg" name="p">
+           <input type="submit" value="Submit">
+        </form>
+      </div>
+      <div style="margin-top:20%">
+        <form action="{% url 'intern' %}" method="POST" enctype="multipart/form-data">
+           {% csrf_token %}
+           <input type="text" placeholder="Title" name="tit">
+           <input type="text" placeholder="caption" name="cap">
+           <input type="number" placeholder="Duration num" name="durno">
+           <input type="text" placeholder="week/mon" name="durex">
+           <input type="date" placeholder="Enddate" name="edate">
+           <input type="file"  accept="image/png, image/jpeg" name="p">
            <input type="submit" value="Submit">
         </form>
       </div>

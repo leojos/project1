@@ -59,6 +59,10 @@
               <span class="section-title text-primary mb-3 mb-sm-4">Job Description and Requirements</span>
               <p>{{x.job_description}}</p>
           </div>
+          <div>
+            <span class="section-title text-primary mb-3 mb-sm-4">Location</span>
+            <p>{{x.loc}}</p>
+          </div>
             
             <form method="post" action="{% url 'applyjob'%}">
               {% csrf_token %}

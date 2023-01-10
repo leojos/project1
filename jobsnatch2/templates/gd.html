@@ -2,16 +2,36 @@
 {% extends 'base.html'%}
 {% load static %}
 {% block content %}
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
 <style> 
     body{
         background-image: url("{% static 'images/gd.jpg' %}");
         background-size:45%;
         background-repeat:no-repeat;
       }
+      .div1{
+        height: fit-content;
+        width: 50%;
+        text-align:center;
+        background-color:rgba(255, 255, 255, 0.606);
+        margin-top:5%;
+        margin-left:25%;
+        border-radius:10px;
+        padding:6px;
+        font-size: large;
+        
+      }
 </style>
 <body>
     <!-- <h1 style="color: black; text-align:center">Hi {{user.username}}, The companies that accepted your requests are :</h1> -->
-    <div style="height: 38%;width:42%;float:left;background-color:#3b5898b6;margin-top:25%;margin-left:2%;border-radius:10px;border-top-right-radius: 50px;border-bottom-left-radius: 50px;"></div>
+    <div style="height: 38%;width:42%;float:left;background-image: linear-gradient(to right, rgb(0, 0, 0),rgba(104, 101, 101, 0.395));margin-top:25%;margin-left:2%;border-radius:10px;border-top-right-radius: 50px;border-bottom-left-radius: 50px;">
+        <a href="https://youtu.be/3w32jIsRlsw"><img src="{% static 'images/gd1.jpg' %}"  style="margin-left:7%;margin-top:0.1%;border-radius:5%;" width="459" height="226"></a>
+    </div>
+    
     <div style="width:50%;text-align: justify;margin-left:47%;color:black;">
    
         <h1 style="font-weight: bolder;color:#293f6f">MASTERING GDs</h1>
@@ -27,11 +47,94 @@
                    <li> Clears the selection rounds of companies visiting for the campus placement process</li>
                    
             </ul></p>
-            <p style="font-weight: bold;">During the course, Students undergoes 50+ GD Rounds which not only check their continuous growth but also gives them regular feedback on the key improvement areas.
-            We monitor our students on an individual basis and measure their performance thereby imparting specialized training as per the requirements of students as well as the companies.
-            Our aptitude training program is highly interactive and is designed to give students the much needed edge in positioning themselves ahead of the curve in today's highly competitive world.</p>
-   
+            <p><h3>10 Roles in a Group Discussion</h3>
+                GD is a collaborative discussion that involves a group of people. Participants play a role in these discussions. Your GD role can impact your chances of getting selected. Choose your role smartly. 
+                <ul type=".">
+                    <li>Opener - The candidate who initiates the group discussion is an opener or a beginner. As they go first, there is very little time for them to prepare their arguments. Volunteer for this position only if you know the topic well. </li> 
+                    <li>Facilitator / Moderator - A facilitator or moderator ensures that no participant is getting interrupted while making arguments. They also make sure participants are following the rules properly. </li>
+                    <li>Seeker of Information - These group discussion participants are not aware of the topic and look for arguments in statements made by others. </li>
+                    <li>Opinion Seeker - This person has no stand, they look for an opportunity to accumulate information and create an opinion. </li>
+                    <li>Analyst - They analyses and clarifies the arguments and opinions discussed during the group discussion. </li>
+                    <li>Community Supporter - These individuals in a group discussion do not have any strong opinion. They support everyone in the discussion.  </li>
+                    <li>Reliever -  They witness the problem with a broader perspective.</li>
+                    <li>Energy spreader -  These group discussion participants are active and indirectly motivate others to speak up. </li>
+                    <li>Bridge creator - They concentrate on coming to a common ground and find an optimum solution to the given problem. </li>
+                    <li>Summary maker - This GD participant is responsible for concluding the discussion.</li> 
+                </ul></p>
+                <div  style="width:42%;position: absolute;left:0;top:99%;margin-left:2%;"><p style="font-weight: bold;float:left;">During the course, Students undergoes 50+ GD Rounds ( Online and Offline ) which not only check your continuous growth but also gives them regular feedback on the key improvement areas.
+                    We monitor our students on an individual basis and measure their performance thereby imparting specialized training as per the requirements of students as well as the companies.
+                    Our aptitude training program is highly interactive and is designed to give students the much needed edge in positioning themselves ahead of the curve in today's highly competitive world.</p>
+                    
+                </div>
+                <div style="width:42%;position: absolute;left:0;top:127%;margin-left:2%;">
+                    <h4>Procedure :</h4>
+                    <ul type="square">
+                        <li>Personal Assistance</li>
+                        <li>2-5 day training</li>
+                        <li>Daily Tests</li>
+                        <li>Further Helps</li>
+                    </ul>
+
+                    <form action="{% url 'train' %}" method="post">
+                        {% csrf_token %}
+                        <!-- <input type="text" value="GD" name="gd" hidden> -->
+                        
+<div class="container">
+    
+    <!-- Trigger the modal with a button -->
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style=" height:35px;width: 10%;background-color:rgb(10, 62, 87) ;border-color:rgb(10, 62, 87);border-radius:5px;color:white;">Apply Now</button>
+  
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content" style="background:rgba(9, 148, 223, 0.742);">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" style="color: white;text-align:center">Confrim your time and date :)</h4>
+          </div>
+          <div class="modal-body">
+            <div class="div1">
+                    <form action="{% url 'train' %}" method="post" onsubmit="cli()"> 
+                      {% csrf_token %}
+                      <br><br>
+                      <label for="uname">Name : </label>
+                      <input type="text" value="{{user.username}}" name="uname" style="border-radius:7px;margin-left:6%; border:none;text-align:center;width:fit-content;"><br><br>
+                      <label for="ititle">Type : </label>
+                      <input type="text"  name="type" value="GD" style="border-radius:7px;margin-left:6%;border:none;text-align:center;width:fit-content;"><br><br>
+                      <label for="pday">Day : </label>
+                      <input type="date" placeholder="Prefered day" name="pday" style="border-radius:7px;margin-left:6%;border:none;text-align:center;" required>
+                      <br><br>
+                      <label for="ptime" style="margin-left:-14%;">Time :  </label>
+                      <select name="ptime" id="interntime"  style="border-radius:7px;margin-left:2%;border:none;text-align:center;" placeholder="Choose Time" required>
+                        <option value="9:00 AM">9:00 AM</option>
+                        <option value="11:00 AM">11:00 AM</option>
+                        <option value="2:00 PM">2:00 PM</option>
+                        <option value="4:00 PM">4:00 PM</option>
+                        <option value="7:00 PM">7:00 PM</option>
+                      </select><br><br>
+                      <input type="number" value={{user.id}} name="caid" hidden>
+                      <button type="submit" style="border-radius: 5px;border:none;background: rgb(7, 133, 183);height:fit-content;width:fit-content;font-weight:bold;color:white;font-size:medium;">Confrim</button>
+                    </form>
+                  </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    
+  </div>
+  
+                        <!-- <button type="submit" style=" height:35px;width: 23%;background-color:rgb(10, 62, 87) ;border-color:rgb(10, 62, 87);border-radius:5px;color:white">Apply Now</button> -->
+                    </form></div>
+                
+            
 </div>
+
 </body>
 {% endblock %}
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">

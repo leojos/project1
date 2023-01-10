@@ -130,10 +130,12 @@ body {margin:0;font-family:Arial}
           <div class="dropdown-content">
             <a href="{% url 'aptitude'%}">Apptitude</a>
             <a href="{% url 'gd'%}">GD</a>
-            <a href="interview">Interview</a>
+            <a href="{% url 'interview' %}">Interview</a>
           </div>
         </div>
         <a href="{% url 'my_form' %}">Feedback</a>
+        <a href="moreinterns/{{user.id}}">Internships</a>
+        <a href="{% url 'activity' %}">Activities</a>
         <div style="float: right;margin-right:5%;">
             {% if user.is_authenticated %}
                 <p style=" margin-top:15%">

@@ -17,6 +17,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
     </head>
     <style>
       .account-settings .user-profile {
@@ -182,9 +184,9 @@
           }
           
           </style>
- <body style="background-image: linear-gradient( rgb(198, 201, 202),rgb(50, 147, 166));">
+ <body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));">
    <div class="topnav" id="myTopnav" style="margin-top:-20px ;">
-      <a href="{% url 'company'%}" class="active">Dashboard</a>
+      <a href="{% url 'company'%}" style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));">Dashboard</a>
       <a href="{% url 'jobpost'%}" id="try">Post Job</a>
       <a href="{% url 'avlcandidates'%}">Available Candidates</a>
       <a href="{% url 'acceptedcan'%}">Accepted Candidates</a>
@@ -231,8 +233,6 @@
     <div class="container">
     <div class="row flex-lg-nowrap">
      
-      <form class="form"  action="updatecom/{{ user.id }}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
       <div class="col">
         <div class="row">
           <div class="col mb-3">
@@ -256,28 +256,29 @@
                         <p class="mb-0">{{user.email}}</p>
                         <div class="text-muted"><small>Last seen 2 hours ago</small></div>
                         <div class="mt-2">
-                          <label for="avatar">Choose a profile picture:</label>
-                          <input type="file" d="avatar" name="img" accept="image/png, image/jpeg">
-                          <div class="mt-2">
-                            <label for="avatar">Choose a proof:</label>
-                            <input type="file" d="avatar" name="proof" accept="image/png, image/jpeg">
-                          </div>
+                          <!-- Button trigger modal -->
+                          <button type="button" class="btn btn-primary" style="background-color: rgb(10, 62, 87);" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Update Profile
+                          </button> 
                         </div>
-                        
+                        <div style="margin-top:-28%;margin-left:110%;width:100%">
+                          <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Submit Proof</button>
+                        </div>
                       </div>
                       <div class="text-center text-sm-right">
-                        {% if user.is_candidate %}
-                        <span class="badge badge-secondary">Candidate</span>
+                        {% if user.is_company %}
+                        <span class="badge badge-secondary" style="color: rgba(48, 48, 48, 0.724); background:rgb(218, 217, 217)">Company</span>
                         {% endif %}
                         <div class="text-muted"><small>{{user.date_joined}}</small></div>
                       </div>
                     </div>
                   </div>
                   <ul class="nav nav-tabs">
-                    <li class="nav-item"><a href="" class="active nav-link">Settings</a></li>
+                    <li class="nav-item"><a href="" class="active nav-link">Update Profile</a></li>
                   </ul>
                   <div class="tab-content pt-3">
-                     
+                    <form class="form"  action="updatecom/{{ user.id }}" method="post" enctype="multipart/form-data">
+                      {% csrf_token %}
                         <div class="row">
                           <div class="col">
                             <div class="row">
@@ -309,6 +310,14 @@
                                 <div class="form-group">
                                   <label>Phone</label>
                                     <input class="form-control" type="number" name="phone" value="{{user.phone}}">
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col">
+                                <div class="form-group">
+                                  <label>Location</label>
+                                    <input class="form-control" type="text" name="loc" value="{{user.location}}">
                                   </div>
                               </div>
                             </div>
@@ -352,7 +361,70 @@
             </div>
           </div>
         </div>
-    
+            
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="form"  action="updateco/{{ user.id }}" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+            <label for="avatarr" style="background-color:rgb(10, 62, 87) ;border-color:rgb(10, 62, 87);color:white;border-radius:5px;padding-left:7%;padding-right:7%;padding-top:2%;padding-bottom:2%;">Choose Profile</label>
+            <input type="file" d="avatar" id="avatarr" name="img" accept="image/png, image/jpeg" style="display: none;">
+            <button type="submit" class="btn btn-primary">Update Photo</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+       
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  <div id="id01" class="w3-modal">
+    <div class="w3-modal-content">
+      <div class="w3-container">
+        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+        <form class="form"  action="updatec/{{ user.id }}" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+            <label for="avatarr" style="background-color:rgb(10, 62, 87) ;border-color:rgb(10, 62, 87);color:white;border-radius:5px;padding-left:7%;padding-right:7%;padding-top:2%;padding-bottom:2%;">Choose Proof</label>
+            <input type="file" d="avatar" id="avatarr" name="proof" accept="image/png, image/jpeg" style="display: none;">
+            <button type="submit" class="btn btn-primary">Submit proof</button>
+        </form>
+      </div>
+    </div>
+  </div>
+<!-- Modal -->
+<!-- <div class="modal fade" id="exampleModall" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="form"  action="updatec/{{ user.id }}" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+            <label for="avatarr" style="background-color:rgb(10, 62, 87) ;border-color:rgb(10, 62, 87);color:white;border-radius:5px;padding-left:7%;padding-right:7%;padding-top:2%;padding-bottom:2%;">Choose Proof</label>
+            <input type="file" d="avatar" id="avatarr" name="proof" accept="image/png, image/jpeg" style="display: none;">
+            <button type="submit" class="btn btn-primary">Submit proof</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+       
+      </div>
+    </div>
+  </div>
+</div> -->
+
       </div>
     </div>
     </div>

@@ -20,6 +20,10 @@
     <link href="{% static 'homescripts.js' %}" rel="stylesheet" >
     <script src="{% static 'homescripts.js' %}"></script>
 
+    <!-- Card -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <title>JobSnatch</title>
   
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
@@ -139,6 +143,37 @@
   .sticky + .content {
     padding-top: 60px;
   }
+  #contain>div {
+    width: 250px;
+    margin-top: 5%;
+    height: 250px;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    background:rgba(0, 0, 0, 0.322);
+    border-radius: 5%;
+    margin-left: 4%;
+    margin-bottom: 2%;
+    
+}
+.homedi {
+  width: 250px;
+  margin-top: 5%;
+  height: 250px;
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+  background:rgba(0, 0, 0, 0.322);
+  border-radius: 5%;
+  margin-left: 4%;
+  margin-bottom: 2%;
+  
+}
+.homed:hover{
+background-size: cover;
+background-blend-mode:normal;
+color:white
+}
 </style>
 <body style="background-image: linear-gradient( rgb(198, 201, 202),rgb(50, 147, 166));">
  <div class="homebody">
@@ -151,7 +186,10 @@
       <a href="#con">Contact</a>
       <a href="{% url 'resume' %}">Resume</a>
       <a href="{% url 'feedbacks' %}">Feedbacks</a>
-      <a href="{% url 'graph' %}">Graph</a>
+      <a href="#cati">Internships</a>
+      <a href="{% url 'map' %}">Map</a>
+      <a href="{% url 'res' %}">Resumes</a>
+      <a href="{% url 'resdetails' %}">Resdetails</a>
       <!-- <a href="{% url 'register' %}" style="width:auto; color:white">Register</a> -->
       <a href="{% url 'login' %}" style="width:auto; color:white">Login</a>
     </div>
@@ -189,7 +227,7 @@
         <p class="homediv3"><a href="{% url 'wnt' %}"><img align="middle" src="{% static 'images/writing.png'%}" width="50" height="50" ></a></p>
         <p style="font-size: 17px; text-align:center; font-weight: bold;color:white">Writing \ Translation  </p>
     </div>
-
+   
   </div>
 <br><br><br>
 <div id="container2" class="row">
@@ -208,10 +246,22 @@
     <div class="col-xs-12 col-sm-6 col-m-4 col-lg-3 col-xl-2 homediv11" style="background-color: rgba(255, 255, 255, 0.187)">
         <p class="homediv3"><a href="{% url 'snm' %}"><img align="middle" src="{% static 'images/speaker.png'%}" width="50" height="50" ></a></p>
         <p style="font-size: 17px; text-align:center; font-weight: bold;color:white">Sales \ Markeing  </p>
-    </div>
-
+  
 </div>
+</div>
+<br><br><br>
+{% for i in cat %}
+  <div class="container mt-3 homedi homed"  style="background-color: rgba(255, 255, 255, 0.187)">
+    {% if i.img %}
+      <img src="{{i.img.url}}"  width="230px"; height="150px"  style="margin-top: 5%;border-radius:5%;">
+    {% endif %}
+    <div class="card " style="background-color: rgba(255, 255, 255, 0.644); margin-top:10%;text-align:center">
+      <div class="card-body">{{i.categname}}</div>
+    </div>
+  </div>
+{% endfor %} 
 <br><br><br><br>
+
 <div id="container3" class="row" style="background-color: rgba(255, 255, 255, 0.050);width:105%;">
   <div class="col-xs-2 col-sm-2 col-m-4 col-lg-2 col-xl-2 hiw">
      <h2 style="text-align:center;">How It Works?</h2>
@@ -240,17 +290,17 @@
     <div class="col-xs-2 col-sm-3 col-m-4 col-lg-6 col-xl-12 hiw2">
       <p class="blogpara"><img align="middle" src="{% static 'images/blog1.jpg'%}" width="100%" height="170" ></p>
       <p style="font-size: 17px; font-weight: bold;color:white">Tips to write an impressive resume online for beginners.  </p>
-      <p><a href="{% url 'resum' %}" style="color:rgb(10, 53, 88)">Learn More >></a></p>
+      <p><a href="{% url 'resum' %}"><button style="color:rgb(10, 53, 88);height:fit-content;width:fit-content;background:transparent;border:none;">Learn More >></button></a></p>
   </div>
   <div class="col-xs-2 col-sm-2 col-m-4 col-lg-2 col-xl-2 hiw2">
     <p class="blogpara"><img align="middle" src="{% static 'images/blog2.jpg'%}" width="100%" height="170" ></p>
     <p style="font-size: 17px; font-weight: bold;color:white">Tips to help you clear apptitudes with ease </p>
-    <p><a href="{% url 'appti' %}" style="color:rgb(10, 53, 88)">Learn More >></a></p>
+    <p><a href="{% url 'appti' %}"><button style="color:rgb(10, 53, 88);height:fit-content;width:fit-content;background:transparent;border:none;">Learn More >></button></a></p>
   </div>
   <div class="col-xs-2 col-sm-2 col-m-4 col-lg-2 col-xl-2 hiw2">
     <p class="blogpara"><img align="middle" src="{% static 'images/blog3.jpg'%}" width="100%" height="170" ></p>
     <p style="font-size: 17px; font-weight: bold;color:white">How to convince recruiters <br> and get your deam job </p>
-    <p><a href="{% url 'convince' %}" style="color:rgb(10, 53, 88)">Learn More >></a></p>
+    <p><a href="{% url 'convince' %}" ><button style="color:rgb(10, 53, 88);height:fit-content;width:fit-content;background:transparent;border:none;">Learn More >></button></a></p>
   </div>
     </div>
     <div style="margin-top:12%;margin-bottom:-20%;margin-left:10%">
@@ -260,7 +310,7 @@
       <a href="{% url 'moreblogs' %}"><button style="width: 70%;height:20%;background-color:rgba(0, 0, 0, 0.47) ;color: white;;border-radius:5px;border-color:transparent">Click to More Blogs</button></a>
     </div>
 
-    <div id="cat" class="homediv2" style="margin-top: 25%;">Free Internships</div>
+    <div id="cati" class="homediv2" style="margin-top: 25%;">Free Internships</div>
     
   <div id="container2" class="row">
     <div class="col-xs-12 col-sm-6 col-m-4 col-lg-3 col-xl-2 " style="background-color: rgba(255, 255, 255, 0.187)">
@@ -268,33 +318,33 @@
       <p style="font-size: 17px; text-align:center; font-weight: bold; color:white">Web Developement</p>
       <p style="font-size: 12px; text-align:center; color:white;margin-top:-7%;">Learn how to create a website from scratch</p>
       <p style="font-size: 10px; text-align:left; color:white;margin-top:-7%;">Duration :2-weeks</p>
-      <p style="font-size: 12px; text-align:right; color:white;margin-top:-15%;">Know More>></p>
+      <a href="{% url 'login' %}"><p style="font-size: 12px; text-align:right; color:white;margin-top:-15%;">Know More>></p></a>
     </div>
     <div class="col-xs-12 col-sm-6 col-m-4 col-lg-3 col-xl-2 " style="background-color: rgba(255, 255, 255, 0.187)">
       <p class="homediv3"><a href="#"><img style="margin-left:-45%;margin-top:-30%" src="{% static 'images/intern2.webp'%}" width="190" height="130" ></a></p>
       <p style="font-size: 17px; text-align:center; font-weight: bold; color:white">Digital Marketing</p>
       <p style="font-size: 12px; text-align:center; color:white;margin-top:-7%;">Learn SEO,SEO marketing,web analytics and more..</p>
       <p style="font-size: 10px; text-align:left; color:white;margin-top:-7%;">Duration :3-weeks</p>
-      <p style="font-size: 12px; text-align:right; color:white;margin-top:-15%;">Know More>></p>
+      <a href="{% url 'login' %}"><p style="font-size: 12px; text-align:right; color:white;margin-top:-15%;">Know More>></p></a>
     </div>
     <div class="col-xs-12 col-sm-6 col-m-4 col-lg-3 col-xl-2 " style="background-color: rgba(255, 255, 255, 0.187)">
       <p class="homediv3"><a href="#"><img style="margin-left:-45%;margin-top:-30%" src="{% static 'images/intern3.webp'%}" width="190" height="130" ></a></p>
       <p style="font-size: 17px; text-align:center; font-weight: bold; color:white">Data Science</p>
       <p style="font-size: 12px; text-align:center; color:white;margin-top:-7%;">Learn the ABSs of data science in this course</p>
       <p style="font-size: 10px; text-align:left; color:white;margin-top:-7%;">Duration :2-weeks</p>
-      <p style="font-size: 12px; text-align:right; color:white;margin-top:-15%;">Know More>></p>
+      <a href="{% url 'login' %}"><p style="font-size: 12px; text-align:right; color:white;margin-top:-15%;">Know More>></p></a>
     </div>
     <div class="col-xs-12 col-sm-6 col-m-4 col-lg-3 col-xl-2 " style="background-color: rgba(255, 255, 255, 0.187)">
       <p class="homediv3"><a href="#"><img style="margin-left:-45%;margin-top:-30%" src="{% static 'images/intern4.webp'%}" width="190" height="130" ></a></p>
       <p style="font-size: 17px; text-align:center; font-weight: bold; color:white">Business Analytics</p>
       <p style="font-size: 12px; text-align:center; color:white;margin-top:-7%;">Master the skill of analysing business data with ease!</p>
       <p style="font-size: 10px; text-align:left; color:white;margin-top:-7%;">Duration :4-weeks</p>
-      <p style="font-size: 12px; text-align:right; color:white;margin-top:-15%;">Know More>></p>
+      <a href="{% url 'login' %}"><p style="font-size: 12px; text-align:right; color:white;margin-top:-15%;">Know More>></p></a>
     </div>
 
   </div>
   <div style="margin-top:12%;margin-bottom:-20%;margin-left:35%;">
-    <a href="#"><button style="width: 50%;background-color:rgba(0, 0, 0, 0.644) ;color: white;border-radius:5px;border-color:transparent">Click to see more Internships</button></a>
+    <a href="{% url 'login' %}"><button style="width: 50%;background-color:rgba(0, 0, 0, 0.644) ;color: white;border-radius:5px;border-color:transparent">Click to see more Internships</button></a>
   </div> 
     <script>
       window.onscroll = function() {myFunction()};
@@ -401,6 +451,16 @@
           </div>
           </footer>
         </div>
-    
+        <script type="text/javascript">
+          (function(d, m){
+              var kommunicateSettings = 
+                  {"appId":"f36d48ad3e0d9f09a4d6e08d9120bb15","popupWidget":true,"automaticChatOpenOnNavigation":true};
+              var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+              s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+              var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+              window.kommunicate = m; m._globals = kommunicateSettings;
+          })(document, window.kommunicate || {});
+      /* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
+      </script>
   </body>
 </html>

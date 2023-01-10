@@ -3,6 +3,7 @@ from email.policy import default
 from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from datetime import datetime
 
 
 # Create your models here.
@@ -37,6 +38,8 @@ class User(AbstractUser):
     recruiter=models.CharField(max_length=100,blank=True)
     skills=models.TextField(null=True,blank=True)
     approved=models.BooleanField('approved', default=False)
+    location= models.CharField(max_length=100,null=True)
+
 
     # def __str__(self) :
     #     return {{self.id}}
@@ -50,6 +53,7 @@ class job(models.Model):
     job_description = models.TextField()
     cmp_id = models.ForeignKey(User ,default=None,on_delete=models.CASCADE)
     status=models.BooleanField('status', default=True)
+    desti = models.CharField(max_length=100,null=True,)
     
     
     @property
@@ -95,6 +99,10 @@ class job(models.Model):
     @property
     def cat(self):
         return self.cmp_id.cat
+    
+    @property
+    def loc(self):
+        return self.cmp_id.location
 
 
 class appliedjob(models.Model):
@@ -178,6 +186,14 @@ class appliedjob(models.Model):
     @property
     def cat1(self):
         return self.jobs_id.cat
+    
+    @property
+    def loc(self):
+        return self.jobs_id.loc
+    
+    @property
+    def desti(self):
+        return self.jobs_id.desti
 
 
 class feedback(models.Model):
@@ -202,9 +218,82 @@ class blog(models.Model):
     link=models.CharField(max_length=100,null=True)
     title=models.CharField(max_length=100,null=True)
     blogs=models.TextField(null=True)
+    img=models.ImageField(null=True,blank=True,upload_to="img/")
+    pp=models.CharField(max_length=100,null=True)
+    professsion=models.CharField(max_length=100,null=True)
 
 class categ(models.Model):
     categ_id = models.AutoField(primary_key=True)
     status=models.BooleanField('status', default=True) 
     categname=models.CharField(max_length=100,null=True)
     img=models.ImageField(null=True,blank=True,upload_to="img/")
+
+class internship(models.Model):
+    intern_id = models.AutoField(primary_key=True)
+    status=models.BooleanField('status', default=True) 
+    title=models.CharField(max_length=100,null=True)
+    durno = models.IntegerField(blank=True, null=True)
+    durex = models.CharField(max_length=100,null=True)
+    enddate =  models.DateField()
+    caption=models.CharField(max_length=100,null=True)
+    img=models.ImageField(null=True,blank=True,upload_to="img/")
+
+class classdetails(models.Model):
+    in_id=models.AutoField(primary_key=True)
+    status=models.BooleanField('status', default=True) 
+    candi_id=models.ForeignKey(User ,default=None,on_delete=models.CASCADE)
+    inter_id=models.ForeignKey(internship ,default=None,on_delete=models.CASCADE)
+    interndate =  models.DateField(default=datetime.now, blank=True)
+    interntimes = models.CharField(max_length=100,null=True,default=0)
+    
+    @property
+    def canid(self):
+      return self.candi_id.id
+    
+    @property
+    def inid(self):
+      return self.inter_id.title
+    
+class training(models.Model):
+        train_id = models.AutoField(primary_key=True)
+        status=models.BooleanField('status', default=True) 
+        can_id=models.ForeignKey(User ,default=None,on_delete=models.CASCADE)
+        type=models.CharField(max_length=100,null=True)
+        train_date =  models.DateField()
+        train_time = models.CharField(max_length=100,null=True,default=0)
+
+        @property
+        def canid(self):
+            return self.can_id.id
+
+# resde=(
+#     ("M", "M"),
+#     ("F", "F"),
+# )   
+
+class resdetails(models.Model):
+    res_id = models.AutoField(primary_key=True)
+    name=models.CharField(max_length=100,blank=True)
+    position=models.CharField(max_length=100,blank=True)
+    email=models.EmailField(blank=True, null=True)
+    carobj=models.TextField(blank=True)
+    college=models.CharField(max_length=100,blank=True)
+    plus=models.CharField(max_length=100,blank=True)
+    ten=models.CharField(max_length=100,blank=True)
+    projects=models.TextField(blank=True)
+    certi=models.TextField(blank=True)
+    achi=models.TextField(blank=True)
+    interns=models.TextField(blank=True)
+    refe=models.TextField(blank=True)
+    phone=models.IntegerField(blank=True, null=True,default=0)
+    address=models.TextField(blank=True)
+    strength=models.TextField(null=True,blank=True)
+    skills=models.TextField(null=True,blank=True)
+    lang=models.TextField(null=True,blank=True)
+    hob=models.TextField(null=True,blank=True)
+    soci=models.CharField(max_length=100,blank=True)
+    coun=models.CharField(max_length=100,blank=True)
+    status=models.BooleanField('status', default=0) 
+    dob=models.DateField()
+    gender=models.CharField(max_length=100,null=True,default=0)
+    # image=models.ImageField(null=True,blank=True,upload_to="img/")

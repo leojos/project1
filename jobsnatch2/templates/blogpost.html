@@ -5,16 +5,18 @@
     <body>
 
         <div style="text-align: center;">
-            <h1>Post Your Blogs</h1>
+            <h1 style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" required>POST YOUR BLOGS</h1>
         </div>
-        <div style="width:60%;background-color:#ffffff92;margin-top:2%;margin-left:20%;border-radius:10px; padding:2%;line-height: 150%;text-align:center">
-          <form action="blogg" method="post">
+        <div style="width:60%;background-color:#ffffff92;margin-top:2%;margin-left:20%;border-radius:10px; padding:2%;line-height: 150%;text-align:center" required>
+          <form action="blogg" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <input type="text" name="name" placeholder="Enter Your Name" style="height: 50px;width:80%"><br><br>
-            <input type="text" placeholder="Enter a Social Media link" name="link" style="height: 50px;width:80%"><br><br>
-            <input type="text" placeholder="Enter Title" name="title" style="height: 50px;width:80%"><br><br>
-            <textarea name="blogs" style="height: 100px;width:80%">Enter Your Content</textarea><br><br>
-            <button type="submit" style=" height:35px;width: 35%;background-color:rgb(10, 62, 87) ;border-color:rgb(10, 62, 87);border-radius:5px;color:white">POST</button>
+            <input type="text" name="name" placeholder="Enter Your Name" style="height: 50px;width:60%;border-radius:7px;border:none;text-align:center;" required><br><br>
+            <input type="text" placeholder="Enter a Social Media link" name="link" style="height: 50px;width:60%;border-radius:7px;border:none;text-align:center;" required><br><br>
+            <input type="text" placeholder="Enter Title" name="title" style="height: 50px;width:60%;border-radius:7px;border:none;text-align:center;" required><br><br>
+            <textarea name="blogs" style="height: 100px;width:60%;border-radius:7px;border:none;text-align:center;" required>Enter Your Content</textarea><br><br>
+            <input type="file"  accept="image/png, image/jpeg" id="img" name="pic" style="display:none;">
+            <label for="img" style="background-color:rgb(10, 62, 87) ;border-color:rgb(10, 62, 87);color:white;border-radius:5px;padding-left:5%;padding-right:5%;padding-top:1.1%;padding-bottom:1.1%;">Upload Image</label>
+            <button type="submit" style=" height:35px;width: 23%;background-color:rgb(10, 62, 87) ;border-color:rgb(10, 62, 87);border-radius:5px;color:white">POST</button>
           </form>
         </div>
     </body>

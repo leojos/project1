@@ -2,17 +2,97 @@
 {% extends 'base.html'%}
 {% load static %}
 {% block content %}
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
 <style> 
   body{
         background-image: url("{% static 'images/interviuew.jpg' %}");
         background-repeat:no-repeat;
       }
+  .div1{
+        height: fit-content;
+        width: 50%;
+        text-align:center;
+        background-color:rgba(255, 255, 255, 0.606);
+        margin-top:5%;
+        margin-left:25%;
+        border-radius:10px;
+        padding:6px;
+        font-size: large;
+        
+      }
     
 </style>
 <body>
     <!-- <h1 style="color: black; text-align:center">Hi {{user.username}}, The companies that accepted your requests are :</h1> -->
-   <div style="height: 38%;width:32%;float:left;background-color:rgba(108, 188, 200, 0.623);margin-top:25%;margin-left:0.5%;border-radius:10px;border-top-right-radius: 50px;border-bottom-left-radius: 50px;"></div>
-    <div style="width:60%;text-align: justify;margin-left:34%;color:black;box-shadow: 10px 10px 5px lightblue;border-radius:10px;padding-right:20px;margin-bottom:2%">
+   <div style="height: 36%;width:32%;float:left;background-color:rgba(108, 188, 200, 0.623);margin-top:25%;margin-left:0.5%;border-radius:10px;border-top-right-radius: 50px;border-bottom-left-radius: 50px;">
+    <div style="width:42%;position: absolute;left:0;top:65%;margin-left:2%;">
+        <h4>Procedure :</h4>
+        <ul type="square">
+            <li>Personal Assistance</li>
+            <li>2-5 day training</li>
+            <li>Daily Tests</li>
+            <li>Further Helps</li>
+        </ul>
+
+        <form action="{% url 'train' %}" method="post">
+            {% csrf_token %}
+            <!-- <input type="text" value="GD" name="gd" hidden> -->
+            
+<div class="container">
+
+<!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style=" height:35px;width: 30%;background-color:rgb(10, 62, 87) ;border-color:rgb(10, 62, 87);border-radius:5px;color:white;margin-left:1%;">Apply Now</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+<div class="modal-dialog">
+
+<!-- Modal content-->
+<div class="modal-content" style="background:rgba(9, 148, 223, 0.742);">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal">&times;</button>
+<h4 class="modal-title" style="color: white;text-align:center">Confrim your time and date :)</h4>
+</div>
+<div class="modal-body">
+<div class="div1">
+        <form action="{% url 'train' %}" method="post" onsubmit="cli()"> 
+          {% csrf_token %}
+          <label for="uname">Name : </label>
+          <input type="text" value="{{user.username}}" name="uname" style="border-radius:7px;margin-left:6%; border:none;text-align:center;width:fit-content;"><br><br>
+          <label for="ititle">Type : </label>
+          <input type="text"  name="type" value="Interview" style="border-radius:7px;margin-left:6%;border:none;text-align:center;width:fit-content;"><br><br>
+          <label for="pday">Day : </label>
+          <input type="date" placeholder="Prefered day" name="pday" style="border-radius:7px;margin-left:6%;border:none;text-align:center;" required>
+          <br><br>
+          <label for="ptime" style="margin-left:-14%;">Time :  </label>
+          <select name="ptime" id="interntime"  style="border-radius:7px;margin-left:2%;border:none;text-align:center;" placeholder="Choose Time" required>
+            <option value="9:00 AM">9:00 AM</option>
+            <option value="11:00 AM">11:00 AM</option>
+            <option value="2:00 PM">2:00 PM</option>
+            <option value="4:00 PM">4:00 PM</option>
+            <option value="7:00 PM">7:00 PM</option>
+          </select><br><br>
+          <input type="number" value={{user.id}} name="caid" hidden>
+          <button type="submit" style="border-radius: 5px;border:none;background: rgb(7, 133, 183);height:fit-content;width:fit-content;font-weight:bold;color:white;font-size:medium;">Confrim</button>
+        </form>
+      </div>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+        </form></div>
+   </div>
+    <div style="width:65%;height:85%;text-align: justify;margin-left:34%;color:black;box-shadow: 10px 10px 5px lightblue;border-radius:10px;padding-right:20px;margin-bottom:2%">
    
         <h1 style="font-weight: bolder;color:#293f6f">ACING INTERVIEWS</h1>
             <p  style="font-weight: bold;">We believe that Practice makes a man and woman perfect and removes fear of failure, so by practice fear is gone and students start becoming confident. The same is applied to prepare our students for facing one of the toughest rounds of any company’s selection process.

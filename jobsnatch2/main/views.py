@@ -11,6 +11,10 @@ from .models import blog
 from .models import feedback
 from .models import appliedjob
 from .models import categ
+from .models import internship
+from .models import classdetails
+from .models import training
+from .models import resdetails
 from django.contrib.auth.decorators import login_required
 from django import forms
 from django.db.models.functions import Now
@@ -34,7 +38,9 @@ nltk.download('stopwords')
 set(stopwords.words('english'))
 
 def index(request):
-    return render(request, 'index.html')
+    cat=categ.objects.all()
+    return render(request, 'index.html',{'cat':cat})
+
 
 # def dash(request):
 #     return render(request,"dash.html")
@@ -364,10 +370,13 @@ def avljobs(request):
        data4 = job.objects.all()
        data5 = appliedjob.objects.all()
 
+       data6 = User.objects.filter(is_company=True)
+
        if request.method == 'POST':
         # num=request.POST['text']
         st=request.POST.get('number')
         compname=request.POST.get('compname')
+        loc=request.POST.get('loc')
         if st!=None:
           data3 = job.objects.filter(job_title=st,lastdate__gt=Now())
         elif compname!=None:
@@ -375,13 +384,17 @@ def avljobs(request):
           data2 = User.objects.filter(username=compname).values_list('id',flat=True)
           for i in data2 :
             data3 = job.objects.filter(cmp_id_id=i,lastdate__gt=Now())
+        elif loc!=None:
+            data2 = User.objects.filter(location=loc).values_list('id',flat=True)
+            for i in data2 :
+             data3 = job.objects.filter(cmp_id_id=i,lastdate__gt=Now())
           # data2 = User.objects.filter(username=compname).values_list(flat=True)
           # for i in data2:
           #   print(i)
           # data3 = job.objects.filter(cmp_id_id=data2)
           # data = job.objects.filter(job_title=st)
 
-       context = {'data': data,'data1':data1,'data2':data2,'data3':data3,'data4':data4,'data5':data5}
+       context = {'data': data,'data1':data1,'data2':data2,'data3':data3,'data4':data4,'data5':data5,'data6':data6}
        return render(request,"avljobs.html", context)
      return render(request,'index.html')
 
@@ -451,7 +464,6 @@ def updaterecord(request, id):
     address = request.POST['address']
     about = request.POST['about']
     skills = request.POST['skills']
-    image = request.FILES.get('avatar')
   #   password = request.POST['password']
     user = User.objects.get(id=id)
     user.username = username
@@ -460,11 +472,17 @@ def updaterecord(request, id):
     user.address = address
     user.about = about
     user.skills = skills
-    
-    user.image = image
   #   user.password = password
     user.save()
     return redirect('candidate')
+
+def updatecan(request, id):
+   if 'can' in request.session:
+      image = request.FILES.get('avatar')
+      user = User.objects.get(id=id)
+      user.image = image
+      user.save()
+      return redirect('candidate')
 
 def updatecom(request, id):
    if 'cmp' in request.session:
@@ -474,19 +492,33 @@ def updatecom(request, id):
       phone = request.POST['phone']
       address = request.POST['address']
       recru = request.POST['recru']
-      image = request.FILES.get('img')
-      proof = request.FILES.get('proof')
+      loc = request.POST['loc']
     #   password = request.POST['password']
       user = User.objects.get(id=id)
       user.username = username
       user.email = email
       user.about = about
-      user.image = image
-      user.proof = proof
       user.phone = phone
+      user.location = loc
       user.address = address
       user.recruiter = recru
     #   user.password = password
+      user.save()
+      return redirect('company')
+
+def updateco(request, id):
+   if 'cmp' in request.session:
+      image = request.FILES.get('img')
+      user = User.objects.get(id=id)
+      user.image = image
+      user.save()
+      return redirect('company')
+
+def updatec(request, id):
+   if 'cmp' in request.session:
+      proof = request.FILES.get('proof')
+      user = User.objects.get(id=id)
+      user.proof = proof
       user.save()
       return redirect('company')
 
@@ -499,7 +531,8 @@ def postjob(request):
         lastdate = request.POST['date']
         vacancies = request.POST['vacancies']
         job_description = request.POST['desc']
-        member = job(job_title=job_title,salary=salary,experience=experience,lastdate=lastdate,vacancies=vacancies,job_description=job_description)
+        desti = request.POST['desti']
+        member = job(job_title=job_title,salary=salary,experience=experience,lastdate=lastdate,vacancies=vacancies,job_description=job_description,desti=desti)
         # instance=member.save()
         member.cmp_id =request.user
         member.save()
@@ -692,7 +725,8 @@ def blogg(request):
         link  = request.POST['link']
         title = request.POST['title']
         blogs = request.POST['blogs']
-        member = blog(name=name,link=link,title=title,blogs=blogs)
+        image = request.FILES.get('pic')
+        member = blog(name=name,link=link,title=title,blogs=blogs,img=image)
         member.save()
         return redirect('blogpost')
     return redirect('index')
@@ -703,7 +737,108 @@ def adminnew(request):
 def addcat(request):
       if request.method == 'POST':
         cat = request.POST['cat']
-        image = request.FILES.get('pics')
+        image = request.FILES.get('p')
         member = categ(categname=cat,img=image)
         member.save()
         return redirect('admin')
+
+def fullblog(request):
+    if request.method == 'POST':
+        full = request.POST['full']
+        feed=blog.objects.filter(b_id=full)
+        context = {'feed': feed}
+        return render(request,"fullblog.html", context)
+
+def intern(request):
+      if request.method == 'POST':
+        tit = request.POST['tit']
+        cap = request.POST['cap']
+        durno = request.POST['durno']
+        durex = request.POST['durex']
+        edate = request.POST['edate']
+        image = request.FILES.get('p')
+        member = internship(title=tit,caption=cap,durno=durno,durex=durex,enddate=edate,img=image)
+        member.save()
+        return redirect('admin')
+
+def moreinterns(request,id):
+    feed=internship.objects.all()
+    more=classdetails.objects.filter(candi_id=id)
+    context = {'feed': feed,'more':more}
+    return render(request,"moreinterns.html", context)
+
+def interndetails(request,id):
+    ptime= request.POST['ptime']
+    pday= request.POST['pday']
+    inid= request.POST['inid']
+    # caid= request.POST['caid']
+    user = classdetails(candi_id_id=id,inter_id_id=inid,interndate=pday,interntimes=ptime)
+    user.save()
+    return redirect('candidate')
+
+def classdetail(request):
+    inid= request.POST['inid']
+    caid= request.POST['caid']
+    more=classdetails.objects.filter(candi_id=caid,inter_id=inid)
+    feed=internship.objects.filter(intern_id=inid)
+    can=User.objects.get(id=caid)
+    inter=internship.objects.get(intern_id=inid)
+    # user = classdetails(candi_id=caid,inter_id=inid,interndate,interntimes)
+    # user.save()
+    return render(request,'classdetails.html',{'can':can.username,'inter':inter.title,'interid':inter.intern_id,'more':more,'feed':feed,'mo':inid,'mor':caid})
+
+def train(request):
+    type= request.POST.get('type')
+    pday= request.POST['pday']
+    ptime= request.POST['ptime']
+    caid= request.POST['caid']
+    user = training(can_id_id=caid,type=type,train_date=pday,train_time=ptime)
+    user.save()
+    return redirect('candidate')
+
+def activity(request):
+  if 'can' in request.session:
+    acti=training.objects.filter(can_id=request.user)
+    acti2=classdetails.objects.filter(candi_id=request.user)
+    return render(request,'activity.html',{'acti':acti,'acti2':acti2})
+
+def map(request):
+    return render(request,'map.html')
+
+def setdate(request):
+    jobid= request.POST['jobid']
+    canid= request.POST['canid']
+    return render(request,'setdate.html')
+
+def res(request):
+    return render(request,'res.html')
+
+def resdetails(request):
+    return render(request,'resdetails.html')
+
+def resubmit(request):
+    username= request.POST['username']
+    pos= request.POST['pos']
+    co= request.POST['co']
+    email= request.POST['email']
+    col= request.POST['col']
+    plus= request.POST['plus']
+    scho= request.POST['scho']
+    pro= request.POST['pro']
+    certi= request.POST['certi']
+    achi= request.POST['achi']
+    intern= request.POST['intern']
+    ref= request.POST['ref']
+    phone= request.POST['phone']
+    address= request.POST['address']
+    stre= request.POST['stre']
+    skills= request.POST['skills']
+    lang= request.POST['lang']
+    hob= request.POST['hob']
+    soli= request.POST['soli']
+    country= request.POST['country']
+    dob= request.POST['dob']
+    gen= request.POST['gen']
+    user = resdetails(name=username,position=pos,email=email,carobj=co,college=col,plus=plus,ten=scho,projects=pro,certi=certi,achi=achi,interns=intern,refe=ref,phone=phone,address=address,strength=stre,skills=skills,lang=lang,hob=hob,soci=soli,coun=country,dob=dob)
+    user.save()
+    return redirect('candidate')

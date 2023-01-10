@@ -146,34 +146,47 @@
               <th style="text-align: center;">ABOUT</th>
               <th style="text-align: center;">EMAIL</th>
               <th style="text-align: center;"></th>
+              <th style="text-align: center;"></th>
             </tr>
             {% for x in data %}
               {% if user.cat == x.cat %}
                  <tr>
-                  <form method="POST" action="canpage">
-                     {% csrf_token %}
+                  
                      {% if user.username in x.username %}
-                        <td style="text-align: center;">{{ x.name}}</td>
-                        <td style="text-align: center;">{{ x.abt}}</td>
-                        <td style="text-align: center;"><a href="#">{{ x.email}}</a></td>
-                        <td style="text-align: center;" hidden><input type="text" name="jobid" value="{{ x.jobs_id_id}}"></td>
-                        <td style="text-align: center;"  hidden><input type="text" name="canid" value="{{ x.can_id_id}}"></td>
-                        <td style="text-align: center;"><button  style="background-color: rgb(73, 198, 73); border-radius:7px;height:35px;width:80px;font-weight:bold;color:white;border:none" type="submit">View More</button></td>
+                      <form method="POST" action="canpage">
+                        {% csrf_token %}
+                          <td style="text-align: center;">{{ x.name}}</td>
+                          <td style="text-align: center;">{{ x.abt}}</td>
+                          <td style="text-align: center;"><a href="#">{{ x.email}}</a></td>
+                          <td style="text-align: center;" hidden><input type="text" name="jobid" value="{{ x.jobs_id_id}}"></td>
+                          <td style="text-align: center;"  hidden><input type="text" name="canid" value="{{ x.can_id_id}}"></td>
+                          <td style="text-align: center;"><button  style="background-color: rgb(73, 198, 73); border-radius:7px;height:35px;width:80px;font-weight:bold;color:white;border:none" type="submit">View More</button></td>
                         <!-- <td style="text-align: center;">{{ x.username}}</td> -->
-                        
-                        
+                      </form>
+                      <form method="POST" action="{% url 'setdate' %}">
+                        {% csrf_token %}
+                        <td style="text-align: center;"><button  style="background-color: rgb(73, 198, 73); border-radius:7px;height:35px;width:80px;font-weight:bold;color:white;border:none" type="submit">Set Date</button>
+                         <input type="text" name="jobid" value="{{ x.jobs_id_id}}" hidden>
+                         <input type="text" name="canid" value="{{ x.can_id_id}}" hidden>
+                      </form>
                         <!-- <td style="text-align: center;">{{ user.id}}</td> -->
                       {% endif %}
                      <!-- <td style="text-align: center;"><a href="#">{{ x.email }}{{ x.about}}</a></td> -->
                      
                      <!-- <td style="text-align: center;" hidden><input type="text" name="cmpid" value="{{ x.job_id}}"></td> -->
-                   </form>
+                   
+                   
                  </tr>
                   {% endif %}
                  {% endfor %}
+                 
                 </table>
            </div>  
          </div>
+         
+
+
+
           <script>
           function myFunction() {
             var x = document.getElementById("myTopnav");
@@ -184,6 +197,7 @@
             }
           }
           </script>
+    </body>
 </html>
 
 

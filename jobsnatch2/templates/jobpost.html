@@ -42,7 +42,7 @@ input[type=submit]:hover {
   margin-top: 2%;
   margin-left: 2.5%;
   width: 95%;
-  height:520px;
+  height:560px;
 }
 
 .col-25 {
@@ -230,7 +230,7 @@ body {margin:0;font-family:Arial}
         <label for="title">Job Title</label>
       </div>
       <div class="col-75">
-        <input type="text" id="fname" name="title" placeholder="Title">
+        <input type="text" id="fname" name="title" placeholder="Title" style="border-radius:7px;border:none;text-align:center;" required>
       </div>
     </div>
     <div class="row">
@@ -238,7 +238,7 @@ body {margin:0;font-family:Arial}
         <label for="salary">Salary</label>
       </div>
       <div class="col-75">
-        <input type="number" id="lname" name="salary">
+        <input type="number" id="lname" name="salary" style="border-radius:7px;border:none;text-align:center;height:25px;" required>
       </div>
     </div>
     <div class="row">
@@ -246,7 +246,7 @@ body {margin:0;font-family:Arial}
           <label for="experience">Experience</label>
         </div>
         <div class="col-75">
-          <input type="number" id="exp" name="experience">
+          <input type="number" id="exp" name="experience" style="border-radius:7px;border:none;text-align:center;height:25px;" required>
         </div>
       </div>
       <div class="row">
@@ -254,7 +254,19 @@ body {margin:0;font-family:Arial}
           <label for="date">Last Date</label>
         </div>
         <div class="col-75">
-          <input type="date" id="da" name="date">
+          <input type="date" id="da" name="date" style="border-radius:7px;border:none;text-align:center;" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="desti">Destination</label>
+        </div>
+        <div class="col-75">
+          <select name="desti" style="border-radius:7px;border:none;text-align:center;" required>
+            <option value="Abroad">Abroad</option>
+            <option value="Within">Within</option>
+            <option value="Depends">Depends</option>
+          </select>
         </div>
       </div>
     <div class="row">
@@ -262,7 +274,7 @@ body {margin:0;font-family:Arial}
         <label for="vacancies">No.of vacancies</label>
       </div>
       <div class="col-75">
-        <input type="number" id="va" name="vacancies">
+        <input type="number" id="va" name="vacancies" style="border-radius:7px;border:none;text-align:center;height:25px;" required>
       </div>
       <!-- <div class="col-75">
         <select id="country" name="country">
@@ -276,7 +288,7 @@ body {margin:0;font-family:Arial}
         <label for="desc">Job Description</label>
       </div>
       <div class="col-75">
-        <textarea id="subject" name="desc" placeholder="Write something.." style="height:200px"></textarea>
+        <textarea id="subject" name="desc" placeholder="Write something.." style="height:190px ;border-radius:7px;border:none;" required></textarea>
       </div>
     </div>
       <!-- <div class="row">
