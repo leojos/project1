@@ -1,0 +1,39 @@
+<html>
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+<style> 
+    body{
+        background-image: url("{% static 'images/gd.jpg' %}");
+        background-size:45%;
+        background-repeat:no-repeat;
+      }
+</style>
+<body>
+    <!-- <h1 style="color: black; text-align:center">Hi {{user.username}}, The companies that accepted your requests are :</h1> -->
+    <div style="height: 38%;width:42%;float:left;background-color:#3b5898b6;margin-top:25%;margin-left:2%;border-radius:10px;border-top-right-radius: 50px;border-bottom-left-radius: 50px;"></div>
+    <div style="width:50%;text-align: justify;margin-left:47%;color:black;">
+   
+        <h1 style="font-weight: bolder;color:#293f6f">MASTERING GDs</h1>
+            <p  style="font-weight: bold;">In their respective companies as managers, students have to conduct lot of meetings both with seniors as well as colleagues and subordinates.
+                 The preparation of Group Discussions through 100+ Mock GDs help PIBM students to not only clear the placement process of many companies coming for recruitment but also help them to become comfortable in being an active member of discussions.
+                  This continuous practice of Group Discussions makes students comfortable and increases confidence.</p>
+
+            <p style="font-weight: bold;">We also prepare our students on the current affairs and business topics through interaction with Business Heads of the companies every weekends.
+                 Outcome of this GD training is:
+            <ul type=".">
+                   <li>The students are well informed about the happenings in the business world</li> 
+                   <li>Have more confidence while speaking among a group of intellectuals</li>
+                   <li> Clears the selection rounds of companies visiting for the campus placement process</li>
+                   
+            </ul></p>
+            <p style="font-weight: bold;">During the course, Students undergoes 50+ GD Rounds which not only check their continuous growth but also gives them regular feedback on the key improvement areas.
+            We monitor our students on an individual basis and measure their performance thereby imparting specialized training as per the requirements of students as well as the companies.
+            Our aptitude training program is highly interactive and is designed to give students the much needed edge in positioning themselves ahead of the curve in today's highly competitive world.</p>
+   
+</div>
+</body>
+{% endblock %}
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+</html>

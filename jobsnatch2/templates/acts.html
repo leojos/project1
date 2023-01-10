@@ -1,0 +1,149 @@
+<html>
+    <style>
+    .topnav {
+        overflow: hidden;
+        background-color: #333;
+        margin-bottom: -2%;
+      }
+      
+      .topnav a {
+        float: left;
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+      }
+      
+      .active {
+        background-color: #04AA6D;
+        color: white;
+      }
+      
+      .topnav .icon {
+        display: none;
+      }
+      
+      .dropdown {
+        float: left;
+        overflow: hidden;
+      }
+      
+      .dropdown .dropbtn {
+        font-size: 17px;    
+        border: none;
+        outline: none;
+        color: white;
+        padding: 14px 16px;
+        background-color: inherit;
+        font-family: inherit;
+        margin: 0;
+      }
+      
+      .dropdown-content {
+        display: none;
+        position: relative;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index:1;
+      }
+      
+      .dropdown-content a {
+        float: none;
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+      }
+      
+      .topnav a:hover, .dropdown:hover .dropbtn {
+        background-color: #555;
+        color: white;
+      }
+      
+      .dropdown-content a:hover {
+        background-color: #ddd;
+        color: black;
+      }
+      
+      .dropdown:hover .dropdown-content {
+        display: block;
+        
+      }
+      
+      @media screen and (max-width: 600px) {
+        .topnav a:not(:first-child), .dropdown .dropbtn {
+          display: none;
+        }
+        .topnav a.icon {
+          float: right;
+          display: block;
+        }
+      }
+      
+      @media screen and (max-width: 600px) {
+        .topnav.responsive {position: relative;}
+        .topnav.responsive .icon {
+          position: absolute;
+          right: 0;
+          top: 0;
+        }
+        .topnav.responsive a {
+          float: none;
+          display: block;
+          text-align: left;
+        }
+        .topnav.responsive .dropdown {float: none;}
+        .topnav.responsive .dropdown-content {position: relative;}
+        .topnav.responsive .dropdown .dropbtn {
+          display: block;
+          width: 100%;
+          text-align: left;
+        }
+      }
+      
+      </style>
+    <body style="background-image: linear-gradient( rgb(198, 201, 202),rgb(50, 147, 166));">
+        <div class="topnav" id="myTopnav">
+            <a href="{% url 'company'%}" class="active">Dashboard</a>
+            <a href="{% url 'jobpost'%}">Post Job</a>
+            <a href="avlcandidates">Available Candidates</a>
+            <a href="{% url 'acceptedcan'%}">Accepted Candidates</a>
+            <div class="dropdown">
+            <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+        </div> 
+        <div style="float: right;margin-right:1%;">
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}">Logout</a>
+            {% endif %}
+        </div>
+        </div>
+        
+          <script>
+          function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "topnav") {
+              x.className += " responsive";
+            } else {
+              x.className = "topnav";
+            }
+          }
+          </script>
+<br>
+<h1 style="text-align: center;">Jobs List </h1><br>
+{% for x in data %}
+  
+    <div style="background-color: rgba(234, 234, 234, 0.58);" class="w3-row-padding">
+        <div class="w3-third">
+              <P>POST : {{ x.job_title}}</P>
+              <P>END-DATE : {{ x.lastdate }}</P>
+          
+      </div>  
+    </div><br>
+{% endfor %}
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</body>
+</html>

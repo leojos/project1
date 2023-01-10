@@ -1,3 +1,4 @@
+{% load static %}
 <html>
     <style>
     .topnav {
@@ -104,33 +105,85 @@
           text-align: left;
         }
       }
-      
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 70%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #ffffff;
+        }
       </style>
     <body style="background-image: linear-gradient( rgb(198, 201, 202),rgb(50, 147, 166));">
         <div class="topnav" id="myTopnav" style="width:1500px;margin-top:-10">
             <a href="{% url 'company'%}" class="active">Dashboard</a>
             <a href="{% url 'jobpost'%}">Post Job</a>
             <a href="{% url 'avlcandidates'%}">Available Candidates</a>
+            <a href="{% url 'acceptedcan'%}">Accepted Candidates</a>
             
-            <a href="{% url 'comactivity'%}">Activity Log</a>
+            
               {% if user.is_authenticated %}
+                <!-- <p style=" margin-top:15%;margin-left:20%">
+                 <div class="d-flex justify-content-center align-items-center rounded" style="height: 30px;width:30px; background-color: rgb(233, 236, 239);">
+                   {% if user.image %}
+                     <img src="{{user.image.url}}" alt="..."width=30px height="30px" style="border-radius: 50%;" >
+                   {% endif %}
+                 </div>
+                 <div style="margin-top:-60%;margin-left:60%;color: white;font-weight:bold">{{user.username}}</div>
+                 <div style="margin-top:-65%;margin-left:120%;"><a href="{% url 'logout'%}"><img src="{% static 'images/logout.png'%}" width="25" height="25" style="color: white;"></a></div>
+                </p> -->
                  <a href="{% url 'logout' %}">Logout</a>
               {% endif %}
-            <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
-         
-        </div>
-       <h1 style="color: black; text-align:center">Available Candidates :</h1>
-        {% for x in data %}
-          
-            <div style="background-color: rgba(234, 234, 234, 0.58);" class="w3-row-padding">
-            <div class="w3-third">
-              <br> <P>Candidate_id  <input type="text" value="{{ x.can_id_id}}" name="value" style="margin-left: 6%;"></P>
-                <P>Job_id  <input type="text" value="{{ x.jobs_id_id}}" name="value" style="margin-left: 9.5%;"></P><br>
-                {{user.username}}
-            </div>  
             </div>
-        {% endfor %}
-        
+            <!-- <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a> -->
+       <h1 style="color: black; text-align:center">Available Candidates :</h1>
+       
+       
+       
+       <div style="background-color: rgba(234, 234, 234, 0.58);padding:2%;" >
+         <div class="w3-third" style="margin-left: 22%;">
+          <table>
+            
+            <tr>
+              <th style="text-align: center;">CANDIDATE</th>
+              <th style="text-align: center;">ABOUT</th>
+              <th style="text-align: center;">EMAIL</th>
+              <th style="text-align: center;"></th>
+            </tr>
+            {% for x in data %}
+              {% if user.cat == x.cat %}
+                 <tr>
+                  <form method="POST" action="canpage">
+                     {% csrf_token %}
+                     {% if user.username in x.username %}
+                        <td style="text-align: center;">{{ x.name}}</td>
+                        <td style="text-align: center;">{{ x.abt}}</td>
+                        <td style="text-align: center;"><a href="#">{{ x.email}}</a></td>
+                        <td style="text-align: center;" hidden><input type="text" name="jobid" value="{{ x.jobs_id_id}}"></td>
+                        <td style="text-align: center;"  hidden><input type="text" name="canid" value="{{ x.can_id_id}}"></td>
+                        <td style="text-align: center;"><button  style="background-color: rgb(73, 198, 73); border-radius:7px;height:35px;width:80px;font-weight:bold;color:white;border:none" type="submit">View More</button></td>
+                        <!-- <td style="text-align: center;">{{ x.username}}</td> -->
+                        
+                        
+                        <!-- <td style="text-align: center;">{{ user.id}}</td> -->
+                      {% endif %}
+                     <!-- <td style="text-align: center;"><a href="#">{{ x.email }}{{ x.about}}</a></td> -->
+                     
+                     <!-- <td style="text-align: center;" hidden><input type="text" name="cmpid" value="{{ x.job_id}}"></td> -->
+                   </form>
+                 </tr>
+                  {% endif %}
+                 {% endfor %}
+                </table>
+           </div>  
+         </div>
           <script>
           function myFunction() {
             var x = document.getElementById("myTopnav");
@@ -142,3 +195,5 @@
           }
           </script>
 </html>
+
+

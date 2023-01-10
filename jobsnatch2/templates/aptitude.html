@@ -1,0 +1,114 @@
+<html>
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+<style> 
+    body{
+        background-image: url("{% static 'images/aptitude.png' %}");
+        background-repeat:no-repeat;
+      }
+    .button-85 {
+    padding: 0.6em 2em;
+    border: none;
+    outline: none;
+    color: rgb(255, 255, 255);
+    background: rgb(242, 226, 4);
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width:98%;
+    }
+
+    .button-85:before {
+    content: "";
+    background: linear-gradient(
+        45deg,
+        #ff0000,
+        #ff7300,
+        #fffb00,
+        #48ff00,
+        #00ffd5,
+        #002bff,
+        #7a00ff,
+        #ff00c8,
+        #ff0000
+    );
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing-button-85 20s linear infinite;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 10px;
+    }
+
+    @keyframes glowing-button-85 {
+    0% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 400% 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
+    }
+
+    .button-85:after {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgb(19, 31, 31);
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+    }
+</style>
+<body>
+    <!-- <h1 style="color: black; text-align:center">Hi {{user.username}}, The companies that accepted your requests are :</h1> -->
+    <div style="height: 45%;width:40%;float:left;background-color:#08090ae0;margin-top:30%;margin-left:2%;border-radius:10px;border-top-right-radius: 50px;border-bottom-left-radius: 50px;">
+        <div style="margin-top:40%;margin-left:2%"><button class="button-85" role="button">Try it out</button></div></div>
+    <div style="width:50%;text-align: justify;margin-left:45%;color:black;">
+   
+        <h1 style="font-weight: bolder;color:#293f6f">DEVELOPING APTITUDE</h1>
+            <p  style="font-weight: bold;">Aptitude tells about the mental stability and analytical skills of an individual. Someone who doesn't have the right skills for a position, or who isn't a good fit with the corporate culture, often ends up being replaced.
+             Then companies fill the position again, and turnover costs and lost opportunities become significant. To make better hiring decisions and avoid high job turnover rates, national & multi-national organizations use aptitude & ability testing.
+             Companies also use these tests for promoting and training. The goal is to get the right people, with the right skills, in the right jobs.</p>
+
+            <p style="font-weight: bold;">This is one of the main reasons Aptitude Test is conducted by majority of the companies for recruitment. We have a special team of Aptitude Experts to train & develop students' aptitude skills.
+            Our trainers discuss the requirements with the companies & recruiters from various sectors so as to know what is expected by them from our students.
+            Thus students are trained on following:
+            <ul type=".">
+                   <li>Quantitative Aptitude Skills</li> 
+                   <li>Data Interpretation & Data Sufficiency</li>
+                   <li> Reasoning Ability</li>
+                   <li>Logical Reasoning</li>
+                   <li>Visual Reasoning</li>
+                   <li>Verbal Reasoning</li>
+                   <li>Verbal Abilities & Language Comprehension</li>
+                   <li>General Awareness & General Knowledge</li>
+            </ul></p>
+            <p style="font-weight: bold;">During the course, Students undergoes 150+ Aptitude Tests which not only check their continuous growth but also gives them regular feedback on the key improvement areas.
+            We monitor our students on an individual basis and measure their performance thereby imparting specialized training as per the requirements of students as well as the companies.
+            Our aptitude training program is highly interactive and is designed to give students the much needed edge in positioning themselves ahead of the curve in today's highly competitive world.</p>
+   
+</div>
+<img src="{% static 'images/app1.jpg'%}" width="400" height="200" style="margin-left: 2%;" >
+<img src="{% static 'images/app2.jpg'%}" width="400" height="200" >
+<img src="{% static 'images/app3.jpg'%}" width="400" height="200" >
+</body>
+{% endblock %}
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+</html>

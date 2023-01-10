@@ -1,0 +1,70 @@
+{% extends 'base2.html'%}
+<html>
+    {% block content %}
+    <body>
+
+        <div style="text-align: center;">
+            <h1>Sales \ Marketing</h1>
+        </div>
+        <div style="height: 70%;width:25%;float:right;background-color:#208bd2a0;margin-top:2%;margin-right:2%;border-radius:10px;border-top-right-radius: 50px;border-bottom-left-radius: 50px; padding-left:2%;line-height: 365%;">
+          <h2>Wats On this Page</h2> 
+           <ul type="square">
+            <a href="#a" style="width:auto;color:rgb(8, 46, 89)"><li>Marketing careers</li></a>
+            <a href="#b" style="width:auto;color:rgb(8, 46, 89)"><li>Digital marketing jobs</li></a>
+            <a href="#c" style="width:auto;color:rgb(8, 46, 89)"><li>Graduate advertising jobs</li></a>
+            <a href="#d" style="width:auto;color:rgb(8, 46, 89)"><li>Jobs in PR</li></a>
+           </ul>
+        </div>
+        <div id="a" style="height:350px;width: 70%; float:left;background-color:#0a0909dc;color:white;margin-top:2%;margin-left:2%;border-radius:5px;padding-left:7px;">
+            <h3>If you've got digital skills, an innovative mind and the drive to keep up with the latest industry developments then there are plenty of marketing jobs you could do</h3>
+              <h2>Marketing careers</h2>
+                <h3>To have a successful marketing career you'll need to have the skills to offer a multi-channel approach as you could be promoting a product, service or idea via a flyer, billboard, TV advert or email and other digital methods.</h3>
+                <ul>
+                    <li>Market researcher</li>
+                    <li>Marketing executive</li>
+                    <li>Media buyer</li>
+                    <li>Media planner</li>
+                    <li>Product manager</li>
+                    <li>Sales promotion account executive</li>
+        </div>
+        <div id="b" style="height:45%;width: 50%;line-height: 1.6; float:left;background-color:#ffffffb5;margin-top:1%;margin-left:2%;border-radius:5px;padding-left:7px;padding-right:7px;">
+           <h2 style="text-align:center;">Digital marketing jobs</h2>
+            <p style="text-align:justify;">Careers in this area are all about discovering what online audiences are looking for and then creating the new and engaging products and content to give them what they need.
+            To get on in any of these roles you'll need to keep up to date with the latest trends and technologies and have a creative mind to come up with new ways to make your product or service stand out from it's competitors.
+            <ul>
+                <li>Digital copywriter</li>
+                <li>Digital marketer</li>
+                <li>PPC specialist</li>
+                <li>SEO specialist</li>
+                <li>Social media manager</li>
+                <li>Web content manager</li>
+            </ul>
+            </p> 
+        </div>
+        <div id="c" style="height:50%;width: 45%;line-height: 1.6; float:right;background-color:#0a0909dc;color:white;margin-top:1%;margin-right:2%;border-radius:5px;padding-left:7px;padding-right:7px;line-height: 220%;">
+            <h2 style="text-align:center;">Graduate advertising jobs</h2>
+             <p style="text-align:justify;">
+                You'll need a mix of commercial and creative skills to work in an advertising role as it will be your job to come up with the advertising campaign and then liaise with the client to deliver what they expect.
+                <ul>
+                <li>Advertising account executive</li>
+                <li>Advertising account planner</li>
+                <li>Advertising art director</li>
+                <li>Advertising copywriter</li>
+                <li>Creative director</li>
+               </ul> </p> 
+         </div>
+         <div id="d" style="height:45%;width: 96%;line-height: 1.6; float:left;background-color:#208bd2a0;margin-top:1%;margin-left:2%;border-radius:5px;padding-left:7px;padding-right:7px;">
+            <h2 style="text-align:center;">Jobs in PR</h2>
+             <p style="text-align:justify;">A commitment to remaining aware of current issues and trends is essential if you're to successfully manage the reputation of your clients. If you have the confidence to communicate with a range of people - both verbally and in writing - one of these PR graduate jobs may be for you.
+                <ul>
+                    <li>Public affairs consultant</li>
+                    <li>Public relations officer</li>
+                </ul>
+             </p> 
+         </div>
+             <div style="height:60px;width: 45%;line-height: 1.6;float:right;background-color:#0a0909dc;color:white;margin-top:1%;margin-right:25%;border-radius:5px;padding-left:7px;padding-right:7px;">
+                <h3 style="text-align:center;">To Check our Job oppurtunities for you,<a href="{% url 'login' %}" style="width:auto;">Log in to our site :)</a></h3>
+            </div>
+    </body>
+    {% endblock %}
+</html>

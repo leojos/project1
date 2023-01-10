@@ -1,0 +1,23 @@
+{% extends 'base2.html'%}
+{% load static %}
+<html>
+    {% block content %}
+    <body>
+
+        <div style="text-align: center;">
+            <h1>Post Your Blogs</h1>
+        </div>
+        <div style="width:60%;background-color:#ffffff92;margin-top:2%;margin-left:20%;border-radius:10px; padding:2%;line-height: 150%;text-align:center">
+          <form action="blogg" method="post">
+            {% csrf_token %}
+            <input type="text" name="name" placeholder="Enter Your Name" style="height: 50px;width:80%"><br><br>
+            <input type="text" placeholder="Enter a Social Media link" name="link" style="height: 50px;width:80%"><br><br>
+            <input type="text" placeholder="Enter Title" name="title" style="height: 50px;width:80%"><br><br>
+            <textarea name="blogs" style="height: 100px;width:80%">Enter Your Content</textarea><br><br>
+            <button type="submit" style=" height:35px;width: 35%;background-color:rgb(10, 62, 87) ;border-color:rgb(10, 62, 87);border-radius:5px;color:white">POST</button>
+          </form>
+        </div>
+    </body>
+    </body>
+    {% endblock %}
+</html>

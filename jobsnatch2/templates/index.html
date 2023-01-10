@@ -15,16 +15,19 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 
     <!-- Style -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="{% static 'homestyle.css' %}" rel="stylesheet" >
     <link href="{% static 'homescripts.js' %}" rel="stylesheet" >
     <script src="{% static 'homescripts.js' %}"></script>
 
     <title>JobSnatch</title>
+  
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+
+
   </head>
   <style>
-    #container2>.homediv4:hover{
+  #container2>.homediv4:hover{
       background-image: url("{% static 'images/suitcase1.png' %}"); 
       background-size: cover;
       background-blend-mode:normal;
@@ -79,40 +82,84 @@
     background-repeat: no-repeat;
     background-size: cover;
   }
+
+  .header {
+    overflow: hidden;
+    background-color: #05050586;
+    padding: 20px 10px;
+    position:relative;
+  }
   
+  .header a {
+    float: left;
+    color: rgb(254, 252, 252);
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 20px; 
+    line-height: 25px;
+    border-radius: 4px;
+  }
   
-  </style>
-  <body style="background-image: linear-gradient( rgb(198, 201, 202),rgb(50, 147, 166));">
-    <div class="homebody">
-        <div class="header" id="myHeader">
-            <a href="#default" class="logo">JobSnatch</a>
-            <div class="header-right">
-              <a class="active" href="#home">Home</a>
-              <a href="#cat">Categories</a>
-              <a href="#blo">Blog</a>
-              <a href="#con">Contact</a>
-              <a href="{% url 'register' %}" style="width:auto; color:white">Register</a>
-              <a href="{% url 'login' %}" style="width:auto; color:white">Login</a>
-            </div>
-          </div>
-    <script>
-         window.onscroll = function() {myFunction()};
-            
-         var header = document.getElementById("myHeader");
-         var sticky = header.offsetTop;
-            
-         function myFunction() {
-              if (window.pageYOffset > sticky) {
-                header.classList.add("sticky");
-              } else {
-                header.classList.remove("sticky");
-              }
-            }
-     </script>
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+  .header a.logo {
+    font-size: 25px;
+    font-weight: bold;
+  }
+  
+  .header a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .header a.active {
+    background-color: dodgerblue;
+    color: white;
+  }
+  
+  .header-right {
+    float: right;
+  }
+  
+  @media screen and (max-width: 500px) {
+    .header a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
     
+    .header-right {
+      float: none;
+    }
+  }
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+  .sticky + .content {
+    padding-top: 60px;
+  }
+</style>
+<body style="background-image: linear-gradient( rgb(198, 201, 202),rgb(50, 147, 166));">
+ <div class="homebody">
+  <div class="header" id="myHeader">
+    <a href="#default" class="logo">JobSnatch</a>
+    <div class="header-right">
+      <a class="active" href="#home">Home</a>
+      <a href="#cat">Categories</a>
+      <a href="#blo">Blog</a>
+      <a href="#con">Contact</a>
+      <a href="{% url 'resume' %}">Resume</a>
+      <a href="{% url 'feedbacks' %}">Feedbacks</a>
+      <a href="{% url 'graph' %}">Graph</a>
+      <!-- <a href="{% url 'register' %}" style="width:auto; color:white">Register</a> -->
+      <a href="{% url 'login' %}" style="width:auto; color:white">Login</a>
+    </div>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
      
   <div id="home"></div>
       <div class="homediv1" >
@@ -127,19 +174,19 @@
     
   <div id="container2" class="row">
     <div class="col-xs-12 col-sm-6 col-m-4 col-lg-3 col-xl-2 homediv4 " style="background-color: rgba(255, 255, 255, 0.187)">
-        <p class="homediv3"><img align="middle" src="{% static 'images/suitcase.png'%}" width="50" height="50" ></p>
+        <p class="homediv3"><a href="{% url 'anf' %}"><img align="middle" src="{% static 'images/suitcase.png'%}" width="50" height="50" ></a></p>
         <p style="font-size: 17px; text-align:center; font-weight: bold; color:white">Accounting and Finance</p>
     </div>
     <div class="col-xs-12 col-sm-6 col-m-4 col-lg-3 col-xl-2 homediv5" style="background-color: rgba(255, 255, 255, 0.187)">
-        <p class="homediv3"><img align="middle" src="{% static 'images/monitor.png'%}" width="50" height="50" ></p>
+        <p class="homediv3"><a href="{% url 'pnt' %}"><img align="middle" src="{% static 'images/monitor.png'%}" width="50" height="50" ></a></p>
         <p style="font-size: 17px; text-align:center; font-weight: bold;color:white">Programming and Tech</p>
     </div>
     <div class="col-xs-12 col-sm-6 col-m-4 col-lg-3 col-xl-2 homediv6" style="background-color: rgba(255, 255, 255, 0.187)">
-        <p class="homediv3"><img align="middle" src="{% static 'images/analytics.png'%}" width="50" height="50" ></p>
+        <p class="homediv3"><a href="{% url 'dna' %}"><img align="middle" src="{% static 'images/analytics.png'%}" width="50" height="50" ></a></p>
         <p style="font-size: 17px; text-align:center; font-weight: bold;color:white">Data Science and Analytics</p>
     </div>
     <div class="col-xs-12 col-sm-6 col-m-4 col-lg-3 col-xl-2 homediv7" style="background-color: rgba(255, 255, 255, 0.187)">
-        <p class="homediv3"><img align="middle" src="{% static 'images/writing.png'%}" width="50" height="50" ></p>
+        <p class="homediv3"><a href="{% url 'wnt' %}"><img align="middle" src="{% static 'images/writing.png'%}" width="50" height="50" ></a></p>
         <p style="font-size: 17px; text-align:center; font-weight: bold;color:white">Writing \ Translation  </p>
     </div>
 
@@ -147,19 +194,19 @@
 <br><br><br>
 <div id="container2" class="row">
     <div class="col-xs-12 col-sm-6 col-m-4 col-lg-3 col-xl-2 homediv8" style="background-color: rgba(255, 255, 255, 0.187)">
-        <p class="homediv3"><img align="middle" src="{% static 'images/education.png'%}" width="50" height="50" ></p>
+        <p class="homediv3"><a href="{% url 'ent' %}"><img align="middle" src="{% static 'images/education.png'%}" width="50" height="50" ></a></p>
         <p style="font-size: 17px; text-align:center; font-weight: bold;color:white">Education \ Training  </p>
     </div>
     <div class="col-xs-12 col-sm-6 col-m-4 col-lg-3 col-xl-2 homediv9" style="background-color: rgba(255, 255, 255, 0.187)">
-        <p class="homediv3"><img align="middle" src="{% static 'images/food.png'%}" width="50" height="50" ></p>
+        <p class="homediv3"><a href="{% url 'rnf' %}"><img align="middle" src="{% static 'images/food.png'%}" width="50" height="50" ></a></p>
         <p style="font-size: 17px; text-align:center; font-weight: bold;color:white">Restaurant \ Food Service  </p>
     </div>
     <div class="col-xs-12 col-sm-6 col-m-4 col-lg-3 col-xl-2 homediv10" style="background-color: rgba(255, 255, 255, 0.187)">
-        <p class="homediv3"><img align="middle" src="{% static 'images/editing.png'%}" width="50" height="50" ></p>
+        <p class="homediv3"><a href="{% url 'dnm' %}"><img align="middle" src="{% static 'images/editing.png'%}" width="50" height="50" ></a></p>
         <p style="font-size: 17px; text-align:center; font-weight: bold;color:white">Design,Art and Multimedia  </p>
     </div>
     <div class="col-xs-12 col-sm-6 col-m-4 col-lg-3 col-xl-2 homediv11" style="background-color: rgba(255, 255, 255, 0.187)">
-        <p class="homediv3"><img align="middle" src="{% static 'images/speaker.png'%}" width="50" height="50" ></p>
+        <p class="homediv3"><a href="{% url 'snm' %}"><img align="middle" src="{% static 'images/speaker.png'%}" width="50" height="50" ></a></p>
         <p style="font-size: 17px; text-align:center; font-weight: bold;color:white">Sales \ Markeing  </p>
     </div>
 
@@ -193,20 +240,76 @@
     <div class="col-xs-2 col-sm-3 col-m-4 col-lg-6 col-xl-12 hiw2">
       <p class="blogpara"><img align="middle" src="{% static 'images/blog1.jpg'%}" width="100%" height="170" ></p>
       <p style="font-size: 17px; font-weight: bold;color:white">Tips to write an impressive resume online for beginners.  </p>
-      <p>Learn More >></p>
+      <p><a href="{% url 'resum' %}" style="color:rgb(10, 53, 88)">Learn More >></a></p>
   </div>
   <div class="col-xs-2 col-sm-2 col-m-4 col-lg-2 col-xl-2 hiw2">
     <p class="blogpara"><img align="middle" src="{% static 'images/blog2.jpg'%}" width="100%" height="170" ></p>
     <p style="font-size: 17px; font-weight: bold;color:white">Tips to help you clear apptitudes with ease </p>
-    <p>Learn More >></p>
+    <p><a href="{% url 'appti' %}" style="color:rgb(10, 53, 88)">Learn More >></a></p>
   </div>
   <div class="col-xs-2 col-sm-2 col-m-4 col-lg-2 col-xl-2 hiw2">
     <p class="blogpara"><img align="middle" src="{% static 'images/blog3.jpg'%}" width="100%" height="170" ></p>
     <p style="font-size: 17px; font-weight: bold;color:white">How to convince recruiters <br> and get your deam job </p>
-    <p>Learn More >></p>
+    <p><a href="{% url 'convince' %}" style="color:rgb(10, 53, 88)">Learn More >></a></p>
   </div>
     </div>
+    <div style="margin-top:12%;margin-bottom:-20%;margin-left:10%">
+      <a href="{% url 'blogpost' %}"><button style="width: 30%;background-color:rgba(0, 0, 0, 0.47);color: white; ;border-radius:5px;border-color:transparent">Click to Post Your Blogs</button></a>
+    </div>
+    <div style="margin-top:17.5%;margin-bottom:-20%;margin-left:65%">
+      <a href="{% url 'moreblogs' %}"><button style="width: 70%;height:20%;background-color:rgba(0, 0, 0, 0.47) ;color: white;;border-radius:5px;border-color:transparent">Click to More Blogs</button></a>
+    </div>
 
+    <div id="cat" class="homediv2" style="margin-top: 25%;">Free Internships</div>
+    
+  <div id="container2" class="row">
+    <div class="col-xs-12 col-sm-6 col-m-4 col-lg-3 col-xl-2 " style="background-color: rgba(255, 255, 255, 0.187)">
+      <p class="homediv3"><a href="#"><img style="margin-left:-45%;margin-top:-30%" src="{% static 'images/intern1.webp'%}" width="190" height="130" ></a></p>
+      <p style="font-size: 17px; text-align:center; font-weight: bold; color:white">Web Developement</p>
+      <p style="font-size: 12px; text-align:center; color:white;margin-top:-7%;">Learn how to create a website from scratch</p>
+      <p style="font-size: 10px; text-align:left; color:white;margin-top:-7%;">Duration :2-weeks</p>
+      <p style="font-size: 12px; text-align:right; color:white;margin-top:-15%;">Know More>></p>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-m-4 col-lg-3 col-xl-2 " style="background-color: rgba(255, 255, 255, 0.187)">
+      <p class="homediv3"><a href="#"><img style="margin-left:-45%;margin-top:-30%" src="{% static 'images/intern2.webp'%}" width="190" height="130" ></a></p>
+      <p style="font-size: 17px; text-align:center; font-weight: bold; color:white">Digital Marketing</p>
+      <p style="font-size: 12px; text-align:center; color:white;margin-top:-7%;">Learn SEO,SEO marketing,web analytics and more..</p>
+      <p style="font-size: 10px; text-align:left; color:white;margin-top:-7%;">Duration :3-weeks</p>
+      <p style="font-size: 12px; text-align:right; color:white;margin-top:-15%;">Know More>></p>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-m-4 col-lg-3 col-xl-2 " style="background-color: rgba(255, 255, 255, 0.187)">
+      <p class="homediv3"><a href="#"><img style="margin-left:-45%;margin-top:-30%" src="{% static 'images/intern3.webp'%}" width="190" height="130" ></a></p>
+      <p style="font-size: 17px; text-align:center; font-weight: bold; color:white">Data Science</p>
+      <p style="font-size: 12px; text-align:center; color:white;margin-top:-7%;">Learn the ABSs of data science in this course</p>
+      <p style="font-size: 10px; text-align:left; color:white;margin-top:-7%;">Duration :2-weeks</p>
+      <p style="font-size: 12px; text-align:right; color:white;margin-top:-15%;">Know More>></p>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-m-4 col-lg-3 col-xl-2 " style="background-color: rgba(255, 255, 255, 0.187)">
+      <p class="homediv3"><a href="#"><img style="margin-left:-45%;margin-top:-30%" src="{% static 'images/intern4.webp'%}" width="190" height="130" ></a></p>
+      <p style="font-size: 17px; text-align:center; font-weight: bold; color:white">Business Analytics</p>
+      <p style="font-size: 12px; text-align:center; color:white;margin-top:-7%;">Master the skill of analysing business data with ease!</p>
+      <p style="font-size: 10px; text-align:left; color:white;margin-top:-7%;">Duration :4-weeks</p>
+      <p style="font-size: 12px; text-align:right; color:white;margin-top:-15%;">Know More>></p>
+    </div>
+
+  </div>
+  <div style="margin-top:12%;margin-bottom:-20%;margin-left:35%;">
+    <a href="#"><button style="width: 50%;background-color:rgba(0, 0, 0, 0.644) ;color: white;border-radius:5px;border-color:transparent">Click to see more Internships</button></a>
+  </div> 
+    <script>
+      window.onscroll = function() {myFunction()};
+         
+      var header = document.getElementById("myHeader");
+      var sticky = header.offsetTop;
+         
+      function myFunction() {
+           if (window.pageYOffset > sticky) {
+             header.classList.add("sticky");
+           } else {
+             header.classList.remove("sticky");
+           }
+         }
+     </script>
 
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
@@ -288,11 +391,11 @@
           <div class="row copyright">
             <div class="footer-menu">
           
-            <a href="">Home</a>
-            <a href="">About</a>
-            <a href="">Contact</a>
-            <a href="">Blog</a>
-            <a href="">Social</a>
+            <a href="#">Home</a>
+            <a href="#cat">Categories</a>
+            <a href="#con">Contact</a>
+            <a href="#blo">Blog</a>
+            <a href="{% url 'my_form' %}">Feedbacks</a>
             <p style="float: right">Copyright &copy; 2022 JobSnatch</p>
             </div>
           </div>

@@ -1,0 +1,33 @@
+{% extends 'base2.html'%}
+{% load static %}
+<html>
+    {% block content %}
+    <body style="background-image: url({% static 'images/resume13.png' %});background-size:cover;">
+
+        <div style="text-align: center;">
+        </div>
+        <div style="width:35%;background-color:#ffffff92;margin-top:1%;margin-left:65%;border-radius:10px; padding:2%;line-height: 150%;text-align:justify">
+            <p><h2>Includes : </h2>
+                <b><ul>
+                <li>Picking the Right Resume Format</li>
+                <li>Choosing the Best Resume Layout</li>
+                <li>Resume Content - What to Mention on Your Resume</li>
+                <li>Contact Information</li>
+                <li>Resume Summary or Objective</li>
+                <li>What’s a Resume Summary & When to Use it</li>
+                <li>What’s a Resume Objective & When to Use it</li>
+                <li>Work Experience</li>
+                <li>How to List Education on Your Resume</li>
+                <li>Emphasize Your Know-How with the Skills Section</li>
+                <li>To List Skills the in Your Resume</li>
+                <li>Other Important Resume Sections</li>
+                <li>Checking out Checklist</li>
+                <li>Going through Effective Resume Examples</li>
+                <li>Wrapping it all up!</li>
+            </ul></b>
+                <a href="{% url 'resume' %}" style="color:rgb(10, 53, 88)">To know more check out our Resume build help page..</a></p>
+        </div>
+    </body>
+    </body>
+    {% endblock %}
+</html>

@@ -1,0 +1,260 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>admin page</title>
+</head>
+<body>
+    {% if request.session.usr %}
+        <h1> hello {{request.session.usr}} your role is admin</h1>
+    {% endif %}
+</body>
+</html> -->
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobSnatch</title>
+</head>
+<style>
+body {margin:0;font-family:Arial}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav .icon {
+  display: none;
+}
+
+.a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.topnav a:hover {
+  background-color: #555;
+  color: white;
+}
+
+.a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+@media screen and (max-width: 600px) {
+  .topnav a:not(:first-child){
+    display: none;
+  }
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .topnav.responsive{float: none;}
+  .topnav.responsive{position: relative;}
+  .topnav.responsive{
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 90%;
+    border-color: rgb(198, 201, 202);
+    border-radius:5px;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #ffffff;
+  }
+
+
+  .sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+  
+  .sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidebar a:hover {
+    color: #f1f1f1;
+  }
+  
+  .sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  .openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+  }
+  
+  .openbtn:hover {
+    background-color: #444;
+  }
+  
+ 
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
+  }
+</style>
+<body style="background-color:#1dd4ec;background-repeat:no-repeat;height:100%">
+  <div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <a href="{% url 'admin'%}">Dashboard</a>
+    <a href="{% url 'admincan'%}">Candidate</a>
+    <a href="{% url 'admincom'%}">Company</a>
+  </div>
+  <div id="main">
+  
+  
+    <script>
+      function openNav() {
+        document.getElementById("mySidebar").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+      }
+      
+      function closeNav() {
+        document.getElementById("mySidebar").style.width = "0";
+        document.getElementById("main").style.marginLeft= "0";
+      }
+      </script>  
+  
+  
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <div class="topnav" id="myTopnav">
+      
+        <button class="openbtn" onclick="openNav()">☰</button> 
+        <div style="float: right;margin-right:1%;">
+          {% if user.is_authenticated %}
+              <a href="{% url 'logout' %}">Logout</a>
+          {% endif %}
+        </div>
+        <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+      </div>
+    
+      <script>
+      function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+          x.className += " responsive";
+        } else {
+          x.className = "topnav";
+        }
+      }
+      </script>
+<h1 style="color: black; text-align:center;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Available Candidates</h1>   
+<br> 
+<div style="padding:2%;" >
+   <div class="w3-third" style="margin-left: 30%;">
+     <table>
+        <tr>
+          <th style="text-align: center;">Candidate</th>
+          <th style="text-align: center;">EMAIL</th>
+          <th style="text-align: center;">PHONE</th>
+          <!-- <th style="text-align: center;">EMAIL</th> -->
+          <th style="text-align: center;"></th>
+          <th style="text-align: center;"></th>
+        </tr>
+        {% for x in data1 %}
+         <tr>
+            {% if x.status == False %}
+                <td style="text-align: center;">{{ x.username}}</td>
+                <td style="text-align: center;">{{ x.email}}</td>
+                <td style="text-align: center;">{{ x.phone}}</td>
+                <form method="post" action="canpage">
+                    {% csrf_token %}
+                      <td style="text-align: center;"><button  style="background-color: rgb(73, 198, 73); border-radius:7px;height:35px;width:80px;font-weight:bold;color:white;border:none" type="submit">More Info</button></td>
+                      <td style="text-align: center;" hidden><input type="text" name="jobid" value="{{ x.jobs_id_id}}"></td>
+                      <td style="text-align: center;" hidden><input type="text" name="canid" value="{{ x.can_id_id}}"></td>
+                </form>
+                <form action="{% url 'authdeletecan' %}" method="post">
+                      {% csrf_token %}
+                      <td style="text-align: center;"><button type="submit" id="submit" name="submit" class="btn btn-primary" style="background-color: rgb(255, 25, 25);border-radius:5px;border:solid red 2px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">delete</button></td>
+                      <td style="text-align: center;" hidden></td><input type="text" name="username" class="form-control" id="website"value="{{ x.username}}" hidden>
+                </form>
+            {% endif %}
+         </tr>
+        {% endfor %}
+     </table>
+     <br><br>
+  </div>  
+ </div>
+ <br><br>  
+</div>
+
+</body>
+</html>

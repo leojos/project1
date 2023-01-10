@@ -18,7 +18,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JonSnatch</title>
+    <title>JobSnatch</title>
 </head>
 <style>
 body {margin:0;font-family:Arial}
@@ -96,11 +96,115 @@ body {margin:0;font-family:Arial}
     text-align: left;
   }
 }
+
+
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 70%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #ffffff;
+  }
+
+
+  .sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+  
+  .sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidebar a:hover {
+    color: #f1f1f1;
+  }
+  
+  .sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  .openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+  }
+  
+  .openbtn:hover {
+    background-color: #444;
+  }
+  
+ 
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
+  }
+
+  .div {
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 300px;
+    padding: 50px;
+    float:right;
+    margin-right: 7%;
+    border-radius: 10px;
+  }
 </style>
 <body style="background-image: linear-gradient( rgb(198, 201, 202),rgb(50, 147, 166));background-repeat:no-repeat">
+  <div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <a href="{% url 'admin'%}">Dashboard</a>
+    <a href="{% url 'admincan'%}">Candidate</a>
+    <a href="{% url 'admincom'%}">Company</a>
+  </div>
+  <div id="main" style="height: 1000px;">
+  
+  
+    <script>
+      function openNav() {
+        document.getElementById("mySidebar").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+      }
+      
+      function closeNav() {
+        document.getElementById("mySidebar").style.width = "0";
+        document.getElementById("main").style.marginLeft= "0";
+      }
+      </script>  
+  
+  
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <div class="topnav" id="myTopnav">
-        <a href="admin" class="active">Dashboard</a>
+      
+        <button class="openbtn" onclick="openNav()">☰</button> 
         <div style="float: right;margin-right:1%;">
           {% if user.is_authenticated %}
               <a href="{% url 'logout' %}">Logout</a>
@@ -119,102 +223,30 @@ body {margin:0;font-family:Arial}
         }
       }
       </script>
-       <h1 style="color: black; text-align:center;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">ADMIN PANEL ({{request.session.usr}})</h1>
-       <!-- <select>
-        <option>--Usernames--</option>
-        {% for result in displayusername %}
-          <option>{{result.username}}</option>
-        {% endfor %}
-      </select>  -->
-      <!-- <div style="background-color: rgba(234, 234, 234, 0.58);" class="w3-row-padding">
-        <div class="w3-third">
-                    <h1>Members</h1>
-                <form action="showmemb" method="post">
-                    {% csrf_token %}
-                    <button type="submit">Show Members</button>
-                    <table >
-                        {{user}}
-                    {% for x in auth_user %}
-                    <tr>
-                    <td>{{ x.id }}</td>
-                    <td>{{ x.first_name }}</td>
-                    <td><a href="delete/{{ x.id }}">delete</a></td>
-                    </tr>
-                    {% endfor %}
-                </table>
-            </form>
-        </div>
-     </div>  -->
-      <!-- <div style="background-color: rgba(234, 234, 234, 0.363); width:60%;padding-left:250px;padding-bottom:30px;margin-left:20%; border-radius:10px" class="w3-row-padding">
-        <div class="w3-third">
-             <form action="adregister" method="POST">
-                {% csrf_token %}
-                <div >
-                  <h3 style="font-weight:bold ;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Add Up</h3>
-                  <hr>
-                  <label for="username"><b>Username : </b></label><br>
-                  <input type="text" placeholder="Enter Username" name="username" required><br><br>
-            
-                  <label for="name"><b>Name : </b></label><br>
-                  <input type="text" placeholder="Enter Name" name="name" required><br><br>
-            
-                  <label for="email"><b>Email : </b></label><br>
-                  <input type="email" placeholder="Enter Email" name="email" required><br><br>
-            
-                  <label for="pswd"><b>Password : </b></label><br>
-                  <input type="password" placeholder="Enter Password" name="p1" required><br><br>
-            
-                  <label for="pswd"><b>Re-enter Password : </b></label><br>
-                  <input type="password" placeholder="Re-enter Password" name="p2" required><br><br>
-                  <div class="clearfix">
-                    <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn1" style="background-color: rgb(255, 25, 25);border-radius:5px;border:solid red 2px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Cancel</button>
-                    <button type="submit" class="signupbtn" style="background-color: rgb(37, 178, 9);border-radius:5px;border:solid green 2px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Add Up</button>
-                  </div>
-                </div>
-              </form> 
-    </div>  
-    </div>
-<br><br> -->
-<div style="background-color: rgba(234, 234, 234, 0.363); width:60%;padding-left:250px;padding-bottom:30px;margin-left:20%; border-radius:10px;margin-bottom:5%" class="w3-row-padding">
-  <p>&nbsp&nbspid &nbsp&nbsp&nbsp Users &nbsp&nbsp&nbspstatus</p>
-  {% for x in data %}
-    <div style="background-color: rgba(234, 234, 234, 0.58);" class="w3-row-padding">
-        <div class="w3-third">
-            <P>{{ x.id}} &nbsp&nbsp&nbsp&nbsp{{ x.username}} &nbsp&nbsp&nbsp&nbsp</P>
-      </div>  
-    </div><br>
-  {% endfor %}
-    <div class="w3-third">
-    <form action="{% url 'authdelete' %}" method="post">
-        {% csrf_token %}
-        <h3 style="font-weight:bold ;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Delete User</h3>
-        <hr>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <div class="form-group">
-              <label for="website">User Id</label><br>
-              <input type="text" name="username" class="form-control" id="website"><br><br>
-          </div>
-        </div>
-    <div class="row gutters">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <div class="text-right">
-                <button type="reset" id="submit" name="submit" class="btn btn-secondary" style="background-color: rgb(37, 178, 9);border-radius:5px;border:solid green 2px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Cancel</button>
-                <button type="submit" id="submit" name="submit" class="btn btn-primary" style="background-color: rgb(255, 25, 25);border-radius:5px;border:solid red 2px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">delete</button>
-            </div>
-        </div>
-    </div>
-   </form>
-    </div>
+     
+       <h1 style="color: black; text-align:center;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Welcome  {{request.session.usr}}</h1><br><br>
+       <div class="div">
+          <p style="text-align: center;">Jobs Posted</p>
+          <p style="text-align: center;">  {{data}}</p>
+       </div>
+       <div class="div">
+          <p style="text-align: center;">Available Candidates</p>
+          <p style="text-align: center;">{{data1}}</p>
+       </div>
+       <div class="div">
+          <p style="text-align: center;">Available Companies</p>
+          <p style="text-align: center;">{{data2}}</p>
+       </div>
+       <div style="margin-top:20%">
+        <form action="{% url 'addcat' %}" method="POST">
+           {% csrf_token %}
+           <input type="text" placeholder="category type" name="cat">
+           <input type="file" name="pics" accept="image/png, image/jpeg">
+           <input type="submit" value="Submit">
+        </form>
+      </div>
 </div>
-    <!-- <script>
-      function a()
-      {
-        b={{user.status}}
-        if (b==False){
-          
-        }
 
-      }
-    </script> -->
+
 </body>
 </html>
