@@ -45,6 +45,15 @@
             </div>
         </div>
    {% endfor %}
+   {% for z in acti3 %}
+        <div class="container mt-3 homedi homed"  style="background-color: rgba(255, 255, 255, 0.187);width: 40%;"><p style="text-align: center;margin-top:5%;">Job Interview</p>
+            <div class="card " style="background-color: rgba(255, 255, 255, 0.644); margin-top:5%;text-align:center;">
+            <div class="card-body" ><h3>Enrolled For : {{z.typp}}</h3>
+                <h5>Date : {{z.train_date}}</h5>
+                <h5>Duration : {{z.dura}}</h5></div>
+            </div>
+        </div>
+   {% endfor %}
   </body>
   {% endblock %}
 </html>

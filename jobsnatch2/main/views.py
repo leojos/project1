@@ -14,7 +14,8 @@ from .models import categ
 from .models import internship
 from .models import classdetails
 from .models import training
-from .models import resdetails
+from .models import resumme
+from .models import scheduling
 from django.contrib.auth.decorators import login_required
 from django import forms
 from django.db.models.functions import Now
@@ -24,6 +25,7 @@ import re
 from nltk.corpus import stopwords
 import pyttsx3
 from django.http import HttpResponseNotFound
+from twilio.rest import Client
 # from faunadb import query as q
 # import pytz
 # from faunadb.objects import Ref
@@ -40,8 +42,6 @@ set(stopwords.words('english'))
 def index(request):
     cat=categ.objects.all()
     return render(request, 'index.html',{'cat':cat})
-
-
 # def dash(request):
 #     return render(request,"dash.html")
 
@@ -788,11 +788,11 @@ def classdetail(request):
     return render(request,'classdetails.html',{'can':can.username,'inter':inter.title,'interid':inter.intern_id,'more':more,'feed':feed,'mo':inid,'mor':caid})
 
 def train(request):
-    type= request.POST.get('type')
+    typ= request.POST.get('type')
     pday= request.POST['pday']
     ptime= request.POST['ptime']
     caid= request.POST['caid']
-    user = training(can_id_id=caid,type=type,train_date=pday,train_time=ptime)
+    user = training(can_id_id=caid,typ=typ,train_date=pday,train_time=ptime)
     user.save()
     return redirect('candidate')
 
@@ -800,7 +800,8 @@ def activity(request):
   if 'can' in request.session:
     acti=training.objects.filter(can_id=request.user)
     acti2=classdetails.objects.filter(candi_id=request.user)
-    return render(request,'activity.html',{'acti':acti,'acti2':acti2})
+    acti3=scheduling.objects.filter(can_id=request.user.id)
+    return render(request,'activity.html',{'acti':acti,'acti2':acti2,'acti3':acti3})
 
 def map(request):
     return render(request,'map.html')
@@ -811,7 +812,8 @@ def setdate(request):
     return render(request,'setdate.html')
 
 def res(request):
-    return render(request,'res.html')
+    r=resumme.objects.all()
+    return render(request,'res.html',{'r':r})
 
 def resdetails(request):
     return render(request,'resdetails.html')
@@ -839,6 +841,27 @@ def resubmit(request):
     country= request.POST['country']
     dob= request.POST['dob']
     gen= request.POST['gen']
-    user = resdetails(name=username,position=pos,email=email,carobj=co,college=col,plus=plus,ten=scho,projects=pro,certi=certi,achi=achi,interns=intern,refe=ref,phone=phone,address=address,strength=stre,skills=skills,lang=lang,hob=hob,soci=soli,coun=country,dob=dob)
+    user = resumme(name=username,position=pos,email=email,carobj=co,college=col,plus=plus,ten=scho,projects=pro,certi=certi,achi=achi,interns=intern,refe=ref,phone=phone,address=address,strength=stre,skills=skills,lang=lang,hob=hob,soci=soli,coun=country,dob=dob,gender=gen)
     user.save()
-    return redirect('candidate')
+    return redirect('res')
+
+def sche(request):
+    timm= request.POST['timm']
+    ty= request.POST['ty']
+    tim= request.POST['tim']
+    caid= request.POST['caid']
+    canid= request.POST['canid']
+    user = scheduling(user_id_id=caid,train_date=tim,typp=ty,can_id=canid,dura=timm)
+    user.save()
+    ac=User.objects.filter(id=canid)
+    account_sid = "ACbe5a012071ff14a371492b37cd98f240"
+    auth_token = "2d296dcfc02cb8fcf25e6fc0f20e424b"
+    client = Client(account_sid, auth_token)
+    message = client.messages.create(
+    body="Hello from JobSnatch {ac.username}",
+    from_="+15076085128",
+    to="+917025484895"
+    )
+
+    print(message.sid)
+    return redirect('acceptedcan')

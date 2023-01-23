@@ -6,6 +6,7 @@ from django.contrib.auth.models import AbstractUser
 from datetime import datetime
 
 
+
 # Create your models here.
 
 sem=(
@@ -258,7 +259,7 @@ class training(models.Model):
         train_id = models.AutoField(primary_key=True)
         status=models.BooleanField('status', default=True) 
         can_id=models.ForeignKey(User ,default=None,on_delete=models.CASCADE)
-        type=models.CharField(max_length=100,null=True)
+        typ=models.CharField(max_length=100,null=True)
         train_date =  models.DateField()
         train_time = models.CharField(max_length=100,null=True,default=0)
 
@@ -266,12 +267,7 @@ class training(models.Model):
         def canid(self):
             return self.can_id.id
 
-# resde=(
-#     ("M", "M"),
-#     ("F", "F"),
-# )   
-
-class resdetails(models.Model):
+class resumme(models.Model):
     res_id = models.AutoField(primary_key=True)
     name=models.CharField(max_length=100,blank=True)
     position=models.CharField(max_length=100,blank=True)
@@ -295,5 +291,14 @@ class resdetails(models.Model):
     coun=models.CharField(max_length=100,blank=True)
     status=models.BooleanField('status', default=0) 
     dob=models.DateField()
-    gender=models.CharField(max_length=100,null=True,default=0)
-    # image=models.ImageField(null=True,blank=True,upload_to="img/")
+    gender=models.CharField(max_length=100,null=True)
+
+class scheduling(models.Model):
+        sche_id = models.AutoField(primary_key=True)
+        status=models.BooleanField('status', default=True) 
+        user_id=models.ForeignKey(User ,default=None,on_delete=models.CASCADE)
+        can_id=models.IntegerField(blank=True, null=True)
+        typp=models.CharField(max_length=100,null=True)
+        dura=models.CharField(max_length=100,null=True)
+        train_date =  models.DateTimeField()
+

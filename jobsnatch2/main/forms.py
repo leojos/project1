@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import User
+from captcha.fields import CaptchaField
 
 class LoginForm(forms.Form):
     username = forms.CharField(
@@ -16,6 +17,9 @@ class LoginForm(forms.Form):
                 "class": "form-control"
             }
         )
+    )
+    captcha = CaptchaField(
+        
     )
 
 class SignUpForm(UserCreationForm):

@@ -139,7 +139,7 @@ body {margin:0;font-family:Arial}
         <div style="float: right;margin-right:5%;">
             {% if user.is_authenticated %}
                 <p style=" margin-top:15%">
-                  <div class="d-flex justify-content-center align-items-center rounded" style="height: 30px;width:30px; background-color: rgb(233, 236, 239);">
+                  <div class="d-flex justify-content-center align-items-center rounded" style="height: 30px;width:30px;">
                     {% if user.image %}
                     <img src="{{user.image.url}}" alt="..."width=30px height="30px" style="border-radius: 50%;" >
                     {% endif %}
