@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <style>
+            .bt{
+                background-color: rgb(73, 198, 73);
+                 border-radius:7px;
+                 height:fit-content;
+                 width:80px;
+                 font-size:small;
+                 padding: 7.5px;
+                 font-weight:bold;
+                 color:white;
+                 border:none;
+              }
+              .div1{
+                height: fit-content;
+                width: 50%;
+                text-align:center;
+                background-color:rgba(255, 255, 255, 0.606);
+                margin-top:5%;
+                margin-left:25%;
+                border-radius:10px;
+                padding:6px;
+                font-size: large;
+                
+              }
+        </style>
+    </head>
+    <body>
+        <div class="div1">
+        <form action="{% url 'sche' %}" method="post" onsubmit="cli()"> 
+            {% csrf_token %}
+            <label for="timm" style="margin-left:-14%;">Duration :  </label>
+            <select name="timm" id="interntim"  style="border-radius:7px;margin-left:2%;border:none;text-align:center;" required>
+              <option value="1hr">1hr</option>
+              <option value="30 min">30 min</option>
+              <option value="15-20min">15-20 min</option>
+              <option value="More than 1hr">More than 1hr</option>
+            </select><br><br>
+            <label for="ty" style="margin-left:-14%;">Type :  </label>
+            <select name="ty" id="interntime"  style="border-radius:7px;margin-left:2%;border:none;text-align:center;" required>
+              <option value="Interview - 1">Interview - 1</option>
+              <option value="Interview - 2">Interview - 2</option>
+              <option value="HR">HR</option>
+            </select><br><br>
+            
+            <label for="tday">Time : </label>
+            <input type="datetime-local" id="birthdaytime" name="tim"><br><br>
+            <input type="number" value={{user.id}} name="caid" hidden>
+            {% for x in data %}
+              {% if user.cat == x.cat %}
+                {% if user.username in x.username %}
+                  <input type="text" value={{x.can_id_id}}>
+                  <input type="text" value={{x.can_id_id}} name="canid" hidden>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+            <button type="submit" style="border-radius: 5px;border:none;background: rgb(7, 133, 183);height:fit-content;width:fit-content;font-weight:bold;color:white;font-size:medium;">Confrim</button>
+          </form>
+        </div>
+    </body>
+</html>

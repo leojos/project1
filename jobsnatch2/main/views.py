@@ -615,8 +615,9 @@ def avlcandidates(request):
 def acceptedcan(request):
     if 'cmp' in request.session:
       #  canid=request.POST['canid']
+      #  jobid=request.POST['jobid']
        data = appliedjob.objects.all()
-       data = appliedjob.objects.filter(accept=False)
+       data = appliedjob.objects.filter(accept=False,)
       #  data1=User.objects.all()
       #  data1 = User.objects.filter(id=data.can_id_id)
 
@@ -851,17 +852,20 @@ def sche(request):
     tim= request.POST['tim']
     caid= request.POST['caid']
     canid= request.POST['canid']
+    ac=User.objects.filter(id=canid)
+    bc=ac[0].username
     user = scheduling(user_id_id=caid,train_date=tim,typp=ty,can_id=canid,dura=timm)
     user.save()
-    ac=User.objects.filter(id=canid)
     account_sid = "ACbe5a012071ff14a371492b37cd98f240"
-    auth_token = "2d296dcfc02cb8fcf25e6fc0f20e424b"
+    auth_token = "d48d21cacce540f89557ac799cb7aa36"
     client = Client(account_sid, auth_token)
     message = client.messages.create(
-    body="Hello from JobSnatch {ac.username}",
-    from_="+15076085128",
-    to="+917025484895"
+      body="Hello from Twilio",
+      from_="+15076085128",
+      to="+917025484895"
     )
-
     print(message.sid)
     return redirect('acceptedcan')
+
+def interdate(request):
+    return render(request,'resdetails.html')

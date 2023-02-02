@@ -73,6 +73,7 @@ urlpatterns = [
     path('resdetails', views.resdetails, name='resdetails'),
     path('resubmit', views.resubmit, name='resubmit'),
     path('sche', views.sche, name='sche'),
+    path('interdate', views.interdate, name='interdate'),
     # path("createresume", views.createresume, name="createresume"),
     # path("resumes", views.resumes, name="resumes"),
     # path("dash", views.dash, name="dash"),

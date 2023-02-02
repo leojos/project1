@@ -190,6 +190,10 @@
                           <td style="text-align: center;"><button class="bt" type="submit">View More</button></td>
                         <!-- <td style="text-align: center;">{{ x.username}}</td> -->
                       </form>
+                      <form action="{% url 'interdate'%}" method="post">
+                        <td style="text-align: center;"><button class="bt" type="submit">interdate</button></td> 
+                        
+                      </form>
                       <td><button type="button" class="bt" data-bs-toggle="modal" data-bs-target="#myModal">Set Date</button></td>
                     
                       <!-- <form method="POST" action="{% url 'setdate' %}">
@@ -249,6 +253,7 @@
             {% for x in data %}
               {% if user.cat == x.cat %}
                 {% if user.username in x.username %}
+                  <input type="text" value={{x.can_id_id}}>
                   <input type="text" value={{x.can_id_id}} name="canid" hidden>
                 {% endif %}
               {% endif %}
