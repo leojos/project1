@@ -25,6 +25,30 @@
       background-blend-mode:normal;
       color:rgb(1, 82, 132)
       }
+      .bt{
+         background-color: rgb(73, 198, 73);
+         border-radius:7px;
+         height:fit-content;
+         width:80px;
+         font-size:small;
+         padding: 7.5px;
+         font-weight:bold;
+         color:white;
+         border:none;
+         float: left;
+      }
+      .bt2{
+         background-color: rgb(209, 40, 74);
+         border-radius:7px;
+         height:fit-content;
+         width:80px;
+         font-size:small;
+         padding: 7.5px;
+         font-weight:bold;
+         color:white;
+         border:none;
+         float: right;
+      }
   </style>
   <body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));">
     {% for x in acti %}
@@ -48,9 +72,18 @@
    {% for z in acti3 %}
         <div class="container mt-3 homedi homed"  style="background-color: rgba(255, 255, 255, 0.187);width: 40%;"><p style="text-align: center;margin-top:5%;">Job Interview</p>
             <div class="card " style="background-color: rgba(255, 255, 255, 0.644); margin-top:5%;text-align:center;">
-            <div class="card-body" ><h3>Enrolled For : {{z.typp}}</h3>
+            <div class="card-body" ><h3>{{z.typp}}</h3>
                 <h5>Date : {{z.train_date}}</h5>
-                <h5>Duration : {{z.dura}}</h5></div>
+                <h5>Duration : {{z.dura}}</h5>
+              <form action="#" method="post">
+                {% csrf_token %}
+                 <button type="submit" class="bt">Accept</button>
+
+              </form>
+              <form action="#" method="post">
+                {% csrf_token %}
+                 <button type="submit" class="bt2">Decline</button>
+              </form></div>
             </div>
         </div>
    {% endfor %}

@@ -191,6 +191,8 @@
                         <!-- <td style="text-align: center;">{{ x.username}}</td> -->
                       </form>
                       <form action="{% url 'interdate'%}" method="post">
+                       {% csrf_token %}
+                        <td style="text-align: center;"  hidden><input type="text" name="canid" value="{{ x.can_id_id}}"></td>
                         <td style="text-align: center;"><button class="bt" type="submit">interdate</button></td> 
                         
                       </form>

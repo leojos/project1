@@ -301,4 +301,5 @@ class scheduling(models.Model):
         typp=models.CharField(max_length=100,null=True)
         dura=models.CharField(max_length=100,null=True)
         train_date =  models.DateTimeField()
+        
 

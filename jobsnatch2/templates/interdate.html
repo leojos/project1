@@ -28,8 +28,8 @@
     </head>
     <body>
         <div class="div1">
-        <form action="{% url 'sche' %}" method="post" onsubmit="cli()"> 
-            {% csrf_token %}
+         <form action="{% url 'sche' %}" method="post" onsubmit="cli()"> 
+          {% csrf_token %}
             <label for="timm" style="margin-left:-14%;">Duration :  </label>
             <select name="timm" id="interntim"  style="border-radius:7px;margin-left:2%;border:none;text-align:center;" required>
               <option value="1hr">1hr</option>
@@ -47,16 +47,18 @@
             <label for="tday">Time : </label>
             <input type="datetime-local" id="birthdaytime" name="tim"><br><br>
             <input type="number" value={{user.id}} name="caid" hidden>
-            {% for x in data %}
+            <input type="number" value={{can}} name="canid" hidden>
+            <h2>{{can}}</h2>
+            <!-- {% for x in data %}
               {% if user.cat == x.cat %}
                 {% if user.username in x.username %}
                   <input type="text" value={{x.can_id_id}}>
                   <input type="text" value={{x.can_id_id}} name="canid" hidden>
                 {% endif %}
               {% endif %}
-            {% endfor %}
+            {% endfor %} -->
             <button type="submit" style="border-radius: 5px;border:none;background: rgb(7, 133, 183);height:fit-content;width:fit-content;font-weight:bold;color:white;font-size:medium;">Confrim</button>
-          </form>
-        </div>
+        </form>
+       </div>
     </body>
 </html>

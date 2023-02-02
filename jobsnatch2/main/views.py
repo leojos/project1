@@ -868,4 +868,7 @@ def sche(request):
     return redirect('acceptedcan')
 
 def interdate(request):
-    return render(request,'resdetails.html')
+    if request.method == 'POST':
+     canid= request.POST['canid']
+     ca=User.objects.filter(id=canid)
+     return render(request,'interdate.html',{'ca':ca,'can':canid})
