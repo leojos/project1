@@ -872,3 +872,28 @@ def interdate(request):
      canid= request.POST['canid']
      ca=User.objects.filter(id=canid)
      return render(request,'interdate.html',{'ca':ca,'can':canid})
+
+def scheaccept(request):
+    if request.method == 'POST':
+        scheu=request.POST['scheu']
+        accept=scheduling.objects.get(sche_id=scheu)
+        accept.acc=True
+        accept.save()
+        return redirect('activity')
+
+def schedec(request):
+    if request.method == 'POST':
+        scheu=request.POST['scheu']
+        sc=request.POST['sc']
+        tii=request.POST['tii']
+        accept=scheduling.objects.get(sche_id=scheu)
+        accept.dec=False
+        accept.reason=sc
+        accept.can_date=tii
+        accept.save()
+        return redirect('activity')
+
+def notifi(request):
+     if 'cmp' in request.session:
+       sc=scheduling.objects.filter()
+       return render(request,'notifications.html')

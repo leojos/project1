@@ -49,6 +49,18 @@
          border:none;
          float: right;
       }
+      .bt3{
+        background-color: rgb(209, 40, 74);
+        border-radius:7px;
+        height:fit-content;
+        width:80px;
+        font-size:small;
+        padding: 7.5px;
+        font-weight:bold;
+        color:white;
+        border:none;
+        align-items: center;
+     }
   </style>
   <body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));">
     {% for x in acti %}
@@ -75,18 +87,45 @@
             <div class="card-body" ><h3>{{z.typp}}</h3>
                 <h5>Date : {{z.train_date}}</h5>
                 <h5>Duration : {{z.dura}}</h5>
-              <form action="#" method="post">
+              <form action="{% url 'scheaccept' %}" method="post">
                 {% csrf_token %}
+                 <input type="text" name="scheu" value="{{z.sche_id}}" hidden>
                  <button type="submit" class="bt">Accept</button>
-
               </form>
-              <form action="#" method="post">
-                {% csrf_token %}
-                 <button type="submit" class="bt2">Decline</button>
-              </form></div>
+              <button type="button" class="btn btn-primary bt2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Decline
+              </button>
+              </div>
             </div>
         </div>
    {% endfor %}
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="{% url 'schedec' %}" method="post">
+          {% csrf_token %}
+           {% for z in acti3 %}
+            <input type="text" name="scheu" value="{{z.sche_id}}" hidden>
+           {% endfor %}
+           <label for="tday">Please enter a prefered date : </label>
+           <input type="datetime-local" id="birthdaytime" name="tii"><br><br>
+           <textarea name="sc" placeholder="Enter reason"></textarea><br><br>
+           <button class="bt3">Submit</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
   </body>
   {% endblock %}
 </html>

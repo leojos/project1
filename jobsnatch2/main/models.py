@@ -301,5 +301,9 @@ class scheduling(models.Model):
         typp=models.CharField(max_length=100,null=True)
         dura=models.CharField(max_length=100,null=True)
         train_date =  models.DateTimeField()
-        
+        acc=models.BooleanField('status', default=False) 
+        dec=models.BooleanField('status', default=True) 
+        reason=models.TextField(null=True,blank=True)
+        can_date =  models.DateTimeField(null=True,default=0)
+
 

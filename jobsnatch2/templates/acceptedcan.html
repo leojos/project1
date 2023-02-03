@@ -152,6 +152,7 @@
             <a href="{% url 'company'%}" class="active">Dashboard</a>
             <a href="{% url 'jobpost'%}">Post Job</a>
             <a href="{% url 'avlcandidates'%}">Available Candidates</a>
+            <a href="{% url 'notifi' %}">Notifications</a>
             <!-- <a href="{% url 'acceptedcan'%}">Accepted Candidates</a> -->
             
               {% if user.is_authenticated %}
@@ -160,6 +161,7 @@
             <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
          
         </div>
+        <br><br>
        <h1 style="color: black; text-align:center">Accepted Candidates :</h1>
        
        
