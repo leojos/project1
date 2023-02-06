@@ -156,25 +156,51 @@
                 <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
              
             </div>
-            <div style="text-align:center;background-color:rgba(255, 255, 255, 0.392);margin-top:5%;border-radius:10px;width:40%;height:50%;margin-left:2%;">
-              <h2>Confirmed Dates</h2>
+            <div style="text-align:center;background-color:rgba(255, 255, 255, 0.392);margin-top:5%;border-radius:10px;width:35%;height:50%;margin-left:2%;">
+              <h2 style="font-family:Arial, Helvetica, sans-serif;">CONFIRMED DATES</h2>
+              <table style="margin-left: 10%;">
+                <th style="text-align: center;">Candidate</th>
+                <th style="text-align: center;">Type</th>
+                <th style="text-align: center;">Duration</th>
+                <th style="text-align: center;">Approve</th>
                 {% for i in sc %}
-                  <form action="notifi/{{ user.id }}" method="post">
-                      <input type="text" name="test" value="{{i.can_id}}" hidden>
+                 <tr>
+                  <td style="text-align: center;">{{i.name}}</td>
+                  <td style="text-align: center;">{{i.typp}}</td>
+                  <td style="text-align: center;">{{i.dura}}</td>
+                  <form action="{% url 'appr1' %}" method="post">
+                   {% csrf_token %}
+                    <input type="text" name="appr1" value="{{i.sche_id}}" hidden>
+                    <td style="text-align: center;"><button type="submit" class="bt">Approve</button></td>
                   </form>
-                  {{i.can_id}}
-                  
+                 </tr>
                 {% endfor %}
+              </table>
             </div>
-            <div style="text-align:center;background-color:rgba(255, 255, 255, 0.392);margin-top:5%;border-radius:10px;width:40%;height:50%;float:right;margin-top:-22.5%;margin-right:2%;">
-              <h2>Prefered Dates</h2>
+            <div style="text-align:center;background-color:rgba(255, 255, 255, 0.392);margin-top:5%;border-radius:10px;width:60%;height:50%;float:right;margin-top:-22.5%;margin-right:1%;">
+              <h2 style="font-family:Arial, Helvetica, sans-serif;">PREFERED DATES</h2>
+              <table style="width:90%;margin-left: 5%;">
+               <th style="text-align: center;">Candidate</th>
+               <th style="text-align: center;">Type</th>
+               <th style="text-align: center;">Duration</th>
+               <th style="text-align: center;">Reason</th>
+               <th style="text-align: center;">Prefered date</th>
+               <th style="text-align: center;">Approve</th>
                 {% for i in scc %}
-                     Canid : {{i.can_id}}<br>
-                     Reason : {{i.reason}}<br>
-                     Prefered date : {{i.can_date}}<br>
-                     Type : {{i.typp}}<br>
-                     
+                  <tr>
+                   <td style="text-align: center;">{{i.name}}</td>
+                   <td style="text-align: center;">{{i.typp}}</td>
+                   <td style="text-align: center;">{{i.dura}}</td>
+                   <td style="text-align: center;">{{i.reason}}</td>
+                   <td style="text-align: center;">{{i.can_date}}</td>  
+                   <form action="#" method="post">
+                    {% csrf_token %}
+                     <input type="text" name="appr2" value="{{i.sche_id}}" hidden>
+                     <td style="text-align: center;"><button type="submit" class="bt">Approve</button></td>
+                   </form> 
+                  </tr>        
                 {% endfor %}
+              </table>
             </div>
             
         </body>

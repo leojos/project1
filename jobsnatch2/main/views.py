@@ -801,7 +801,7 @@ def activity(request):
   if 'can' in request.session:
     acti=training.objects.filter(can_id=request.user)
     acti2=classdetails.objects.filter(candi_id=request.user)
-    acti3=scheduling.objects.filter(can_id=request.user.id)
+    acti3=scheduling.objects.filter(user_id_id=request.user.id)
     return render(request,'activity.html',{'acti':acti,'acti2':acti2,'acti3':acti3})
 
 def map(request):
@@ -852,9 +852,7 @@ def sche(request):
     tim= request.POST['tim']
     caid= request.POST['caid']
     canid= request.POST['canid']
-    ac=User.objects.filter(id=canid)
-    bc=ac[0].username
-    user = scheduling(user_id_id=caid,train_date=tim,typp=ty,can_id=canid,dura=timm)
+    user = scheduling(user_id_id=canid,train_date=tim,typp=ty,com_id=caid,dura=timm)
     user.save()
     # account_sid = "ACbe5a012071ff14a371492b37cd98f240"
     # auth_token = "d48d21cacce540f89557ac799cb7aa36"
@@ -892,11 +890,24 @@ def schedec(request):
         accept.can_date=tii
         accept.save()
         return redirect('activity')
+    
+def appr1(request):
+    if request.method == 'POST':
+        appr1=request.POST['appr1']
+        accept=scheduling.objects.get(sche_id=appr1)
+        accept.approvedd=True
+        accept.save()
+        return redirect('acceptedcan')
+
+def progress(request):
+    sc=scheduling.objects.filter(user_id_id=request.user.id,approvedd=True)
+    return render(request,'progress.html',{'sc':sc})
+
 
 def notifi(request,id):
      if 'cmp' in request.session:
        testt=request.POST.get('test')
        ss=User.objects.filter(id=testt)
-       sc=scheduling.objects.filter(user_id_id=id,acc=True)
-       scc=scheduling.objects.filter(user_id_id=id,dec=False)
+       sc=scheduling.objects.filter(com_id=id,acc=True)
+       scc=scheduling.objects.filter(com_id=id,dec=False)
        return render(request,'notifications.html',{'sc':sc,'scc':scc,'ss':ss})

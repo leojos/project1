@@ -297,7 +297,7 @@ class scheduling(models.Model):
         sche_id = models.AutoField(primary_key=True)
         status=models.BooleanField('status', default=True) 
         user_id=models.ForeignKey(User ,default=None,on_delete=models.CASCADE)
-        can_id=models.IntegerField(blank=True, null=True)
+        com_id=models.IntegerField(blank=True, null=True)
         typp=models.CharField(max_length=100,null=True)
         dura=models.CharField(max_length=100,null=True)
         train_date =  models.DateTimeField()
@@ -305,6 +305,9 @@ class scheduling(models.Model):
         dec=models.BooleanField('status', default=True) 
         reason=models.TextField(null=True,blank=True)
         can_date =  models.DateTimeField(null=True)
+        approvedd=models.BooleanField('approveds', default=False)
 
-
+        @property
+        def name(self):
+            return self.user_id.username
         

@@ -136,6 +136,7 @@ body {margin:0;font-family:Arial}
         <a href="{% url 'my_form' %}">Feedback</a>
         <a href="moreinterns/{{user.id}}">Internships</a>
         <a href="{% url 'activity' %}">Activities</a>
+        <a href="{% url 'progress' %}">My Progress</a>
         <div style="float: right;margin-right:5%;">
             {% if user.is_authenticated %}
                 <p style=" margin-top:15%">
