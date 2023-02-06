@@ -304,6 +304,7 @@ class scheduling(models.Model):
         acc=models.BooleanField('status', default=False) 
         dec=models.BooleanField('status', default=True) 
         reason=models.TextField(null=True,blank=True)
-        can_date =  models.DateTimeField(null=True,default=0)
+        can_date =  models.DateTimeField(null=True)
 
 
+        

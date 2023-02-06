@@ -856,15 +856,15 @@ def sche(request):
     bc=ac[0].username
     user = scheduling(user_id_id=caid,train_date=tim,typp=ty,can_id=canid,dura=timm)
     user.save()
-    account_sid = "ACbe5a012071ff14a371492b37cd98f240"
-    auth_token = "d48d21cacce540f89557ac799cb7aa36"
-    client = Client(account_sid, auth_token)
-    message = client.messages.create(
-      body="Hello from Twilio",
-      from_="+15076085128",
-      to="+917025484895"
-    )
-    print(message.sid)
+    # account_sid = "ACbe5a012071ff14a371492b37cd98f240"
+    # auth_token = "d48d21cacce540f89557ac799cb7aa36"
+    # client = Client(account_sid, auth_token)
+    # message = client.messages.create(
+    #   body="Hello from Twilio",
+    #   from_="+15076085128",
+    #   to="+917025484895"
+    # )
+    # print(message.sid)
     return redirect('acceptedcan')
 
 def interdate(request):
@@ -893,7 +893,10 @@ def schedec(request):
         accept.save()
         return redirect('activity')
 
-def notifi(request):
+def notifi(request,id):
      if 'cmp' in request.session:
-       sc=scheduling.objects.filter()
-       return render(request,'notifications.html')
+       testt=request.POST.get('test')
+       ss=User.objects.filter(id=testt)
+       sc=scheduling.objects.filter(user_id_id=id,acc=True)
+       scc=scheduling.objects.filter(user_id_id=id,dec=False)
+       return render(request,'notifications.html',{'sc':sc,'scc':scc,'ss':ss})
