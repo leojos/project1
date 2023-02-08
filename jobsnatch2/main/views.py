@@ -371,6 +371,7 @@ def avljobs(request):
        data5 = appliedjob.objects.all()
 
        data6 = User.objects.filter(is_company=True)
+       data7 = User.objects.filter(is_candidate=True)
 
        if request.method == 'POST':
         # num=request.POST['text']
@@ -394,7 +395,7 @@ def avljobs(request):
           # data3 = job.objects.filter(cmp_id_id=data2)
           # data = job.objects.filter(job_title=st)
 
-       context = {'data': data,'data1':data1,'data2':data2,'data3':data3,'data4':data4,'data5':data5,'data6':data6}
+       context = {'data': data,'data1':data1,'data2':data2,'data3':data3,'data4':data4,'data5':data5,'data6':data6,'data7':data7}
        return render(request,"avljobs.html", context)
      return render(request,'index.html')
 
@@ -422,11 +423,22 @@ def comppages(request):
 
 def canpage(request):
   
-    data = appliedjob.objects.all()
+    
     if request.method == 'POST':
       canid=request.POST.get('canid')
       jobid=request.POST['jobid']
-      data = appliedjob.objects.filter(can_id_id=canid,jobs_id=jobid)
+      data = appliedjob.objects.filter(can_id_id=canid,jobs_id=jobid,accept=True)
+      context = {'data': data}
+      return render(request, 'canpage.html', context)
+    return render(request,'index.html')
+
+def canpage2(request):
+  
+    
+    if request.method == 'POST':
+      canid=request.POST.get('canid')
+      jobid=request.POST['jobid']
+      data = appliedjob.objects.filter(can_id_id=canid,jobs_id=jobid,accept=False)
       context = {'data': data}
       return render(request, 'canpage.html', context)
     return render(request,'index.html')
@@ -617,7 +629,7 @@ def acceptedcan(request):
       #  canid=request.POST['canid']
       #  jobid=request.POST['jobid']
        data = appliedjob.objects.all()
-       data = appliedjob.objects.filter(accept=False,)
+       data = appliedjob.objects.filter(accept=False)
       #  data1=User.objects.all()
       #  data1 = User.objects.filter(id=data.can_id_id)
 
@@ -899,9 +911,20 @@ def appr1(request):
         accept.save()
         return redirect('acceptedcan')
 
+def appr2(request):
+    if request.method == 'POST':
+        appr2=request.POST['appr2']
+        accept=scheduling.objects.get(sche_id=appr2)
+        accept.approvedd=True
+        accept.save()
+        return redirect('acceptedcan')
+    
 def progress(request):
-    sc=scheduling.objects.filter(user_id_id=request.user.id,approvedd=True)
-    return render(request,'progress.html',{'sc':sc})
+
+  comp=job.objects.all()
+    
+  sc=scheduling.objects.filter(user_id_id=request.user.id,approvedd=True)
+  return render(request,'progress.html',{'sc':sc,'comp':comp})
 
 
 def notifi(request,id):

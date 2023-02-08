@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html>
 <body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));">
-
-<h1>The progress element</h1>
 {% for i in sc %}
- {% if i.approvedd == 'True' %}
-   
-   <progress id="file" value="10" max="100"> 10% </progress>
- {% else %}
-    <progress id="file" value="10" max="100"> 100% </progress>
- {% endif %}
+  {% for x in comp %}
+    {% if x.cmp_id_id == i.com_id %}
+     Company : {{x.username}}<br>
+     Title :{{x.job_title}}<br>
+     Lastdate : {{x.lastdate}}<br>
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+{% for i in sc %}
+  Step 1 : Interview Process 
+  <progress id="file" value="10" max="100"> 10% </progress>
 {% endfor %}
 </body>
 </html>

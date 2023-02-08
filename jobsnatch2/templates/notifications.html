@@ -193,7 +193,7 @@
                    <td style="text-align: center;">{{i.dura}}</td>
                    <td style="text-align: center;">{{i.reason}}</td>
                    <td style="text-align: center;">{{i.can_date}}</td>  
-                   <form action="#" method="post">
+                   <form action="{% url 'appr2' %}" method="post">
                     {% csrf_token %}
                      <input type="text" name="appr2" value="{{i.sche_id}}" hidden>
                      <td style="text-align: center;"><button type="submit" class="bt">Approve</button></td>

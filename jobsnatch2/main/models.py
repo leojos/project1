@@ -306,6 +306,7 @@ class scheduling(models.Model):
         reason=models.TextField(null=True,blank=True)
         can_date =  models.DateTimeField(null=True)
         approvedd=models.BooleanField('approveds', default=False)
+        
 
         @property
         def name(self):
