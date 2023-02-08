@@ -81,6 +81,7 @@ urlpatterns = [
     path('appr1', views.appr1, name='appr1'),
     path('appr2', views.appr2, name='appr2'),
     path('progress', views.progress, name='progress'),
+         
     # path("createresume", views.createresume, name="createresume"),
     # path("resumes", views.resumes, name="resumes"),
     # path("dash", views.dash, name="dash"),

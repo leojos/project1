@@ -934,3 +934,6 @@ def notifi(request,id):
        sc=scheduling.objects.filter(com_id=id,acc=True)
        scc=scheduling.objects.filter(com_id=id,dec=False)
        return render(request,'notifications.html',{'sc':sc,'scc':scc,'ss':ss})
+
+
+
