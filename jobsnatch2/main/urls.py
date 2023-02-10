@@ -27,6 +27,7 @@ urlpatterns = [
     # path('jobelete', views.jobdelete, name='jobdelete'),
     path('applyjob', views.applyjob, name='applyjob'),
     path('comppage', views.comppage, name='comppage'),
+    path('comppage2', views.comppage2, name='comppage2'),
     path('comppages', views.comppages, name='comppages'),
     path('canpage', views.canpage, name='canpage'),
     path('canpage2', views.canpage2, name='canpage2'),
@@ -85,6 +86,8 @@ urlpatterns = [
     path('progress', views.progress, name='progress'),
     path('setstatus', views.setstatus, name='setstatus'),
     path('compoffer', views.compoffer, name='compoffer'),
+    path('offercan', views.offercan, name='offercan'),
+    path('offerjob', views.offerjob, name='offerjob'),
          
     # path("createresume", views.createresume, name="createresume"),
     # path("resumes", views.resumes, name="resumes"),

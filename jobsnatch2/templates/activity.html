@@ -100,6 +100,22 @@
         </div>
    {% endfor %}
 
+   {% for v in acti4 %}
+        <div class="container mt-3 homedi homed"  style="background-color: rgba(255, 255, 255, 0.187);width: 40%;"><p style="text-align: center;margin-top:4%;">Job Offers</p>
+            <div class="card " style="background-color: rgba(255, 255, 255, 0.644); margin-top:5%;text-align:justify;">
+            <div class="card-body" ><h4>Hi {{user.username}}, {{v.username}} company has shown interest to your profile.
+              Check their jobs offered as per your interest in the Avaliable Jobs section in your portal.
+            </h4>
+            <form action="{% url 'comppage2' %}" method="post">
+              {% csrf_token %}
+              <input type="text" name="idd" value="{{v.comm_id_id}}" hidden>
+              <button style="background-color: transparent;border:none;" type="submit">Know More >></button>
+            </form>
+              </div>
+            </div>
+        </div>
+   {% endfor %}
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">

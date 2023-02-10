@@ -312,3 +312,55 @@ class scheduling(models.Model):
         def name(self):
             return self.user_id.username
         
+class offer(models.Model):
+    offer_id=models.AutoField(primary_key=True)
+    cann_id=models.IntegerField(blank=True, null=True)
+    comm_id=models.IntegerField(blank=True, null=True)
+    status=models.BooleanField('status', default=True) 
+
+class offerr(models.Model):
+    offer_id=models.AutoField(primary_key=True)
+    cann_id=models.IntegerField(blank=True, null=True)
+    comm_id=models.ForeignKey(User ,default=None,on_delete=models.CASCADE)
+    status=models.BooleanField('status', default=True) 
+
+    @property
+    def id(self):
+        return self.comm_id
+
+    @property
+    def email(self):
+        return self.comm_id.email
+    
+    @property
+    def about(self):
+        return self.comm_id.about
+    
+    @property
+    def image(self):
+        return self.comm_id.image
+    
+    @property
+    def username(self):
+        return self.comm_id.username
+    
+    @property
+    def phone(self):
+        return self.comm_id.phone
+    
+    @property
+    def address(self):
+        return self.comm_id.address
+    
+    @property
+    def recruiter(self):
+        return self.comm_id.recruiter
+    
+    @property
+    def cat(self):
+        return self.comm_id.cat
+    
+    @property
+    def loc(self):
+        return self.comm_id.location
+

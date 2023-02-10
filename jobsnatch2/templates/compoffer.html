@@ -157,6 +157,20 @@
               <th style="text-align: center;">EMAIL</th>
               <th style="text-align: center;"></th>
             </tr>
+            
+            {% for x in avl %}
+              <tr>
+                <form method="POST" action="{% url 'offercan' %}">
+                    {% csrf_token %}
+                       <td style="text-align: center;">{{ x.username}}</td>
+                       <td style="text-align: center;">{{ x.about}}</td>
+                       <td style="text-align: center;"><a href="#">{{ x.email}}</a></td>
+                       <td style="text-align: center;"  hidden><input type="text" name="canid" value="{{ x.id}}"></td>
+                       <td style="text-align: center;"><button  style="background-color: rgb(73, 198, 73); border-radius:7px;height:35px;width:80px;font-weight:bold;color:white;border:none" type="submit">View More</button></td>
+                  </form>
+              </tr>
+            {% endfor %}
+
                 </table>
            </div>  
          </div>

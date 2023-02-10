@@ -16,6 +16,7 @@ from .models import classdetails
 from .models import training
 from .models import resumme
 from .models import scheduling
+from .models import offerr
 from django.contrib.auth.decorators import login_required
 from django import forms
 from django.db.models.functions import Now
@@ -405,6 +406,15 @@ def comppage(request):
     if request.method == 'POST':
       cmpid=request.POST['cmpid']
       data = job.objects.filter(job_id=cmpid)
+      context = {'data': data}
+      return render(request, 'comppage.html', context)
+    return render(request,'index.html')
+
+def comppage2(request):
+    data = offerr.objects.all()
+    if request.method == 'POST':
+      idd=request.POST['idd']
+      data = job.objects.filter(cmp_id=idd)
       context = {'data': data}
       return render(request, 'comppage.html', context)
     return render(request,'index.html')
@@ -814,7 +824,8 @@ def activity(request):
     acti=training.objects.filter(can_id=request.user)
     acti2=classdetails.objects.filter(candi_id=request.user)
     acti3=scheduling.objects.filter(user_id_id=request.user.id)
-    return render(request,'activity.html',{'acti':acti,'acti2':acti2,'acti3':acti3})
+    acti4=offerr.objects.filter(cann_id=request.user.id)
+    return render(request,'activity.html',{'acti':acti,'acti2':acti2,'acti3':acti3,'acti4':acti4})
 
 def map(request):
     return render(request,'map.html')
@@ -961,6 +972,19 @@ def notifi(request,id):
 
 def compoffer (request):
     if 'cmp' in request.session:
-        avl=User.objects.filter(is_candidate=True)
-        return render(request,'compoffer.html')
-        
+        avl=User.objects.filter(is_candidate=True,cat=request.user.cat)
+        return render(request,'compoffer.html',{'avl':avl})
+
+def offercan (request):
+    if 'cmp' in request.session:
+         canid=request.POST['canid']
+         data=User.objects.filter(id=canid)
+         return render(request,'offercan.html',{'data':data})
+
+def offerjob (request):
+    if 'cmp' in request.session:
+         canid=request.POST['canid']
+         off=offerr(cann_id=canid)
+         off.comm_id=request.user
+         off.save()
+         return redirect('compoffer')
