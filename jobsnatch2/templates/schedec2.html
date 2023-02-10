@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <style>
+            .bt{
+                background-color: rgb(73, 198, 73);
+                 border-radius:7px;
+                 height:fit-content;
+                 width:80px;
+                 font-size:small;
+                 padding: 7.5px;
+                 font-weight:bold;
+                 color:white;
+                 border:none;
+              }
+              .div1{
+                height: fit-content;
+                width: 50%;
+                text-align:center;
+                background-color:rgba(255, 255, 255, 0.606);
+                margin-top:5%;
+                margin-left:25%;
+                border-radius:10px;
+                padding:6px;
+                font-size: large;
+                
+              }
+        </style>
+    </head>
+    <body>
+        <div class="div1">
+         <form action="{% url 'schedec2' %}" method="post"> 
+          {% csrf_token %}
+            <label for="tii">Preffered Time : </label>
+            <input type="datetime-local" id="birthdaytime" name="tii"><br><br>
+            <textarea name="sc" placeholder="Enter reason"></textarea><br><br>
+            <input type="text" value={{sche}} name="sche" hidden>
+            <button type="submit" style="border-radius: 5px;border:none;background: rgb(7, 133, 183);height:fit-content;width:fit-content;font-weight:bold;color:white;font-size:medium;">Confrim</button>
+        </form>
+       </div>
+    </body>
+</html>

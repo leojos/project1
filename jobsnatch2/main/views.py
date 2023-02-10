@@ -902,12 +902,36 @@ def schedec(request):
         accept.can_date=tii
         accept.save()
         return redirect('activity')
+
+def sch(request):
+    sche=request.POST['sche']
+    return render(request,'schedec2.html',{'sche':sche})
+
+def schedec2(request):
+    if request.method == 'POST':
+        sche=request.POST['sche']
+        sc=request.POST['sc']
+        tii=request.POST['tii']
+        accept=scheduling.objects.get(sche_id=sche)
+        accept.dec=False
+        accept.reason=sc
+        accept.can_date=tii
+        accept.save()
+        return redirect('activity')
     
 def appr1(request):
     if request.method == 'POST':
         appr1=request.POST['appr1']
         accept=scheduling.objects.get(sche_id=appr1)
         accept.approvedd=True
+        accept.save()
+        return redirect('acceptedcan')
+
+def setstatus(request):
+    if request.method == 'POST':
+        app=request.POST['app']
+        accept=scheduling.objects.get(sche_id=app)
+        accept.status=False
         accept.save()
         return redirect('acceptedcan')
 
@@ -923,7 +947,7 @@ def progress(request):
 
   comp=job.objects.all()
     
-  sc=scheduling.objects.filter(user_id_id=request.user.id,approvedd=True)
+  sc=scheduling.objects.filter(user_id_id=request.user.id,approvedd=True,train_date__gt=Now())
   return render(request,'progress.html',{'sc':sc,'comp':comp})
 
 
@@ -935,5 +959,8 @@ def notifi(request,id):
        scc=scheduling.objects.filter(com_id=id,dec=False)
        return render(request,'notifications.html',{'sc':sc,'scc':scc,'ss':ss})
 
-
-
+def compoffer (request):
+    if 'cmp' in request.session:
+        avl=User.objects.filter(is_candidate=True)
+        return render(request,'compoffer.html')
+        

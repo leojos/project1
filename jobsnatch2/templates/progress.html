@@ -1,18 +1,86 @@
 <!DOCTYPE html>
 <html>
-<body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));">
-{% for i in sc %}
-  {% for x in comp %}
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <style>
+    .bt{
+      background-color: rgb(73, 198, 73);
+      border-radius:7px;
+      height:fit-content;
+      width:80px;
+      font-size:small;
+      padding: 7.5px;
+      font-weight:bold;
+      color:white;
+      border:none;
+      float: left;
+   }
+    .bt2{
+      background-color: rgb(209, 40, 74);
+      border-radius:7px;
+      height:fit-content;
+      width:80px;
+      font-size:small;
+      padding: 7.5px;
+      font-weight:bold;
+      color:white;
+      border:none;
+   }
+   table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 70%;
+    text-align: center;
+    margin-left:15%;
+  }
+  
+  td, th {
+    border: 1px solid #000000;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #ffffff;
+  }
+  </style>
+<body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));"> 
+ <table>
+  <th>Company</th>
+  <th>Title</th>
+  <th>Date</th>
+  <th>Type</th>
+  <th></th>
+  <th>Status</th>
+  <tr>
+ {% for i in sc %}
+  
+   {% for x in comp %}
     {% if x.cmp_id_id == i.com_id %}
-     Company : {{x.username}}<br>
-     Title :{{x.job_title}}<br>
-     Lastdate : {{x.lastdate}}<br>
+      <td>{{x.username}}</td>
+      <td>{{x.job_title}}</td>
+      {% if i.can_date %}
+       <td>{{i.can_date}}</td>
+      {% else %}
+       <td>{{i.train_date}}</td>
+      {% endif %}
     {% endif %}
-  {% endfor %}
-{% endfor %}
-{% for i in sc %}
-  Step 1 : Interview Process 
-  <progress id="file" value="10" max="100"> 10% </progress>
-{% endfor %}
+   {% endfor %}
+   <td>{{i.typp}}</td>
+   <form action="{% url 'sch' %}" method="post">
+    {% csrf_token %}
+     <td hidden><input type="text" name="sche" value="{{i.sche_id}}"></td>
+     <td><button type="submit" class="bt2">Reschedule</button></td>
+  </form>
+  
+   <td>{% if i.status == False %}
+    <button type="submit" class="bt">Done</button>
+  {% endif %}
+</td>
+ </tr>
+  
+ {% endfor %}
+   
+</table>
 </body>
 </html>

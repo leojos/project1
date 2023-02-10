@@ -156,13 +156,14 @@
                 <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
              
             </div>
-            <div style="text-align:center;background-color:rgba(255, 255, 255, 0.392);margin-top:5%;border-radius:10px;width:35%;height:50%;margin-left:2%;">
+            <div style="text-align:center;background-color:rgba(255, 255, 255, 0.392);margin-top:5%;border-radius:10px;width:37%;height:50%;margin-left:1%;">
               <h2 style="font-family:Arial, Helvetica, sans-serif;">CONFIRMED DATES</h2>
-              <table style="margin-left: 10%;">
+              <table style="margin-left: 2%;">
                 <th style="text-align: center;">Candidate</th>
                 <th style="text-align: center;">Type</th>
                 <th style="text-align: center;">Duration</th>
                 <th style="text-align: center;">Approve</th>
+                <th style="text-align: center;">Status</th>
                 {% for i in sc %}
                  <tr>
                   <td style="text-align: center;">{{i.name}}</td>
@@ -172,6 +173,11 @@
                    {% csrf_token %}
                     <input type="text" name="appr1" value="{{i.sche_id}}" hidden>
                     <td style="text-align: center;"><button type="submit" class="bt">Approve</button></td>
+                  </form>
+                  <form action="{% url 'setstatus' %}" method="post">
+                    {% csrf_token %}
+                     <input type="text" name="app" value="{{i.sche_id}}" hidden>
+                     <td style="text-align: center;"><button type="submit" class="bt">Done</button></td>
                   </form>
                  </tr>
                 {% endfor %}
@@ -186,6 +192,7 @@
                <th style="text-align: center;">Reason</th>
                <th style="text-align: center;">Prefered date</th>
                <th style="text-align: center;">Approve</th>
+               <th style="text-align: center;">Status</th>
                 {% for i in scc %}
                   <tr>
                    <td style="text-align: center;">{{i.name}}</td>
@@ -198,6 +205,11 @@
                      <input type="text" name="appr2" value="{{i.sche_id}}" hidden>
                      <td style="text-align: center;"><button type="submit" class="bt">Approve</button></td>
                    </form> 
+                   <form action="{% url 'setstatus' %}" method="post">
+                    {% csrf_token %}
+                     <input type="text" name="app" value="{{i.sche_id}}" hidden>
+                     <td style="text-align: center;"><button type="submit" class="bt">Done</button></td>
+                  </form>
                   </tr>        
                 {% endfor %}
               </table>
