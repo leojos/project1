@@ -52,15 +52,15 @@
                         {% csrf_token %}
                         <input type="text" name="canid" value="{{x.id}}" hidden>
                         <input type="text" name="comid" value="{{user.id}}" hidden>
-                        <button  style="background-color: rgb(73, 198, 73); border-radius:7px;height:35px;width:fit-content;font-weight:bold;color:white;border:none" type="submit">Offer Job</button>
+                        <button  style="background-color: rgb(73, 198, 73); border-radius:7px;height:35px;width:fit-content;font-weight:bold;color:white;border:none" type="submit" onclick="myFunction()">Offer Job</button>
                       </form>
-                    <div style="margin-left:8%;margin-top:-3%">
+                    <!-- <div style="margin-left:8%;margin-top:-3%">
                         <form method="post" action="#">
                             {% csrf_token %}
                             <input type="text" name="reject" hidden>
                             <button  style="background-color: rgb(196, 27, 27); border-radius:7px;height:35px;width:60px;font-weight:bold;color:white;border:none" type="submit">Reject</button>
                         </form>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             
@@ -70,6 +70,11 @@
     </div>
 </section>
 
+<script>
+function myFunction() {
+  alert("Successfully offered job for candidate");
+}
+</script>
 <style type="text/css">
 body{margin-top:20px;}
 .card-style1 {

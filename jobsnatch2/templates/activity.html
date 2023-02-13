@@ -90,7 +90,7 @@
               <form action="{% url 'scheaccept' %}" method="post">
                 {% csrf_token %}
                  <input type="text" name="scheu" value="{{z.sche_id}}" hidden>
-                 <button type="submit" class="bt">Accept</button>
+                 <button type="submit" class="bt" onclick="myFunction()" >Accept</button>
               </form>
               <button type="button" class="btn btn-primary bt2" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Decline
@@ -121,7 +121,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Date Preference</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -133,7 +133,7 @@
            <label for="tday">Please enter a prefered date : </label>
            <input type="datetime-local" id="birthdaytime" name="tii"><br><br>
            <textarea name="sc" placeholder="Enter reason"></textarea><br><br>
-           <button class="bt3">Submit</button>
+           <button class="bt3" onclick="myFunction1()">Submit</button>
         </form>
       </div>
       <div class="modal-footer">
@@ -142,6 +142,15 @@
     </div>
   </div>
 </div>
+
+<script>
+function myFunction() {
+  alert("Confirmed the offered date !!");
+}
+function myFunction1() {
+  alert("Changed suggested date succeffully");
+}
+</script>
   </body>
   {% endblock %}
 </html>

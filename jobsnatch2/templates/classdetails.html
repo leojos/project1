@@ -55,7 +55,7 @@
                             {% endif %}
                         {% endfor %}  
                               {% for x in feed %}  
-                                {{x.intern_id}}
+                                
                                 {% if x.intern_id == mo or more.candi_id_id == mor  %} 
                                   <button type="submit" style="border-radius: 5px;border:none;background: rgb(7, 133, 183);height:fit-content;width:fit-content;font-weight:bold;color:white;font-size:medium;">Applied</button>
                                   <!-- <button type="submit" style="border-radius: 5px;border:none;background: rgb(7, 133, 183);height:fit-content;width:fit-content;font-weight:bold;color:white;font-size:medium;">Apply</button>          -->
@@ -63,12 +63,12 @@
                                 {% endif %}  
                               {% endfor %}  
                             
-                        <!-- <button type="submit"  style="border-radius: 5px;border:none;background: rgb(7, 133, 183);height:fit-content;width:fit-content;font-weight:bold;color:white;font-size:medium;">Apply</button>  -->
+                        <button type="submit"  style="border-radius: 5px;border:none;background: rgb(7, 133, 183);height:fit-content;width:fit-content;font-weight:bold;color:white;font-size:medium;">Apply</button> 
                       </form>
                     </div>
       <script>
       function cli(){
-        alert('Thank You For Your Response :)') 
+        alert('Succefully applied for the internship, Thank You For Your Response :)') 
       }
       function myFunction() {
         var x = document.getElementById("myTopnav");

@@ -172,7 +172,7 @@
                   <form action="{% url 'appr1' %}" method="post">
                    {% csrf_token %}
                     <input type="text" name="appr1" value="{{i.sche_id}}" hidden>
-                    <td style="text-align: center;"><button type="submit" class="bt">Approve</button></td>
+                    <td style="text-align: center;"><button type="submit" class="bt" onclick="myFunction()">Approve</button></td>
                   </form>
                   <form action="{% url 'setstatus' %}" method="post">
                     {% csrf_token %}
@@ -203,7 +203,7 @@
                    <form action="{% url 'appr2' %}" method="post">
                     {% csrf_token %}
                      <input type="text" name="appr2" value="{{i.sche_id}}" hidden>
-                     <td style="text-align: center;"><button type="submit" class="bt">Approve</button></td>
+                     <td style="text-align: center;"><button type="submit" class="bt" onclick="myFunction1()">Approve</button></td>
                    </form> 
                    <form action="{% url 'setstatus' %}" method="post">
                     {% csrf_token %}
@@ -214,6 +214,14 @@
                 {% endfor %}
               </table>
             </div>
-            
+
+            <script>
+            function myFunction() {
+              alert("Date approved and Scheduled confirmed of slotted date");
+            }
+            function myFunction1() {
+              alert("Date approved and Scheduled confirmed of preferred date ");
+            }
+            </script>
         </body>
 </html>

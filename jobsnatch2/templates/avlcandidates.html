@@ -122,12 +122,12 @@
         }
       </style>
     <body style="background-image: linear-gradient( rgb(198, 201, 202),rgb(50, 147, 166));">
-        <div class="topnav" id="myTopnav" style="width:1500px;margin-top:-10">
+        <div class="topnav" id="myTopnav" style="width:1500px;margin-top:-10;margin-left:-1%;">
             <a href="{% url 'company'%}" class="active">Dashboard</a>
             <a href="{% url 'jobpost'%}">Post Job</a>
-            <a href="{% url 'avlcandidates'%}">Available Candidates</a>
             <a href="{% url 'acceptedcan'%}">Accepted Candidates</a>
             <a href="{% url 'compoffer'%}">Candidates</a>
+            <a href="notifi/{{ user.id }}">Notifications</a>
             
             
               {% if user.is_authenticated %}
