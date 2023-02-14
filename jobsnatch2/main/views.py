@@ -303,11 +303,14 @@ def admin(request):
        data1 = User.objects.filter(is_candidate=1).count()
        data2 = User.objects.all()
        data2 = User.objects.filter(is_company=1).count()
+       data3 = categ.objects.all().count()
+       data4 = internship.objects.all().count()
+       data5 = feedback.objects.all().count()
       #  data1 = job.objects.all()
       #  if request.method == 'POST':
       #   cmpid=request.POST['cmpid']
       #   data1= appliedjob.objects.filter(jobs_id_id=cmpid)
-       context = {'data': data,'data1':data1,'data2':data2}
+       context = {'data': data,'data1':data1,'data2':data2,'data3':data3,'data4':data4,'data5':data5}
        return render(request,"admin.html", context)
     return render(request,'index.html')
     # return render(request,'admin.html')

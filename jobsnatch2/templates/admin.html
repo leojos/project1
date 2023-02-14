@@ -173,9 +173,10 @@ body {margin:0;font-family:Arial}
     background-color: rgba(255, 255, 255, 0.5);
     width: 300px;
     padding: 50px;
-    float:right;
-    margin-right: 7%;
+    float: left;
+    margin-left: 7%;
     border-radius: 10px;
+    margin-bottom: 2%;
   }
 </style>
 <body style="background-image: linear-gradient( rgb(198, 201, 202),rgb(50, 147, 166));background-repeat:no-repeat">
@@ -227,16 +228,34 @@ body {margin:0;font-family:Arial}
      
        <h1 style="color: black; text-align:center;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Welcome  {{request.session.usr}}</h1><br><br>
        <div class="div">
+          <center><img src="{% static 'images/suitcase.png'%}" width="50" height="50" ></center>
           <p style="text-align: center;">Jobs Posted</p>
           <p style="text-align: center;">  {{data}}</p>
        </div>
        <div class="div">
+          <center><img src="{% static 'images/user.png'%}" width="50" height="50" ></center>
           <p style="text-align: center;">Available Candidates</p>
           <p style="text-align: center;">{{data1}}</p>
        </div>
        <div class="div">
+          <center><img src="{% static 'images/company.png'%}" width="50" height="50" ></center>
           <p style="text-align: center;">Available Companies</p>
           <p style="text-align: center;">{{data2}}</p>
+       </div>
+       <div class="div">
+        <center><img src="{% static 'images/categories.png'%}" width="50" height="50" ></center>
+        <p style="text-align: center;">Available Categories</p>
+        <p style="text-align: center;">{{data3}}</p>
+       </div>
+       <div class="div">
+        <center><img src="{% static 'images/employee.png'%}" width="50" height="50" ></center>
+        <p style="text-align: center;">Available Internships</p>
+        <p style="text-align: center;">{{data4}}</p>
+       </div>
+       <div class="div">
+        <center><img src="{% static 'images/feedback.png'%}" width="50" height="50" ></center>
+        <p style="text-align: center;">Overall Feedbacks</p>
+        <p style="text-align: center;">{{data5}}</p>
        </div>
 </div>
 
