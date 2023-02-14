@@ -312,6 +312,7 @@ def admin(request):
     return render(request,'index.html')
     # return render(request,'admin.html')
 
+
 def admincom(request):
     if 'usr' in request.session:
       #  data = job.objects.all()
@@ -419,6 +420,14 @@ def comppage2(request):
       return render(request, 'comppage.html', context)
     return render(request,'index.html')
 
+def comppage3(request):
+    if request.method == 'POST':
+      cmpid=request.POST['cmpid']
+      data = User.objects.filter(id=cmpid)
+      context = {'data': data}
+      return render(request, 'comppage.html', context)
+    return render(request,'index.html')
+
 def comppages(request):
   if 'can' in request.session:
     data = job.objects.all()
@@ -451,6 +460,15 @@ def canpage2(request):
       data = appliedjob.objects.filter(can_id_id=canid,jobs_id=jobid,accept=False)
       context = {'data': data}
       return render(request, 'canpage.html', context)
+    return render(request,'index.html')
+
+def canpage3(request):
+    if request.method == 'POST':
+      canid=request.POST.get('canid')
+
+      data = User.objects.filter(id=canid)
+      context = {'data': data}
+      return render(request, 'canpage3.html', context)
     return render(request,'index.html')
 
 def appliedjobs(request):
@@ -779,8 +797,9 @@ def intern(request):
         durno = request.POST['durno']
         durex = request.POST['durex']
         edate = request.POST['edate']
+        caty = request.POST['caty']
         image = request.FILES.get('p')
-        member = internship(title=tit,caption=cap,durno=durno,durex=durex,enddate=edate,img=image)
+        member = internship(title=tit,caption=cap,durno=durno,durex=durex,enddate=edate,img=image,category=caty)
         member.save()
         return redirect('admin')
 
@@ -988,3 +1007,16 @@ def offerjob (request):
          off.comm_id=request.user
          off.save()
          return redirect('compoffer')
+
+def addcate(request):
+    if 'usr' in request.session:
+       return render(request,"addcat.html")
+    return render(request,'index.html')
+    # return render(request,'admin.html')
+
+def addin(request):
+    if 'usr' in request.session:
+       ad=categ.objects.all()
+       return render(request,"addin.html",{'ad':ad})
+    return render(request,'index.html')
+    

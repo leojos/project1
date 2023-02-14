@@ -238,6 +238,7 @@ class internship(models.Model):
     enddate =  models.DateField()
     caption=models.CharField(max_length=100,null=True)
     img=models.ImageField(null=True,blank=True,upload_to="img/")
+    category=models.CharField(max_length=100,null=True)
 
 class classdetails(models.Model):
     in_id=models.AutoField(primary_key=True)

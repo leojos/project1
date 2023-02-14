@@ -171,12 +171,13 @@ body {margin:0;font-family:Arial}
     .sidebar a {font-size: 18px;}
   }
 </style>
-<body style="background-color:#1dd4ec;background-repeat:no-repeat;height:100%">
+<body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));">
   <div id="mySidebar" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
     <a href="{% url 'admin'%}">Dashboard</a>
-    <a href="{% url 'admincan'%}">Candidate</a>
     <a href="{% url 'admincom'%}">Company</a>
+    <a href="{% url 'addcate'%}">Add Category</a>
+    <a href="{% url 'addin'%}">Add Internship</a>
   </div>
   <div id="main">
   
@@ -235,11 +236,10 @@ body {margin:0;font-family:Arial}
                 <td style="text-align: center;">{{ x.username}}</td>
                 <td style="text-align: center;">{{ x.email}}</td>
                 <td style="text-align: center;">{{ x.phone}}</td>
-                <form method="post" action="canpage">
+                <form method="post" action="{% url 'canpage3' %}">
                     {% csrf_token %}
                       <td style="text-align: center;"><button  style="background-color: rgb(73, 198, 73); border-radius:7px;height:35px;width:80px;font-weight:bold;color:white;border:none" type="submit">More Info</button></td>
-                      <td style="text-align: center;" hidden><input type="text" name="jobid" value="{{ x.jobs_id_id}}"></td>
-                      <td style="text-align: center;" hidden><input type="text" name="canid" value="{{ x.can_id_id}}"></td>
+                      <td style="text-align: center;" hidden><input type="text" name="canid" value="{{ x.id}}"></td>
                 </form>
                 <form action="{% url 'authdeletecan' %}" method="post">
                       {% csrf_token %}

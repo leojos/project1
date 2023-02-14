@@ -123,6 +123,7 @@ margin-bottom: 2%;
         <a class="active"  href="{% url 'index'%}" class="logo">JobSnatch</a>
       </div>
       {% for x in feed %}
+       {% if x.category == user.cat %}
         <div class="container mt-3 homedi homed"  style="background-color: rgba(255, 255, 255, 0.187)">
           <div class="card " style="background-color: rgba(255, 255, 255, 0.644); margin-top:5%;text-align:center;font-size:20px">
             <div class="card-body">{{x.title}}</div>
@@ -148,9 +149,9 @@ margin-bottom: 2%;
               {% endfor %}  
             </form>
           </div>
-        </div>
+         </div>
+       {% endif %}
       {% endfor %}
-      <button >Try it</button>
       <script>
       function myFunction() {
         var x = document.getElementById("myTopnav");
