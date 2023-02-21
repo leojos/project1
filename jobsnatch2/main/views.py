@@ -575,7 +575,9 @@ def postjob(request):
         vacancies = request.POST['vacancies']
         job_description = request.POST['desc']
         desti = request.POST['desti']
-        member = job(job_title=job_title,salary=salary,experience=experience,lastdate=lastdate,vacancies=vacancies,job_description=job_description,desti=desti)
+        quali = request.POST.get('quali')
+        jtype = request.POST.get('jtype')
+        member = job(job_title=job_title,salary=salary,experience=experience,lastdate=lastdate,vacancies=vacancies,job_description=job_description,desti=desti,jobtype=jtype,qualification=quali)
         # instance=member.save()
         member.cmp_id =request.user
         member.save()
@@ -804,7 +806,20 @@ def intern(request):
         image = request.FILES.get('p')
         member = internship(title=tit,caption=cap,durno=durno,durex=durex,enddate=edate,img=image,category=caty)
         member.save()
-        return redirect('admin')
+        return redirect('addin')
+
+def intern1(request):
+      if request.method == 'POST':
+        tit = request.POST['tit']
+        cap = request.POST['cap']
+        durno = request.POST['durno']
+        durex = request.POST['durex']
+        edate = request.POST['edate']
+        caty = request.POST['caty']
+        image = request.FILES.get('p')
+        member = internship(title=tit,caption=cap,durno=durno,durex=durex,enddate=edate,img=image,category=caty)
+        member.save()
+        return redirect('inadd')
 
 def moreinterns(request,id):
     feed=internship.objects.all()
@@ -887,8 +902,9 @@ def resubmit(request):
     country= request.POST['country']
     dob= request.POST['dob']
     gen= request.POST['gen']
-    user = resumme(name=username,position=pos,email=email,carobj=co,college=col,plus=plus,ten=scho,projects=pro,certi=certi,achi=achi,interns=intern,refe=ref,phone=phone,address=address,strength=stre,skills=skills,lang=lang,hob=hob,soci=soli,coun=country,dob=dob,gender=gen)
-    user.save()
+    uid= request.POST['uid']
+    userr = resumme(name=username,position=pos,email=email,carobj=co,college=col,plus=plus,ten=scho,projects=pro,certi=certi,achi=achi,interns=intern,refe=ref,phone=phone,address=address,strength=stre,skills=skills,lang=lang,hob=hob,soci=soli,coun=country,dob=dob,gender=gen,user_id=uid)
+    userr.save()
     return redirect('res')
 
 def sche(request):
@@ -899,15 +915,18 @@ def sche(request):
     canid= request.POST['canid']
     user = scheduling(user_id_id=canid,train_date=tim,typp=ty,com_id=caid,dura=timm)
     user.save()
-    # account_sid = "ACbe5a012071ff14a371492b37cd98f240"
-    # auth_token = "d48d21cacce540f89557ac799cb7aa36"
-    # client = Client(account_sid, auth_token)
-    # message = client.messages.create(
-    #   body="Hello from Twilio",
-    #   from_="+15076085128",
-    #   to="+917025484895"
-    # )
-    # print(message.sid)
+    # Download the helper library from https://www.twilio.com/docs/python/install
+    account_sid = "ACcaf3a016ba44451632b6b9d52ec003f1"
+    auth_token = "b8561c64ea3b53e6c993004e2cf2f593"
+    client = Client(account_sid, auth_token)
+
+    message = client.messages.create(
+    body="Hello from JobSnatch Your interview date is scheduled kindly do the needful through your portal. Thank You :)",
+    from_="+12096892318",
+    to="+917306364976"
+    )
+
+    print(message.sid)
     return redirect('acceptedcan')
 
 def interdate(request):
@@ -1021,5 +1040,17 @@ def addin(request):
     if 'usr' in request.session:
        ad=categ.objects.all()
        return render(request,"addin.html",{'ad':ad})
+    return render(request,'index.html')
+
+def interinfo(request):
+    if 'can' in request.session:
+       inid=request.POST.get('inid')
+       data=internship.objects.filter(intern_id=inid)
+       return render(request,"interinfo.html",{'data':data})
+    return render(request,'index.html')
+    
+def inadd(request):
+    if 'cmp' in request.session:
+       return render(request,"inadd.html")
     return render(request,'index.html')
     

@@ -42,7 +42,7 @@ input[type=submit]:hover {
   margin-top: 2%;
   margin-left: 2.5%;
   width: 95%;
-  height:560px;
+  height:fit-content;
 }
 
 .col-25 {
@@ -254,7 +254,7 @@ body {margin:0;font-family:Arial}
           <label for="date">Last Date</label>
         </div>
         <div class="col-75">
-          <input type="date" id="da" name="date" style="border-radius:7px;border:none;text-align:center;" required>
+          <input type="date" id="userdate" name="date" style="border-radius:7px;border:none;text-align:center;" onmouseleave="TDate()" required>
         </div>
       </div>
       <div class="row">
@@ -291,6 +291,34 @@ body {margin:0;font-family:Arial}
         <textarea id="subject" name="desc" placeholder="Write something.." style="height:190px ;border-radius:7px;border:none;" required></textarea>
       </div>
     </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="jtype">Job Type</label>
+      </div>
+      <div class="col-75">
+        <select name="jtype" style="border-radius:7px;border:none;text-align:center;" required>
+          <option value="10th">Part-Time</option>
+          <option value="12th">Full-Time</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="quali">Qualification</label>
+      </div>
+      <div class="col-75">
+        <select name="quali" style="border-radius:7px;border:none;text-align:center;" required>
+          <option value="10th">10th</option>
+          <option value="12th">12th</option>
+          <option value="B-Tech/M-Tech">B-Tech/M-Tech</option>
+          <option value="MCA/BCA">MCA/BCA</option>
+          <option value="MBA/BBA">MBA/BBA</option>
+          <option value="MSC/BSC">MSC/BSC</option>
+          <option value="MCOM/BCOM">MCOM/BCOM</option>
+          <option value="Diploma">Diploma</option>
+        </select>
+      </div>
+    </div><br>
       <!-- <div class="row">
         <div class="col-25">
           <label for="vacancies">Cid</label>
@@ -299,13 +327,24 @@ body {margin:0;font-family:Arial}
           <input type="number" id="lname" value = {{user.id}} name="cid">
         </div> -->
       <input type="submit" value="Submit" id="try2"> 
-    </form>
+    </form><br><br>
    </div>
   {% else %}
     <center><h1 style="margin-top: 20%;">You can post Jobs only after Admin approves you!!!</h1></center>
   {% endif %}
   
 <!-- </div> -->
+<script>
+  function TDate() {
+    var UserDate = document.getElementById("userdate").value;
+    var ToDate = new Date();
 
+    if (new Date(UserDate).getTime() <= ToDate.getTime()) {
+          alert("The Date must be Bigger or Equal to today date");
+          return false;
+     }
+    return true;
+}
+</script>
 </body>
 </html>

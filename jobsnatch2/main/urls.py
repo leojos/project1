@@ -66,6 +66,7 @@ urlpatterns = [
     path('adminnew', views.adminnew, name='adminnew'),
     path('addcat', views.addcat, name='addcat'),
     path('intern', views.intern, name='intern'),
+    path('intern1', views.intern1, name='intern1'),
     path('moreinterns/<int:id>', views.moreinterns, name='moreinterns/<int:id>'),
     path('interndetails/<int:id>', views.interndetails, name='interndetails/<int:id>'),
     path('classdetail', views.classdetail, name='classdetail'),
@@ -92,6 +93,8 @@ urlpatterns = [
     path('offerjob', views.offerjob, name='offerjob'),
     path('addcate', views.addcate, name='addcate'),
     path('addin', views.addin, name='addin'),
+    path('interinfo', views.interinfo, name='interinfo'),
+    path('inadd', views.inadd, name='inadd'),
          
     # path("createresume", views.createresume, name="createresume"),
     # path("resumes", views.resumes, name="resumes"),

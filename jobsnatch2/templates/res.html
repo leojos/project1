@@ -21,77 +21,79 @@
     </style>
     <body style="background-color:rgba(15, 184, 227, 0.598)">
      {% for i in r %}
-     <center>
-       <div style="background-color: white; height:200%;width:60%;">
-         <div style="height:100%;width:30%;background-color:rgba(185, 188, 36, 0.281);margin-right:80%;">
-             <div style="height:160px;width:160px; float:left;margin-left:15%;margin-top:8%;">
-                <img src="{% static 'images/blog1.jpg'%}" width="160px" height="160px" style="border-radius:50%;">
-             </div>
-             <div class="box">
-                <h3 style="font-weight: bold;text-align:left;">CONTACT</h3><hr>
-                <h4 style="font-weight: bold;text-align:left;margin-bottom:5%;">{{i.address}}</h4>
-                <h4 style="font-weight: bold;text-align:left;margin-bottom:5%;">{{i.phone}}</h4>
-                <h4 style="font-weight: bold;text-align:left;margin-bottom:5%;">{{i.email}}</h4>
-                <h4 style="font-weight: bold;text-align:left;margin-bottom:5%;">{{i.soci}}</h4>
-             </div>
-             <div class="box">
-                <h3 style="font-weight: bold;text-align:left;">SKILL</h3><hr>
-                <h4 style="font-weight: bold;text-align:left;margin-bottom:5%;">{{i.skills}}</h4>
-             </div>
-             <div class="box">
-                <h3 style="font-weight: bold;text-align:left;">STRENGTH</h3><hr>
-                <h4 style="font-weight: bold;text-align:left;margin-bottom:5%;">{{i.strength}}</h4>
-             </div>
-             <div class="box">
-                <h3 style="font-weight: bold;text-align:left;">PERSONAL DETAILS</h3><hr>
-                <h4 style="font-weight: bold;text-align:left;margin-bottom:5%;">{{i.gender}}</h4>
-                <h4 style="font-weight: bold;text-align:left;margin-bottom:5%;">{{i.dob}}</h4>
-                <h4 style="font-weight: bold;text-align:left;margin-bottom:5%;">{{i.coun}}</h4>
-                <h4 style="font-weight: bold;text-align:left;margin-bottom:5%;">{{i.hob}}</h4>
-             </div>
-             <div class="box">
-                <h3 style="font-weight: bold;text-align:left;">LANGUAGE</h3><hr>
-                <h4 style="font-weight: bold;text-align:left;margin-bottom:5%;">{{i.lang}}</h4>
-             </div>
-         </div>
-         <div style="margin-top:-158%;">
-             <div class="box-centerside">
-                <h1 style="font-weight: bold;text-align:left;">{{i.name}}</h1>
-                <h3 style="font-weight: bold;text-align:left;margin-bottom:5%;">{{i.position}}</h3>
-             </div>
-             <div class="box-centerside">
-                <h3 style="font-weight: bold;text-align:left;">CAREER OBJECTIVE</h3><hr>
-                <p style="text-align:left;">{{i.carobj}}</p>
-             </div>
-             <div class="box-centerside">
-                <h3 style="font-weight: bold;text-align:left;">EDUCATION</h3><hr>
-                <p style="text-align:left;">{{i.college}}</p>
-                <p style="text-align:left;">{{i.plus}}</p>
-                <p style="text-align:left;">{{i.ten}}</p>
-             </div>
-             <div class="box-centerside">
-                <h3 style="font-weight: bold;text-align:left;">PROJECTS</h3><hr>
-                <p style="text-align:left;">{{i.projects}}</p>
-             </div>
-             <div class="box-centerside">
-                <h3 style="font-weight: bold;text-align:left;">CERTIFICATIONS</h3><hr>
-                <p style="text-align:left;">{{i.certi}}</p>
-             </div>
-             <div class="box-centerside">
-                <h3 style="font-weight: bold;text-align:left;">ACHIEVEMENTS</h3><hr>
-                <p style="text-align:left;">{{i.achi}}</p>
-             </div>
-             <div class="box-centerside">
-                <h3 style="font-weight: bold;text-align:left;">INTERNSHIPS</h3><hr>
-                <p style="text-align:left;">{{i.interns}}</p>
-             </div>
-             <div class="box-centerside">
-                <h3 style="font-weight: bold;text-align:left;">REFERENCES</h3><hr>
-                <p style="text-align:left;">{{i.refe}}</p>
-             </div>
-          </div>
-       </div>
-     </center>
+      {% if i.user_id == user.id %}
+         <center>
+            <div style="background-color: white; height:200%;width:60%;">
+               <div style="height:100%;width:30%;background-color:rgba(185, 188, 36, 0.281);margin-right:80%;">
+                  <div style="height:160px;width:160px; float:left;margin-left:15%;margin-top:8%;">
+                     <img src="{% static 'images/blog1.jpg'%}" width="160px" height="160px" style="border-radius:50%;">
+                  </div>
+                  <div class="box">
+                     <h3 style="font-weight: bold;text-align:left;">CONTACT</h3><hr>
+                     <h4 style="font-weight: bold;text-align:left;margin-bottom:5%;">{{i.address}}</h4>
+                     <h4 style="font-weight: bold;text-align:left;margin-bottom:5%;">{{i.phone}}</h4>
+                     <h4 style="font-weight: bold;text-align:left;margin-bottom:5%;">{{i.email}}</h4>
+                     <h4 style="font-weight: bold;text-align:left;margin-bottom:5%;">{{i.soci}}</h4>
+                  </div>
+                  <div class="box">
+                     <h3 style="font-weight: bold;text-align:left;">SKILL</h3><hr>
+                     <h4 style="font-weight: bold;text-align:left;margin-bottom:5%;">{{i.skills}}</h4>
+                  </div>
+                  <div class="box">
+                     <h3 style="font-weight: bold;text-align:left;">STRENGTH</h3><hr>
+                     <h4 style="font-weight: bold;text-align:left;margin-bottom:5%;">{{i.strength}}</h4>
+                  </div>
+                  <div class="box">
+                     <h3 style="font-weight: bold;text-align:left;">PERSONAL DETAILS</h3><hr>
+                     <h4 style="font-weight: bold;text-align:left;margin-bottom:5%;">{{i.gender}}</h4>
+                     <h4 style="font-weight: bold;text-align:left;margin-bottom:5%;">{{i.dob}}</h4>
+                     <h4 style="font-weight: bold;text-align:left;margin-bottom:5%;">{{i.coun}}</h4>
+                     <h4 style="font-weight: bold;text-align:left;margin-bottom:5%;">{{i.hob}}</h4>
+                  </div>
+                  <div class="box">
+                     <h3 style="font-weight: bold;text-align:left;">LANGUAGE</h3><hr>
+                     <h4 style="font-weight: bold;text-align:left;margin-bottom:5%;">{{i.lang}}</h4>
+                  </div>
+               </div>
+               <div style="margin-top:-158%;">
+                  <div class="box-centerside">
+                     <h1 style="font-weight: bold;text-align:left;">{{i.name}}</h1>
+                     <h3 style="font-weight: bold;text-align:left;margin-bottom:5%;">{{i.position}}</h3>
+                  </div>
+                  <div class="box-centerside">
+                     <h3 style="font-weight: bold;text-align:left;">CAREER OBJECTIVE</h3><hr>
+                     <p style="text-align:left;">{{i.carobj}}</p>
+                  </div>
+                  <div class="box-centerside">
+                     <h3 style="font-weight: bold;text-align:left;">EDUCATION</h3><hr>
+                     <p style="text-align:left;">{{i.college}}</p>
+                     <p style="text-align:left;">{{i.plus}}</p>
+                     <p style="text-align:left;">{{i.ten}}</p>
+                  </div>
+                  <div class="box-centerside">
+                     <h3 style="font-weight: bold;text-align:left;">PROJECTS</h3><hr>
+                     <p style="text-align:left;">{{i.projects}}</p>
+                  </div>
+                  <div class="box-centerside">
+                     <h3 style="font-weight: bold;text-align:left;">CERTIFICATIONS</h3><hr>
+                     <p style="text-align:left;">{{i.certi}}</p>
+                  </div>
+                  <div class="box-centerside">
+                     <h3 style="font-weight: bold;text-align:left;">ACHIEVEMENTS</h3><hr>
+                     <p style="text-align:left;">{{i.achi}}</p>
+                  </div>
+                  <div class="box-centerside">
+                     <h3 style="font-weight: bold;text-align:left;">INTERNSHIPS</h3><hr>
+                     <p style="text-align:left;">{{i.interns}}</p>
+                  </div>
+                  <div class="box-centerside">
+                     <h3 style="font-weight: bold;text-align:left;">REFERENCES</h3><hr><br>
+                     <div style="text-align:left;width:45%">{{i.refe}}</div>
+                  </div>
+               </div>
+            </div>
+         </center>
+     {% endif %}
     {% endfor %}
    </body>
 </html>

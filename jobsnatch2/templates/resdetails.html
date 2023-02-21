@@ -112,7 +112,7 @@
                           <div class="col">
                             <div class="form-group">
                               <label>Position</label>
-                              <input class="form-control" type="text" name="pos" placeholder="user@example.com" value="{{user.email}}">
+                              <input class="form-control" type="text" placeholder="Enter in full caps" name="pos" >
                             </div>
                           </div>
                         </div>
@@ -120,7 +120,7 @@
                             <div class="col">
                               <div class="form-group">
                                 <label>Career objective</label>
-                                <input class="form-control" type="text" name="co" placeholder="johnny.s" value="{{user.username}}" onkeypress="return /[a-z /st]/i.test(event.key)">
+                                <input class="form-control" type="text" name="co"   onkeypress="return /[a-z /st]/i.test(event.key)">
                               </div>
                             </div>
                         </div>
@@ -136,7 +136,7 @@
                             <div class="col">
                               <div class="form-group">
                                 <label>Education: Degree College and Percentage</label>
-                                <input class="form-control" type="text" name="col" placeholder="johnny.s" value="{{user.username}}" onkeypress="return /[a-z /st]/i.test(event.key)">
+                                <input class="form-control" type="text" name="col"  onkeypress="return /[a-z /st 0-9]/i.test(event.key)">
                               </div>
                             </div>
                         </div>
@@ -144,7 +144,7 @@
                             <div class="col">
                               <div class="form-group">
                                 <label>Education: +2 School and Percentage</label>
-                                <input class="form-control" type="text" name="plus" placeholder="johnny.s" value="{{user.username}}" onkeypress="return /[a-z /st]/i.test(event.key)">
+                                <input class="form-control" type="text" name="plus"  onkeypress="return /[a-z /st 0-9]/i.test(event.key)">
                               </div>
                             </div>
                         </div>
@@ -152,7 +152,7 @@
                             <div class="col">
                               <div class="form-group">
                                 <label>Education: 10th School and Percentage</label>
-                                <input class="form-control" type="text" name="scho" placeholder="johnny.s" value="{{user.username}}" onkeypress="return /[a-z /st]/i.test(event.key)">
+                                <input class="form-control" type="text" name="scho" onkeypress="return /[a-z /st 0-9]/i.test(event.key)">
                               </div>
                             </div>
                         </div>
@@ -162,7 +162,7 @@
                                 <label>Projects</label>
                                 <!-- <input class="form-control" type="text" name="username" placeholder="johnny.s" value="{{user.username}}" onkeypress="return /[a-z /st]/i.test(event.key)">
                                 <input class="form-control" type="text" name="username" placeholder="johnny.s" value="{{user.username}}" onkeypress="return /[a-z /st]/i.test(event.key)"> -->
-                                <textarea class="form-control" rows="5" value="{{user.address}}" name="pro">{{user.address}}</textarea>
+                                <textarea class="form-control" rows="5"  name="pro"></textarea>
                               </div>
                             </div>
                         </div>
@@ -170,7 +170,7 @@
                             <div class="col">
                               <div class="form-group">
                                 <label>Certifications</label>
-                                <textarea class="form-control" rows="5" value="{{user.address}}" name="certi">{{user.address}}</textarea>
+                                <textarea class="form-control" rows="5"  name="certi"></textarea>
                               </div>
                             </div>
                         </div>
@@ -178,7 +178,7 @@
                             <div class="col">
                               <div class="form-group">
                                 <label>Achievements</label>
-                                <textarea class="form-control" rows="5" value="{{user.address}}" name="achi">{{user.address}}</textarea>
+                                <textarea class="form-control" rows="5"  name="achi"></textarea>
                               </div>
                             </div>
                         </div>
@@ -186,7 +186,7 @@
                             <div class="col">
                               <div class="form-group">
                                 <label>Internships</label>
-                                <textarea class="form-control" rows="5" value="{{user.address}}" name="intern">{{user.address}}</textarea>
+                                <textarea class="form-control" rows="5"  name="intern"></textarea>
                               </div>
                             </div>
                         </div>
@@ -194,7 +194,7 @@
                             <div class="col">
                               <div class="form-group">
                                 <label>References</label>
-                                <textarea class="form-control" rows="5" value="{{user.address}}" name="ref">{{user.address}}</textarea>
+                                <textarea class="form-control" rows="5"  name="ref"></textarea>
                               </div>
                             </div>
                         </div>
@@ -234,7 +234,7 @@
                             <div class="col">
                               <div class="form-group">
                                 <label>Language</label>
-                                <textarea class="form-control" rows="5" value="{{user.address}}" name="lang">{{user.address}}</textarea>
+                                <textarea class="form-control" rows="5"  name="lang"></textarea>
                               </div>
                             </div>
                         </div>
@@ -250,7 +250,7 @@
                             <div class="col">
                               <div class="form-group">
                                 <label>Hobbies</label>
-                                <textarea class="form-control" rows="5" value="{{user.address}}" name="hob">{{user.address}}</textarea>
+                                <textarea class="form-control" rows="5"  name="hob"></textarea>
                               </div>
                             </div>
                         </div>
@@ -258,7 +258,7 @@
                             <div class="col">
                               <div class="form-group">
                                 <label>Social Link</label>
-                                <input class="form-control" type="text" name="soli" placeholder="johnny.s" value="{{user.username}}" onkeypress="return /[a-z /st]/i.test(event.key)">
+                                <input class="form-control" type="text" name="soli"  onkeypress="return /[a-z /st]/i.test(event.key)">
                               </div>
                             </div>
                         </div>
@@ -266,7 +266,7 @@
                             <div class="col">
                               <div class="form-group">
                                 <label>Gender</label>
-                                <input class="form-control" type="text" name="gen" placeholder="johnny.s" value="{{user.username}}" onkeypress="return /[a-z /st]/i.test(event.key)">
+                                <input class="form-control" type="text" name="gen"  onkeypress="return /[a-z /st]/i.test(event.key)">
                               </div>
                             </div>
                         </div>
@@ -275,6 +275,7 @@
                               <div class="form-group">
                                 <label>DOB</label>
                                 <input type="date" placeholder="Prefered day" name="dob" style="border-radius:7px;margin-left:6%;border:none;text-align:center;" required>
+                                <input type="text" placeholder="Prefered day" name="uid" style="border-radius:7px;margin-left:6%;border:none;text-align:center;" value="{{user.id}}" hidden>
                               </div>
                             </div>
                         </div>

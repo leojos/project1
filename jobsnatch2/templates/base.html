@@ -24,7 +24,7 @@ body {margin:0;font-family:Arial}
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  font-size: 15px;
+  font-size: 11.5px;
 }
 
 .active {
@@ -123,6 +123,12 @@ body {margin:0;font-family:Arial}
         <a href="{% url 'avljobs'%}" id="try">Available Jobs</a>
         <a href="{% url 'appliedjobs'%}">Applied Jobs</a>
         <a href="{% url 'acceptedcom'%}">Accepted companies</a>
+        <a href="{% url 'my_form' %}">Feedback</a>
+        <a href="moreinterns/{{user.id}}">Internships</a>
+        <a href="{% url 'activity' %}">Activities</a>
+        <a href="{% url 'progress' %}">My Progress</a>
+        <a href="{% url 'res' %}">Resumes</a>
+        <a href="{% url 'resdetails' %}">Resdetails</a>
         <div class="dropdown">
           <button class="dropbtn">Training
             <i class="fa fa-caret-down"></i>
@@ -133,10 +139,6 @@ body {margin:0;font-family:Arial}
             <a href="{% url 'interview' %}">Interview</a>
           </div>
         </div>
-        <a href="{% url 'my_form' %}">Feedback</a>
-        <a href="moreinterns/{{user.id}}">Internships</a>
-        <a href="{% url 'activity' %}">Activities</a>
-        <a href="{% url 'progress' %}">My Progress</a>
         <div style="float: right;margin-right:5%;">
             {% if user.is_authenticated %}
                 <p style=" margin-top:15%">

@@ -55,6 +55,8 @@ class job(models.Model):
     cmp_id = models.ForeignKey(User ,default=None,on_delete=models.CASCADE)
     status=models.BooleanField('status', default=True)
     desti = models.CharField(max_length=100,null=True,)
+    jobtype=models.CharField(max_length=100,null=True,)
+    qualification=models.CharField(max_length=100,null=True,)
     
     
     @property
@@ -239,6 +241,13 @@ class internship(models.Model):
     caption=models.CharField(max_length=100,null=True)
     img=models.ImageField(null=True,blank=True,upload_to="img/")
     category=models.CharField(max_length=100,null=True)
+    stipend=models.IntegerField(blank=True, null=True)
+    location=models.CharField(max_length=100,null=True)
+    moreinfo=models.TextField(null=True)
+    whoapply=models.TextField(null=True)
+    onoff=models.CharField(max_length=100,null=True)
+    certificate=models.BooleanField('status', default=True) 
+    tim=models.CharField(max_length=100,null=True)
 
 class classdetails(models.Model):
     in_id=models.AutoField(primary_key=True)
@@ -293,6 +302,7 @@ class resumme(models.Model):
     status=models.BooleanField('status', default=0) 
     dob=models.DateField()
     gender=models.CharField(max_length=100,null=True)
+    user_id=models.IntegerField(blank=True, null=True)
 
 class scheduling(models.Model):
         sche_id = models.AutoField(primary_key=True)
