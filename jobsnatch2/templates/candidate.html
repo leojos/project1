@@ -182,6 +182,7 @@
                       
                         <div style="margin-top:7%;margin-left:-1%;width:100%">
                           <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black" style="background: rgb(10, 62, 87);border-radius:5px;">Update Profile</button>
+                          <a href="{% url 'idcard' %}"><button class="w3-button w3-black" style="background: rgb(10, 62, 87);border-radius:5px;">View ID</button></a>
                         </div>
                         
                      
@@ -207,6 +208,14 @@
                             <div class="form-group">
                               <label>Username</label>
                               <input class="form-control" type="text" name="username" placeholder="johnny.s" value="{{user.username}}" onkeypress="return /[a-z /st]/i.test(event.key)">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Full Name</label>
+                              <input class="form-control" type="text" name="fullname" placeholder="johnny.s" value="{{user.fullname}}" onkeypress="return /[a-z /st]/i.test(event.key)">
                             </div>
                           </div>
                         </div>

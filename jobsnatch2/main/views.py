@@ -507,6 +507,7 @@ def updaterecord(request, id):
     address = request.POST['address']
     about = request.POST['about']
     skills = request.POST['skills']
+    fullname = request.POST['fullname']
   #   password = request.POST['password']
     user = User.objects.get(id=id)
     user.username = username
@@ -515,6 +516,7 @@ def updaterecord(request, id):
     user.address = address
     user.about = about
     user.skills = skills
+    user.fullname = fullname
   #   user.password = password
     user.save()
     return redirect('candidate')
@@ -536,6 +538,7 @@ def updatecom(request, id):
       address = request.POST['address']
       recru = request.POST['recru']
       loc = request.POST['loc']
+      wu = request.POST['wu']
     #   password = request.POST['password']
       user = User.objects.get(id=id)
       user.username = username
@@ -545,6 +548,7 @@ def updatecom(request, id):
       user.location = loc
       user.address = address
       user.recruiter = recru
+      user.siteurl = wu
     #   user.password = password
       user.save()
       return redirect('company')
@@ -1052,5 +1056,11 @@ def interinfo(request):
 def inadd(request):
     if 'cmp' in request.session:
        return render(request,"inadd.html")
+    return render(request,'index.html')
+
+def idcard(request):
+    if 'can' in request.session:
+       
+       return render(request,"idcard.html")
     return render(request,'index.html')
     

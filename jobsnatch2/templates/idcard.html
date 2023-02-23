@@ -1,0 +1,126 @@
+{% extends 'base.html'%}
+{% load static %}
+<!DOCTYPE html>
+<html>
+{% block content %}
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  width: 550px;
+  height:fit-content;
+  margin: auto;
+  font-family: arial;
+  border-radius: 10px;
+  background-color: white;
+  border:  #000;
+  margin-top: 5%;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+
+.watermark {
+    /* Used to position the watermark */
+    position: relative;
+}
+
+.watermark__inner {
+    /* Center the content */
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+    /* Absolute position */
+    left: 0px;
+    position: absolute;
+    top: 0px;
+
+    /* Take full size */
+    height: 100%;
+    width: 100%;
+}
+
+.watermark__body {
+    /* Text color */
+    color: rgba(0, 0, 0, 0.2);
+
+    /* Text styles */
+    font-size: 5.5rem;
+    font-weight: bold;
+
+    /* Rotate the text */
+    transform: rotate(-30deg);
+
+    /* Disable the selection */
+    user-select: none;
+}
+</style>
+</head>
+<body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));">
+    <div class="watermark">
+        <!-- Watermark container -->
+        <div class="watermark__inner">
+            <!-- The watermark -->
+            <div class="watermark__body">JobSnatch</div>
+        </div>
+    
+        <!-- Other content -->
+        
+    
+<div class="card">
+  {% if user.image %}
+     <img src="{{user.image.url}}"  width="150px" height="150px" style="margin-left: 2%;margin-top:2%;border-radius: 10px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
+  {% endif %}
+  <div style="margin-left:5%; float:right; margin-right:35%;height:fit-content;width:fit-content;">
+    <h1>{{user.fullname}}</h1>
+    <p class="title">{{user.about}}</p>
+  </div>
+  <div style="margin-left:2%;">
+    <table>
+        <tr>
+         <td><p><b>ID No : </b>{{user.id}}</p></td>
+         <td><p><b>Joined Date : </b>{{user.last_login}}</p></td>
+        </tr>
+        <tr>
+         <td><p><b>Address : </b>{{user.address}}</p></td>
+        </tr>
+        <tr>
+         <td><p><b>Phone : </b>{{user.phone}}</p></td>
+        </tr>
+        
+    </table>
+  <img src="{% static 'images/seal.jpg'%}"  width="100px" height="100px" style="margin-left: 2%;margin-top:-21%;border-radius: 10px; float:right;margin-right:5%;">
+
+  </div>
+</div>
+</div>
+</body>
+{% endblock %}
+</html>

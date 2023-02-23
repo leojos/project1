@@ -230,7 +230,11 @@ body {margin:0;font-family:Arial}
              </tr>
              <tr>
                <td><label for="durex">Week/Mon : </label></td>
-               <td><input type="text" name="durex" class="ab"></td>
+               <td><select name="durex" id="durex">
+                     <option value="Week">Week</option>
+                     <option value="Mon">Mon</option>
+                   </select></td>
+               <!-- <td><input type="text" name="durex" class="ab"></td> -->
              </tr>
              <tr>
                <td><label for="edate">Enter Enddate : </label></td>
@@ -243,7 +247,11 @@ body {margin:0;font-family:Arial}
              <tr>
              <tr>
                  <td><label for="ofon">Online/Offline : </label></td>
-                 <td><input type="text" name="ofon" class="ab"></td>
+                     <td><select name="ofon" id="ofon">
+                      <option value="Online">Online</option>
+                      <option value="Offline">Offline</option>
+                     </select></td>
+                 <!-- <td><input type="text" name="ofon" class="ab"></td> -->
              </tr>
              <tr>
                  <td><label for="ab">About : </label></td>

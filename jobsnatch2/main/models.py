@@ -40,6 +40,8 @@ class User(AbstractUser):
     skills=models.TextField(null=True,blank=True)
     approved=models.BooleanField('approved', default=False)
     location= models.CharField(max_length=100,null=True)
+    siteurl= models.CharField(max_length=100,null=True)
+    fullname=models.CharField(max_length=100,null=True)
 
 
     # def __str__(self) :

@@ -95,6 +95,7 @@ urlpatterns = [
     path('addin', views.addin, name='addin'),
     path('interinfo', views.interinfo, name='interinfo'),
     path('inadd', views.inadd, name='inadd'),
+    path('idcard', views.idcard, name='idcard'),
          
     # path("createresume", views.createresume, name="createresume"),
     # path("resumes", views.resumes, name="resumes"),
