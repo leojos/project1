@@ -17,6 +17,7 @@ from .models import training
 from .models import resumme
 from .models import scheduling
 from .models import offerr
+from .models import wishlist
 from django.contrib.auth.decorators import login_required
 from django import forms
 from django.db.models.functions import Now
@@ -25,8 +26,29 @@ import nltk
 import re
 from nltk.corpus import stopwords
 import pyttsx3
-from django.http import HttpResponseNotFound
+from django.http import HttpResponseNotFound,HttpResponseRedirect,FileResponse
 from twilio.rest import Client
+import io
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import inch
+from reportlab.lib.pagesizes import letter
+from django.http import HttpResponse
+from django.views.generic import View
+
+from main.utils import render_to_pdf #created in step 4
+
+from django.template.loader import get_template
+
+import razorpay
+from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponseBadRequest
+
+from django.http import JsonResponse
+
+# from django.template.loader import get_template
+# from xhtml2pdf import pisa
+# from io import BytesIO
 # from faunadb import query as q
 # import pytz
 # from faunadb.objects import Ref
@@ -42,7 +64,25 @@ set(stopwords.words('english'))
 
 def index(request):
     cat=categ.objects.all()
-    return render(request, 'index.html',{'cat':cat})
+    ab=feedback.objects.filter(good=False).count()
+    cd=feedback.objects.filter(bad=False).count()
+    ef=feedback.objects.filter(neutral=False).count()
+    return render(request, 'index.html',{'cat':cat,'ab':ab,'cd':cd,'ef':ef})
+
+# def pdf_view(request):
+#     r=resumme.objects.all()
+#     context_dict={'r':r}
+#     template = get_template('res.html')
+#     html = template.render(context_dict)
+#     output = BytesIO()
+#     pdf = pisa.CreatePDF(BytesIO(html.encode("UTF-8")), dest=output)
+#     if not pdf.err:
+#         response = HttpResponse(content_type='application/pdf')
+#         response.write(output.getvalue())
+#         response['Content-Disposition'] = 'attachment; filename="my_pdf.pdf"'
+#         return response
+#     return HttpResponse('Error rendering PDF', status=400)
+
 # def dash(request):
 #     return render(request,"dash.html")
 
@@ -129,6 +169,7 @@ def index(request):
 #         return render(request,"resume.html",context)
 #     except:
 #         return render(request,"resume.html")
+
 
 def my_form(request):
     engine = pyttsx3.init()
@@ -306,11 +347,14 @@ def admin(request):
        data3 = categ.objects.all().count()
        data4 = internship.objects.all().count()
        data5 = feedback.objects.all().count()
+       ab=feedback.objects.filter(good=False).count()
+       cd=feedback.objects.filter(bad=False).count()
+       ef=feedback.objects.filter(neutral=False).count()
       #  data1 = job.objects.all()
       #  if request.method == 'POST':
       #   cmpid=request.POST['cmpid']
       #   data1= appliedjob.objects.filter(jobs_id_id=cmpid)
-       context = {'data': data,'data1':data1,'data2':data2,'data3':data3,'data4':data4,'data5':data5}
+       context = {'data': data,'data1':data1,'data2':data2,'data3':data3,'data4':data4,'data5':data5,'ab':ab,'cd':cd,'ef':ef}
        return render(request,"admin.html", context)
     return render(request,'index.html')
     # return render(request,'admin.html')
@@ -377,7 +421,8 @@ def avljobs(request):
 
        data6 = User.objects.filter(is_company=True)
        data7 = User.objects.filter(is_candidate=True)
-
+       data8 = wishlist.objects.filter(cann_id=request.user.id)
+       data9 = wishlist.objects.filter(cann_id=request.user.id).count()
        if request.method == 'POST':
         # num=request.POST['text']
         st=request.POST.get('number')
@@ -400,17 +445,18 @@ def avljobs(request):
           # data3 = job.objects.filter(cmp_id_id=data2)
           # data = job.objects.filter(job_title=st)
 
-       context = {'data': data,'data1':data1,'data2':data2,'data3':data3,'data4':data4,'data5':data5,'data6':data6,'data7':data7}
+       context = {'data': data,'data1':data1,'data2':data2,'data3':data3,'data4':data4,'data5':data5,'data6':data6,'data7':data7,'data8':data8,'data9':data9}
        return render(request,"avljobs.html", context)
      return render(request,'index.html')
 
 def comppage(request):
   
     data = job.objects.all()
+    data1 = appliedjob.objects.filter(can_id_id=request.user.id)
     if request.method == 'POST':
       cmpid=request.POST['cmpid']
       data = job.objects.filter(job_id=cmpid)
-      context = {'data': data}
+      context = {'data': data,'data1': data1}
       return render(request, 'comppage.html', context)
     return render(request,'index.html')
 
@@ -428,7 +474,17 @@ def comppage3(request):
       cmpid=request.POST['cmpid']
       data = User.objects.filter(id=cmpid)
       context = {'data': data}
-      return render(request, 'comppage.html', context)
+      return render(request, 'comppage3.html', context)
+    return render(request,'index.html')
+
+def comppage4(request):
+  
+    data = job.objects.all()
+    if request.method == 'POST':
+      cmpid=request.POST['cmpid']
+      data = job.objects.filter(job_id=cmpid)
+      context = {'data': data}
+      return render(request, 'comppage3.html', context)
     return render(request,'index.html')
 
 def comppages(request):
@@ -439,7 +495,7 @@ def comppages(request):
       jobid=request.POST['jobid']
       data = job.objects.filter(cmp_id=cmpid,job_id=jobid)
       context = {'data': data}
-      return render(request, 'comppage.html', context)
+      return render(request, 'comppages.html', context)
 
   return render(request,'index.html')
 
@@ -474,10 +530,19 @@ def canpage3(request):
       return render(request, 'canpage3.html', context)
     return render(request,'index.html')
 
+def canpage4(request):
+    if request.method == 'POST':
+      canid=request.POST.get('canid')
+
+      data = User.objects.filter(id=canid)
+      context = {'data': data}
+      return render(request, 'canpage4.html', context)
+    return render(request,'index.html')
+
 def appliedjobs(request):
      if 'can' in request.session:
        data = appliedjob.objects.all()
-       dat1 = job.objects.all()
+       data1 = job.objects.all()
        data1 = job.objects.filter(lastdate__gt=Now())
       #  user=User.objects.all()
       #  user=User.objects.filter(id=appliedjob.can_id_id)
@@ -575,16 +640,23 @@ def postjob(request):
         job_title = request.POST['title']
         salary  = request.POST['salary']
         experience = request.POST['experience']
+        experiencein = request.POST['experiencein']
+        startdate = request.POST['sdate']
         lastdate = request.POST['date']
         vacancies = request.POST['vacancies']
         job_description = request.POST['desc']
         desti = request.POST['desti']
-        quali = request.POST.get('quali')
+        expl = request.POST['expl']
+        quali = request.POST.getlist('quali')
         jtype = request.POST.get('jtype')
-        member = job(job_title=job_title,salary=salary,experience=experience,lastdate=lastdate,vacancies=vacancies,job_description=job_description,desti=desti,jobtype=jtype,qualification=quali)
+        tenth = request.POST.get('tenth')
+        pltwo = request.POST.get('pltwo')
+        crse = request.POST.get('crse')
+        for value in quali:
+         member = job(job_title=job_title,salary=salary,experience=experience,experiencein=experiencein,startdate=startdate,lastdate=lastdate,vacancies=vacancies,job_description=job_description,desti=desti,expl=expl,jobtype=jtype,qualification=value,tper=tenth,plper=pltwo,cper=crse)
         # instance=member.save()
-        member.cmp_id =request.user
-        member.save()
+         member.cmp_id =request.user
+         member.save()
         return redirect('jobpost')
         # else:
         #      messages.info(request,'Password not matching')
@@ -818,10 +890,16 @@ def intern1(request):
         cap = request.POST['cap']
         durno = request.POST['durno']
         durex = request.POST['durex']
+        sdate = request.POST['sdate']
         edate = request.POST['edate']
         caty = request.POST['caty']
+        loc = request.POST['loc']
+        ofon = request.POST['ofon']
+        about = request.POST['about']
+        stip = request.POST['stip']
+        wca = request.POST['wca']
         image = request.FILES.get('p')
-        member = internship(title=tit,caption=cap,durno=durno,durex=durex,enddate=edate,img=image,category=caty)
+        member = internship(title=tit,caption=cap,durno=durno,durex=durex,stdate=sdate,enddate=edate,img=image,category=caty,location=loc,onoff=ofon,stipend=stip,whoapply=wca,moreinfo=about)
         member.save()
         return redirect('inadd')
 
@@ -838,7 +916,7 @@ def interndetails(request,id):
     # caid= request.POST['caid']
     user = classdetails(candi_id_id=id,inter_id_id=inid,interndate=pday,interntimes=ptime)
     user.save()
-    return redirect('candidate')
+    return redirect('homepage')
 
 def classdetail(request):
     inid= request.POST['inid']
@@ -858,12 +936,12 @@ def train(request):
     caid= request.POST['caid']
     user = training(can_id_id=caid,typ=typ,train_date=pday,train_time=ptime)
     user.save()
-    return redirect('candidate')
+    return redirect('homepage')
 
 def activity(request):
   if 'can' in request.session:
-    acti=training.objects.filter(can_id=request.user)
-    acti2=classdetails.objects.filter(candi_id=request.user)
+    acti=training.objects.filter(can_id=request.user,train_date__gt=Now())
+    acti2=classdetails.objects.filter(candi_id=request.user,interndate__gt=Now())
     acti3=scheduling.objects.filter(user_id_id=request.user.id)
     acti4=offerr.objects.filter(cann_id=request.user.id)
     return render(request,'activity.html',{'acti':acti,'acti2':acti2,'acti3':acti3,'acti4':acti4})
@@ -876,9 +954,58 @@ def setdate(request):
     canid= request.POST['canid']
     return render(request,'setdate.html')
 
+
+
+def my_view(request):
+    # Retrieve data from the database
+            data1=resumme.objects.filter(user_id = request.user.id)
+            data2=request.user.image
+    # Render an HTML template using the retrieved data
+            template = get_template('res.html')
+            html = template.render({'data1': data1,'data2': data2})
+
+            # Generate a PDF from the HTML using xhtml2pdf
+            response = HttpResponse(content_type='application/pdf')
+            response['Content-Disposition'] = 'filename="my_pdf.pdf"'
+
+            pisa_status = pisa.CreatePDF(html, dest=response)
+            if pisa_status.err:
+                return HttpResponse('Error generating PDF file')
+            return response
+
+def my_vi(request):
+    # Retrieve data from the database
+            data1=User.objects.filter(id = request.user.id)
+            data2=request.user.image
+    # Render an HTML template using the retrieved data
+            template = get_template('new.html')
+            html = template.render({'data1': data1,'data2': data2})
+
+            # Generate a PDF from the HTML using xhtml2pdf
+            response = HttpResponse(content_type='application/pdf')
+            response['Content-Disposition'] = 'filename="my_pdf.pdf"'
+
+            pisa_status = pisa.CreatePDF(html, dest=response)
+            if pisa_status.err:
+                return HttpResponse('Error generating PDF file')
+            return response
+
+
+# def get(*args, **kwargs):
+#         r=resumme.objects.all()
+#         data={
+#             "r":r,
+#         }
+#         pdf = render_to_pdf('res.html',data)
+#         if pdf:
+#             response=HttpResponse(pdf,content_type='application/pdf')
+#             # filename = "Report_for_%s.pdf" %(data['id'])
+            
+#             return response
+#         return HttpResponse("Page Not Found")
 def res(request):
-    r=resumme.objects.all()
-    return render(request,'res.html',{'r':r})
+    data1=resumme.objects.filter(user_id = request.user.id)
+    return render(request,'res.html',{'data1':data1})
 
 def resdetails(request):
     return render(request,'resdetails.html')
@@ -889,8 +1016,14 @@ def resubmit(request):
     co= request.POST['co']
     email= request.POST['email']
     col= request.POST['col']
+    colcourse= request.POST['colcourse']
+    colpy= request.POST['colpy']
     plus= request.POST['plus']
+    plusmarks= request.POST['plusmarks']
+    pluspy= request.POST['pluspy']
     scho= request.POST['scho']
+    schomarks= request.POST['schomarks']
+    schopy= request.POST['schopy']
     pro= request.POST['pro']
     certi= request.POST['certi']
     achi= request.POST['achi']
@@ -907,7 +1040,7 @@ def resubmit(request):
     dob= request.POST['dob']
     gen= request.POST['gen']
     uid= request.POST['uid']
-    userr = resumme(name=username,position=pos,email=email,carobj=co,college=col,plus=plus,ten=scho,projects=pro,certi=certi,achi=achi,interns=intern,refe=ref,phone=phone,address=address,strength=stre,skills=skills,lang=lang,hob=hob,soci=soli,coun=country,dob=dob,gender=gen,user_id=uid)
+    userr = resumme(name=username,position=pos,email=email,carobj=co,college=col,plus=plus,ten=scho,projects=pro,certi=certi,achi=achi,interns=intern,refe=ref,phone=phone,address=address,strength=stre,skills=skills,lang=lang,hob=hob,soci=soli,coun=country,dob=dob,gender=gen,user_id=uid,colcourse=colcourse,colpy=colpy,plusmarks=plusmarks,pluspy=pluspy,schomarks=schomarks,schopy=schopy)
     userr.save()
     return redirect('res')
 
@@ -1007,12 +1140,13 @@ def progress(request):
   return render(request,'progress.html',{'sc':sc,'comp':comp})
 
 
-def notifi(request,id):
+def notifi(request):
      if 'cmp' in request.session:
+       
        testt=request.POST.get('test')
        ss=User.objects.filter(id=testt)
-       sc=scheduling.objects.filter(com_id=id,acc=True)
-       scc=scheduling.objects.filter(com_id=id,dec=False)
+       sc=scheduling.objects.filter(com_id=request.user.id,acc=True)
+       scc=scheduling.objects.filter(com_id=request.user.id,dec=False)
        return render(request,'notifications.html',{'sc':sc,'scc':scc,'ss':ss})
 
 def compoffer (request):
@@ -1063,4 +1197,127 @@ def idcard(request):
        
        return render(request,"idcard.html")
     return render(request,'index.html')
+
+def pdf(request):
+    buf=io.BytesIO()
+    c= canvas.Canvas(buf, pagesize=letter, bottomup=0)
+    textob= c.beginText()
+    textob.setTextOrigin(inch, inch)
+    textob.setFont("Helvetica", 14)
+    lines = [
+        "This is line 1",
+        "This is line 2",
+        "This is line 3",
+        "This is line 4",
+    ]
+
+    for line in lines:
+        textob.textLine(line)
     
+
+    c.drawText(textob)
+    c.showPage()
+    c.save()
+    buf.seek(0)
+    return FileResponse(buf,as_attachment=True,filename='venue.pdf')
+
+# def rating(request):
+#     ab=request.POST['rate']
+#     cd=feedback.objects.()
+#     cd.
+    
+
+def wish(request):
+    if 'can' in request.session:
+        jid=request.POST['jid']
+        cmpid=request.POST['cmpid']
+        canid=request.POST['canid']
+        member = wishlist(checkk=True,cann_id=canid,comm_id=cmpid,jobb_id=jid)
+        member.save()
+        return redirect('avljobs')
+
+def wiish(request):
+    if 'can' in request.session:
+        data3 = job.objects.all()
+        data3 = job.objects.filter(lastdate__gt=Now())
+        data8 = wishlist.objects.filter(cann_id=request.user.id)
+        
+        return render(request,'widh.html',{'data3':data3,'data8':data8,})
+
+    
+razorpay_client = razorpay.Client(
+    auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
+ 
+ 
+def homepage(request):
+    currency = 'INR'
+    amount = 20000  # Rs. 200
+ 
+    # Create a Razorpay Order
+    razorpay_order = razorpay_client.order.create(dict(amount=amount,
+                                                       currency=currency,
+                                                       payment_capture='0'))
+ 
+    # order id of newly created order.
+    razorpay_order_id = razorpay_order['id']
+    callback_url = 'paymenthandler/'
+ 
+    # we need to pass these details to frontend.
+    context = {}
+    context['razorpay_order_id'] = razorpay_order_id
+    context['razorpay_merchant_key'] = settings.RAZOR_KEY_ID
+    context['razorpay_amount'] = amount
+    context['currency'] = currency
+    context['callback_url'] = callback_url
+ 
+    return render(request, 'homepage.html', context=context)
+ 
+ 
+# we need to csrf_exempt this url as
+# POST request will be made by Razorpay
+# and it won't have the csrf token.
+@csrf_exempt
+def paymenthandler(request):
+ 
+    # only accept POST request.
+    if request.method == "POST":
+        try:
+           
+            # get the required parameters from post request.
+            payment_id = request.POST.get('razorpay_payment_id', '')
+            razorpay_order_id = request.POST.get('razorpay_order_id', '')
+            signature = request.POST.get('razorpay_signature', '')
+            params_dict = {
+                'razorpay_order_id': razorpay_order_id,
+                'razorpay_payment_id': payment_id,
+                'razorpay_signature': signature
+            }
+ 
+            # verify the payment signature.
+            result = razorpay_client.utility.verify_payment_signature(
+                params_dict)
+            if result is not None:
+                amount = 20000  # Rs. 200
+                try:
+ 
+                    # capture the payemt
+                    razorpay_client.payment.capture(payment_id, amount)
+ 
+                    # render success page on successful caputre of payment
+                    # return render(request, 'paymentsuccess.html')
+                    return redirect('candidate')
+                except:
+ 
+                    # if there is an error while capturing payment.
+                    return render(request, 'paymentfail.html')
+            else:
+ 
+                # if signature verification fails.
+                return render(request, 'paymentfail.html')
+        except:
+ 
+            # if we don't find the required parameters in POST data
+            return HttpResponseBadRequest()
+    else:
+       # if other than POST request is made.
+        return HttpResponseBadRequest()

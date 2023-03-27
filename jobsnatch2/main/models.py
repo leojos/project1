@@ -50,13 +50,19 @@ class job(models.Model):
     job_id = models.AutoField(primary_key=True)
     job_title = models.CharField(max_length=100)
     salary = models.BigIntegerField(default=0)
-    experience = models.IntegerField(blank=True, null=True)
+    experience = models.CharField(max_length=100,blank=True, null=True)
+    experiencein = models.CharField(max_length=100,blank=True, null=True)
+    startdate =  models.DateField()
     lastdate =  models.DateField()
     vacancies = models.IntegerField(blank=True, null=True)
     job_description = models.TextField()
     cmp_id = models.ForeignKey(User ,default=None,on_delete=models.CASCADE)
     status=models.BooleanField('status', default=True)
     desti = models.CharField(max_length=100,null=True,)
+    expl =  models.CharField(max_length=100,null=True,)
+    tper = models.CharField(max_length=100,null=True,)
+    plper = models.CharField(max_length=100,null=True,)
+    cper = models.CharField(max_length=100,null=True,)
     jobtype=models.CharField(max_length=100,null=True,)
     qualification=models.CharField(max_length=100,null=True,)
     
@@ -210,6 +216,7 @@ class feedback(models.Model):
     good=models.BooleanField('good', default=True)
     bad=models.BooleanField('bad', default=True)
     neutral=models.BooleanField('neutral', default=True)
+    rating=models.CharField(max_length=100,null=True,)
 
 
     @property
@@ -239,6 +246,7 @@ class internship(models.Model):
     title=models.CharField(max_length=100,null=True)
     durno = models.IntegerField(blank=True, null=True)
     durex = models.CharField(max_length=100,null=True)
+    stdate =  models.DateField()
     enddate =  models.DateField()
     caption=models.CharField(max_length=100,null=True)
     img=models.ImageField(null=True,blank=True,upload_to="img/")
@@ -286,8 +294,14 @@ class resumme(models.Model):
     email=models.EmailField(blank=True, null=True)
     carobj=models.TextField(blank=True)
     college=models.CharField(max_length=100,blank=True)
+    colcourse=models.CharField(max_length=100,blank=True)
+    colpy=models.CharField(max_length=100,blank=True)
     plus=models.CharField(max_length=100,blank=True)
+    plusmarks=models.CharField(max_length=100,blank=True)
+    pluspy=models.CharField(max_length=100,blank=True)
     ten=models.CharField(max_length=100,blank=True)
+    schomarks=models.CharField(max_length=100,blank=True)
+    schopy=models.CharField(max_length=100,blank=True)
     projects=models.TextField(blank=True)
     certi=models.TextField(blank=True)
     achi=models.TextField(blank=True)
@@ -377,3 +391,10 @@ class offerr(models.Model):
     def loc(self):
         return self.comm_id.location
 
+
+class wishlist(models.Model):
+    wi_id=models.AutoField(primary_key=True)
+    checkk=models.BooleanField('checkk', default=False) 
+    cann_id=models.IntegerField(blank=True, null=True)
+    comm_id=models.IntegerField(blank=True, null=True)
+    jobb_id=models.IntegerField(blank=True, null=True)

@@ -23,7 +23,7 @@
       height:fit-content;
       width:80px;
       font-size:small;
-      padding: 7.5px;
+      padding: 5px;
       font-weight:bold;
       color:white;
       border:none;
@@ -33,12 +33,18 @@
     border-collapse: collapse;
     width: 70%;
     text-align: center;
-    margin-left:15%;
+    margin-left:22%;
+    margin-top: -1%;
+  }
+
+  .ab{
+    margin-left:22%;
+    margin-top: -1%;
   }
   
   td, th {
     border: 1px solid #000000;
-    padding: 8px;
+    padding: 5px;
   }
   
   tr:nth-child(even) {
@@ -46,14 +52,17 @@
   }
   </style>
 <body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));"> 
-  <h1 style="text-align: center;">Know your progress here</h1>
+  <br><br>
+  <h1 style="margin-left:40%; margin-top: 0%;">Know your progress here</h1>
  <table>
   <th>Company</th>
-  <th>Title</th>
-  <th>Date</th>
+  <th>Post</th>
+  <th>Interview start date</th>
+  <!-- <th>Start-date</th> -->
+  <!-- <th>End-date</th> -->
   <th>Type</th>
-  <th></th>
   <th>Status</th>
+  <th></th>
   <tr>
  {% for i in sc %}
   
@@ -61,24 +70,25 @@
     {% if x.cmp_id_id == i.com_id %}
       <td>{{x.username}}</td>
       <td>{{x.job_title}}</td>
-      {% if i.can_date %}
-       <td>{{i.can_date}}</td>
-      {% else %}
-       <td>{{i.train_date}}</td>
-      {% endif %}
+      <td>{{i.train_date}}</td>
+      
     {% endif %}
    {% endfor %}
+   
    <td>{{i.typp}}</td>
-   <form action="{% url 'sch' %}" method="post">
-    {% csrf_token %}
-     <td hidden><input type="text" name="sche" value="{{i.sche_id}}"></td>
-     <td><button type="submit" class="bt2">Reschedule</button></td>
-  </form>
+   
   
    <td>{% if i.status == False %}
-    <button type="submit" class="bt">Done</button>
+    <button type="submit" class="bt" style="margin-left:20%;">Done</button>
+    {% else %}
+      <button type="button" class="bt" style="margin-left:20%;">Pending</button>
   {% endif %}
 </td>
+<form action="{% url 'sch' %}" method="post">
+  {% csrf_token %}
+   <td hidden><input type="text" name="sche" value="{{i.sche_id}}"></td>
+   <td><button type="submit" class="bt2">Reschedule</button></td>
+</form>
  </tr>
   
  {% endfor %}
@@ -86,4 +96,5 @@
 </table>
 </body>
 {% endblock %}
+
 </html>

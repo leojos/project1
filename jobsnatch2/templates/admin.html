@@ -56,10 +56,7 @@ body {margin:0;font-family:Arial}
   text-align: left;
 }
 
-.topnav a:hover {
-  background-color: #555;
-  color: white;
-}
+
 
 .a:hover {
   background-color: #ddd;
@@ -178,6 +175,42 @@ body {margin:0;font-family:Arial}
     border-radius: 10px;
     margin-bottom: 2%;
   }
+
+  @keyframes growProgressBar {
+    0%, 33% { --pgPercentage: 0; }
+    100% { --pgPercentage: var(--value); }
+  }
+  
+  @property --pgPercentage {
+    syntax: '<number>';
+    inherits: false;
+    initial-value: 0;
+  }
+  
+  div[role="progressbar"] {
+    --size: 12rem;
+    --fg: #369;
+    --bg: #def;
+    --pgPercentage: var(--value);
+    animation: growProgressBar 3s 1 forwards;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: 
+      radial-gradient(closest-side, white 80%, transparent 0 99.9%, white 0),
+      conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0)
+      ;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: calc(var(--size) / 5);
+    color: var(--fg);
+  }
+  
+  div[role="progressbar"]::before {
+    counter-reset: percentage var(--value);
+    content: counter(percentage) '%';
+  }
 </style>
 <body style="background-image: linear-gradient( rgb(198, 201, 202),rgb(50, 147, 166));background-repeat:no-repeat">
   <div id="mySidebar" class="sidebar">
@@ -209,7 +242,7 @@ body {margin:0;font-family:Arial}
         <button class="openbtn" onclick="openNav()">☰</button> 
         <div style="float: right;margin-right:1%;">
           {% if user.is_authenticated %}
-              <a href="{% url 'logout' %}">Logout</a>
+              <a href="{% url 'logout' %}">| - - User : {{request.session.usr}} - - | Logout</a>
           {% endif %}
         </div>
         <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
@@ -226,7 +259,7 @@ body {margin:0;font-family:Arial}
       }
       </script>
      
-       <h1 style="color: black; text-align:center;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Welcome  {{request.session.usr}}</h1><br><br>
+       <h1 style="color: black; text-align:center;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Admin Panel</h1><br><br>
        <div class="div">
           <center><img src="{% static 'images/suitcase.png'%}" width="50" height="50" ></center>
           <p style="text-align: center;">Jobs Posted</p>
@@ -258,7 +291,13 @@ body {margin:0;font-family:Arial}
         <p style="text-align: center;">{{data5}}</p>
        </div>
 </div>
-
-
+<div style="margin-top: -25%;padding:5%;">
+  <div style="margin-left: 25%;">
+      <p style="margin-left: 25%;font-size:larger;"><b>Review Listing</b></p><br>
+      <div role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:{{ab}};float:left;margin-right: 2%;"><p style="font-size: 20px;">Good</p></div>
+      <div role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:{{ef}};float:left;margin-right: 2%;"><p style="font-size: 20px;">Neutral</p></div>
+      <div role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="--value:{{cd}};float:left;margin-right: 2%;"><p style="font-size: 20px;">Bad</p></div>
+  </div>
+</div>
 </body>
 </html>

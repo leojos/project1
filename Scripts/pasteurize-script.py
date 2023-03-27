@@ -1,4 +1,4 @@
-#!C:\Users\Leo\project2\Scripts\python.exe
+#!D:\project2.2\Scripts\python.exe
 # EASY-INSTALL-ENTRY-SCRIPT: 'future==0.18.2','console_scripts','pasteurize'
 import re
 import sys

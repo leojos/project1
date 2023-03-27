@@ -1,0 +1,24 @@
+<form method="post" action="{% url 'rate' %}">
+    {% csrf_token %}
+    <select name="rating">
+        <option value="1">1 star</option>
+        <option value="2">2 stars</option>
+        <option value="3">3 stars</option>
+        <option value="4">4 stars</option>
+        <option value="5">5 stars</option>
+    </select>
+    <button type="submit">Submit</button>
+</form>
+
+
+{% if avg_rating %}
+    <div class="rating">
+        {% for i in "12345" %}
+            {% if forloop.counter <= avg_rating %}
+                <i class="fas fa-star"></i>
+            {% else %}
+                <i class="far fa-star"></i>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}

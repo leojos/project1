@@ -1,3 +1,4 @@
+{% extends 'base4.html'%}
 <!-- <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +11,10 @@
     {% endif %}
 </body>
 </html> -->
+
 {% load static %}
 <html>
+  {% block content %}
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -78,161 +81,13 @@
         float: right;
         margin-top: 2%;
     }
-        .topnav {
-            overflow: hidden;
-            background-color: #333;
-            margin-bottom: -2%;
-          }
-          
-          .topnav a {
-            float: left;
-            display: block;
-            color: #f2f2f2;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            font-size: 17px;
-          }
-          
-          .active {
-            background-color: #04AA6D;
-            color: white;
-          }
-          
-          .topnav .icon {
-            display: none;
-          }
-          
-          .dropdown {
-            float: left;
-            overflow: hidden;
-          }
-          
-          .dropdown .dropbtn {
-            font-size: 17px;    
-            border: none;
-            outline: none;
-            color: white;
-            padding: 14px 16px;
-            background-color: inherit;
-            font-family: inherit;
-            margin: 0;
-          }
-          
-          .dropdown-content {
-            display: none;
-            position: relative;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index:1;
-          }
-          
-          .dropdown-content a {
-            float: none;
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-          }
-          
-          .topnav a:hover, .dropdown:hover .dropbtn {
-            background-color: #555;
-            color: white;
-          }
-          
-          .dropdown-content a:hover {
-            background-color: #ddd;
-            color: black;
-          }
-          
-          .dropdown:hover .dropdown-content {
-            display: block;
-            
-          }
-          
-          @media screen and (max-width: 600px) {
-            .topnav a:not(:first-child), .dropdown .dropbtn {
-              display: none;
-            }
-            .topnav a.icon {
-              float: right;
-              display: block;
-            }
-          }
-          
-          @media screen and (max-width: 600px) {
-            .topnav.responsive {position: relative;}
-            .topnav.responsive .icon {
-              position: absolute;
-              right: 0;
-              top: 0;
-            }
-            .topnav.responsive a {
-              float: none;
-              display: block;
-              text-align: left;
-            }
-            .topnav.responsive .dropdown {float: none;}
-            .topnav.responsive .dropdown-content {position: relative;}
-            .topnav.responsive .dropdown .dropbtn {
-              display: block;
-              width: 100%;
-              text-align: left;
-            }
-          }
-          
+        
           </style>
- <body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));">
-   <div class="topnav" id="myTopnav" style="margin-top:-20px ;">
-      <a href="{% url 'company'%}" style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));">Dashboard</a>
-      <a href="{% url 'jobpost'%}" id="try">Post Job</a>
-      <a href="{% url 'avlcandidates'%}">Available Candidates</a>
-      <a href="{% url 'acceptedcan'%}">Accepted Candidates</a>
-      <a href="{% url 'compoffer'%}">Candidates</a>
-      <a href="{% url 'inadd'%}">Add Internship</a>
-      <div class="dropdown">
-          <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
-      </div> 
-      <!-- <div style="float: right;margin-right:1%;">
-        {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}">Logout</a>
-        {% endif %}
-      </div> -->
-      <div style="float: right;margin-right:5%;">
-        {% if user.is_authenticated %}
-            <p style=" margin-top:15%">
-            <div class="d-flex justify-content-center align-items-center rounded" style="height: 30px;width:30px;">
-                {% if user.image %}
-                <img src="{{user.image.url}}" alt="..."width=30px height="30px" style="border-radius: 50%;" >
-                {% endif %}
-            </div>
-              <div style="margin-top:-60%;margin-left:60%;color: white;font-weight:bold">{{user.username}}</div>
-              <div style="margin-top:-65%;margin-left:120%;"><a href="{% url 'logout' %}"><img src="{% static 'images/logout.png'%}" width="25" height="25" style="color: white;"></a></div>
-            </p>
-            
-        {% endif %}
-    </div>
-   </div>
-            
-   <script>
-     function myFunction() {
-     var x = document.getElementById("myTopnav");
-     if (x.className === "topnav")
-      {
-         x.className += " responsive";
-      } else {
-                x.className = "topnav";
-              }
-      }
-              </script>
-    <br>
+ <body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));">   
 
-    <h1 style="text-align:center;font-family: 'Franklin Gothic Medium', Arial Narrow, 'Arial', sans-serif;font-weight: bolder; margin-top: 5%;"> PROFILE </h1>
-    <P style="color: white;text-align:center;font-weight:bold;font-size:12px;">HOME >> PROFILE</P>
+    <h1 style="text-align:center;font-family: 'Franklin Gothic Medium', Arial Narrow, 'Arial', sans-serif;font-weight: bolder; margin-top: -2%;"> PROFILE </h1>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    <div class="container">
+    <div class="container" style="width: 84%;float:right;">
     <div class="row flex-lg-nowrap">
      
       <div class="col">
@@ -360,8 +215,13 @@
                         <a href="{% url 'reset_password' %}" class="forgot-pass" >Change Password</a>
                         <div class="row">
                           <div class="col d-flex justify-content-end">
-                            <button class="btn btn-primary" type="submit">Save Changes</button>
+                            <button class="btn btn-primary" type="submit" onclick="myFunction3()">Save Changes</button>
                           </div>
+                          <script>
+                            function myFunction3() {
+                              alert("Changes Saved Succefully!!");
+                            }
+                            </script>
                         </div>
                       </form>
     
@@ -377,7 +237,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5><b>Please provide a profile photo : </b></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -385,8 +245,13 @@
           {% csrf_token %}
             <label for="avatarr" style="background-color:rgb(10, 62, 87) ;border-color:rgb(10, 62, 87);color:white;border-radius:5px;padding-left:7%;padding-right:7%;padding-top:2%;padding-bottom:2%;">Choose Profile</label>
             <input type="file" d="avatar" id="avatarr" name="img" accept="image/png, image/jpeg" style="display: none;">
-            <button type="submit" class="btn btn-primary">Update Photo</button>
+            <button type="submit" class="btn btn-primary" onclick="myFunction2()">Update Photo</button>
         </form>
+        <script>
+          function myFunction2() {
+            alert("Profile Picture updated Succeffully!!");
+          }
+          </script>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -399,15 +264,23 @@
 
 
   <div id="id01" class="w3-modal">
-    <div class="w3-modal-content">
+    <div class="w3-modal-content" style="height: 30%;width:40%;border-radius:10px;">
       <div class="w3-container">
-        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-        <form class="form"  action="updatec/{{ user.id }}" method="post" enctype="multipart/form-data">
-          {% csrf_token %}
-            <label for="avatarr" style="background-color:rgb(10, 62, 87) ;border-color:rgb(10, 62, 87);color:white;border-radius:5px;padding-left:7%;padding-right:7%;padding-top:2%;padding-bottom:2%;">Choose Proof</label>
-            <input type="file" d="avatar" id="avatarr" name="proof" accept="image/png, image/jpeg" style="display: none;">
-            <button type="submit" class="btn btn-primary">Submit proof</button>
-        </form>
+        <h5><b>Please enter your comapany registration certificate : </b></h5>
+        <div style="margin-top: 10%;margin-left: 20%;">
+          <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+          <form class="form"  action="updatec/{{ user.id }}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+              <label for="avatarr" style="background-color:rgb(10, 62, 87) ;border-color:rgb(10, 62, 87);color:white;border-radius:5px;padding-left:7%;padding-right:7%;padding-top:2%;padding-bottom:2%;">Choose Proof</label>
+              <input type="file" d="avatar" id="avatarr" name="proof" accept="image/png, image/jpeg" style="display: none;">
+              <button type="submit" class="btn btn-primary" onclick="myFunction4()">Submit proof</button>
+          </form>
+        </div>
+        <script>
+          function myFunction4() {
+            alert("Proof Submitted Succeffully!!");
+          }
+          </script>
       </div>
     </div>
   </div>
@@ -454,4 +327,5 @@
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     
 </body>
+{% endblock %}
 </html> 

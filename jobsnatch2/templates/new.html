@@ -1,0 +1,46 @@
+{% load static %}
+<html>
+    <head>
+        <style>
+            .a{
+                    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                    width: 550px;
+                    height:fit-content;
+                    margin: auto;
+                    font-family: arial;
+                    border-radius: 10px;
+                    background-color: white;
+                    border:  #000;
+                    margin-top: 5%;
+                  }
+        </style>
+    </head>
+    <body>
+        <div class="a">
+            {% if user.image %}
+               <img src="{{user.image.url}}"  width="150px" height="150px" style="margin-left: 2%;margin-top:2%;border-radius: 10px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
+            {% endif %}
+            <div style="margin-left:5%; float:right; margin-right:35%;height:fit-content;width:fit-content;">
+              <h1>{{user.fullname}}</h1>
+              <p class="title">{{user.about}}</p>
+            </div>
+            <div style="margin-left:2%;">
+              <table>
+                  <tr>
+                   <td><p><b>ID No : </b>{{user.id}}</p></td>
+                   <td><p><b>Joined Date : </b>{{user.last_login}}</p></td>
+                  </tr>
+                  <tr>
+                   <td><p><b>Address : </b>{{user.address}}</p></td>
+                  </tr>
+                  <tr>
+                   <td><p><b>Phone : </b>{{user.phone}}</p></td>
+                  </tr>
+                  
+              </table>
+            <img src="{% static 'images/seal.jpg'%}"  width="100px" height="100px" style="margin-left: 2%;margin-top:-21%;border-radius: 10px; float:right;margin-right:5%;">
+          
+            </div>
+          </div>
+    </body>
+</html>

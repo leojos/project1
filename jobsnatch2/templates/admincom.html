@@ -242,7 +242,7 @@ body {margin:0;font-family:Arial}
                 </form>
                 <form method="post" action="adminapprove">
                   {% csrf_token %}
-                    <td style="text-align: center;"><button  style="background-color: rgb(73, 198, 73); border-radius:7px;height:35px;width:80px;font-weight:bold;color:white;border:none" type="submit">Approve</button></td>
+                    <td style="text-align: center;"><button  style="background-color: rgb(73, 198, 73); border-radius:7px;height:35px;width:80px;font-weight:bold;color:white;border:none" type="submit" onclick="myFunction2()">Approve</button></td>
                     <td style="text-align: center;" hidden><input type="text" name="username" value="{{ x.username}}"></td>
                 </form>
                 <form action="{% url 'authdeletecom' %}" method="post">
@@ -254,6 +254,11 @@ body {margin:0;font-family:Arial}
          </tr>
         {% endfor %}
      </table>
+     <script>
+      function myFunction2() {
+        alert("Company approved !!");
+      }
+      </script>
   </div>  
  </div>
  <br><br>  

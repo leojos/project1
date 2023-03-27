@@ -1,7 +1,7 @@
 <html>
-{% extends 'base.html'%}
+
 {% load static %}
-{% block content %}
+
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -28,16 +28,11 @@
 </style>
 <body>
     <!-- <h1 style="color: black; text-align:center">Hi {{user.username}}, The companies that accepted your requests are :</h1> -->
-   <div style="height: 36%;width:32%;float:left;background-color:rgba(108, 188, 200, 0.623);margin-top:25%;margin-left:0.5%;border-radius:10px;border-top-right-radius: 50px;border-bottom-left-radius: 50px;">
-    <div style="width:42%;position: absolute;left:0;top:65%;margin-left:2%;">
-        <h4>Procedure :</h4>
-        <ul type="square">
-            <li>Personal Assistance</li>
-            <li>2-5 day training</li>
-            <li>Daily Tests</li>
-            <li>Further Helps</li>
-        </ul>
-
+   <div style="height: 36%;width:32%;float:left;background-color:rgba(108, 188, 200, 0.623);margin-top:27%;margin-left:0.5%;border-radius:10px;border-top-right-radius: 50px;border-bottom-left-radius: 50px;">
+    <div style="width:42%;position: absolute;left:0;top:65%;margin-left:2%;"> 
+      <h3 style="margin-left: 5%;"><b>JobSnatch Featured</b></h3>
+      <button style=" height:60px;width:60%;border-radius:5px;background-color:rgb(0, 0, 0) ;margin-left:4.5%;border-color:rgb(10, 62, 87);color:white;font-size: large;"><b> Rs.200/- </b></button><br><br>
+      <button type="button" data-toggle="modal" data-target="#myModal" style=" height:fit-content;margin-left:4.5%;border-radius:5px;width:60%;background-color:transparent;border-color:rgb(177, 177, 177);padding:2%;"><b> Enroll Now </b></button>
         <form action="{% url 'train' %}" method="post">
             {% csrf_token %}
             <!-- <input type="text" value="GD" name="gd" hidden> -->
@@ -45,14 +40,14 @@
 <div class="container">
 
 <!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style=" height:35px;width: 30%;background-color:rgb(10, 62, 87) ;border-color:rgb(10, 62, 87);border-radius:5px;color:white;margin-left:1%;">Apply Now</button>
+<!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style=" height:35px;width: 30%;background-color:rgb(10, 62, 87) ;border-color:rgb(10, 62, 87);border-radius:5px;color:white;margin-left:1%;">Apply Now</button> -->
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">
 <div class="modal-dialog">
 
 <!-- Modal content-->
-<div class="modal-content" style="background:rgba(9, 148, 223, 0.742);">
+<div class="modal-content" style="background:rgba(4, 4, 4, 0.742);">
 <div class="modal-header">
 <button type="button" class="close" data-dismiss="modal">&times;</button>
 <h4 class="modal-title" style="color: white;text-align:center">Confrim your time and date :)</h4>
@@ -77,7 +72,7 @@
             <option value="7:00 PM">7:00 PM</option>
           </select><br><br>
           <input type="number" value={{user.id}} name="caid" hidden>
-          <button type="submit" style="border-radius: 5px;border:none;background: rgb(7, 133, 183);height:fit-content;width:fit-content;font-weight:bold;color:white;font-size:medium;">Confrim</button>
+          <button type="submit" style="border:none;background: rgb(8, 8, 8);height:fit-content;width:100%;font-weight:bold;color:white;font-size:medium;">Confrim</button>
         </form>
       </div>
 </div>
@@ -92,28 +87,44 @@
 </div>
         </form></div>
    </div>
-    <div style="width:65%;height:85%;text-align: justify;margin-left:34%;color:black;box-shadow: 10px 10px 5px lightblue;border-radius:10px;padding-right:20px;margin-bottom:2%">
+    <div style="width:60%;height:fit-content;text-align: justify;margin-left:34%;color:black;box-shadow: 10px 10px 5px lightblue;border-radius:10px;padding-right:20px;margin-bottom:2%">
    
         <h1 style="font-weight: bolder;color:#293f6f">ACING INTERVIEWS</h1>
-            <p  style="font-weight: bold;">We believe that Practice makes a man and woman perfect and removes fear of failure, so by practice fear is gone and students start becoming confident. The same is applied to prepare our students for facing one of the toughest rounds of any company’s selection process.
-                 Objective of this training is to build self-confidence by repeatedly appearing in mock interviews conducted business heads, mentors and trainers.</p>
-
-            <p style="font-weight: bold;">To give students exposure to what kind of questions can be asked and how to conduct at the time of interviews, PIBM Students undergoes 100+ Mock Interviews where they not only face internal Trainers and Mentors, but also gets interviewed by the Corporate Heads themselves who visits campus for Final Placements.
-
-                Outcome of this Interview training is:
-            <ul type=".">
-                   <li>The feedbacks are given to each student after every mock interview, so they can improve and finally clear the Interview rounds of companies</li> 
-                   <li>Gives clarity to students where are the gaps and how much effort is required in reality to clear the placement processes</li>
-                   <li> Gives much needed exposure to the Job Profile specific sets of questions and what answers are actually expected out of them by Corporate Heads</li>
-                   
+            <h2><b>Job Interview Skills Training Course</b></h2>
+            <h4>Land that dream job by dazzling during your interview</h4>
+            <h6>(14,957 ratings) 190,582 students 1hr 34min of on-demand video</h6>
+           <div style="border:1px solid rgba(0, 0, 0, 0.55);padding:2%;box-shadow: 10px 10px 5px lightblue;border-radius:5px;">
+              <h4>What you will learn</h4>
+              <ul type=".">
+                    <li>Video Lessons</li> 
+                    <li>Learn what to do before you have an interview scheduled</li>
+                    <li>Learn how to answer the 15 most important interview questions</li>
+                    <li>Learn how to follow-up after an interview</li>
+                    <li>Dress to impress</li>
+                    <li>Much More!</li>
+              </ul>
+           </div>
+           <br>
+           <!-- <h4>Procedure :</h4>
+           <ul type="square">
+            <li>Personal Assistance</li>
+            <li>2-5 day training</li>
+            <li>Daily Tests</li>
+            <li>Further Helps</li>
+           </ul> -->
+           <p><h3>This course includes:</h3>
+            <ul type="square">
+                <li>31 mins on-demand video</li> 
+                <li>1 article</li>
+                <li>1 downloadable resource</li>
+                <li>Full lifetime access</li>
+                <li>Access on mobile and TV</li>
+                <li>Certificate of completion</li>
             </ul></p>
-            <p style="font-weight: bold;">During the course, Students undergoes 100+ Interviews Rounds which not only check their continuous growth but also gives them regular feedback on the key improvement areas.
-            We monitor our students on an individual basis and measure their performance thereby imparting specialized training as per the requirements of students as well as the companies.
-            Our aptitude training program is highly interactive and is designed to give students the much needed edge in positioning themselves ahead of the curve in today's highly competitive world.</p>
    
 </div>
 </body>
-{% endblock %}
+
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 </html>

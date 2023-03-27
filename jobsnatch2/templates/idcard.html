@@ -5,6 +5,7 @@
 {% block content %}
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <style>
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -13,13 +14,13 @@
   margin: auto;
   font-family: arial;
   border-radius: 10px;
-  background-color: white;
+  background-color: rgb(10, 106, 174);
   border:  #000;
   margin-top: 5%;
 }
 
 .title {
-  color: grey;
+  color: rgb(0, 0, 0);
   font-size: 18px;
 }
 
@@ -49,6 +50,7 @@ button:hover, a:hover {
 .watermark {
     /* Used to position the watermark */
     position: relative;
+    margin-top: -5%;
 }
 
 .watermark__inner {
@@ -69,7 +71,7 @@ button:hover, a:hover {
 
 .watermark__body {
     /* Text color */
-    color: rgba(0, 0, 0, 0.2);
+    color: rgba(0, 0, 0, 0.094);
 
     /* Text styles */
     font-size: 5.5rem;
@@ -81,9 +83,49 @@ button:hover, a:hover {
     /* Disable the selection */
     user-select: none;
 }
+
+
+.rate {
+  float:inline-start;
+  height: 46px;
+  padding: 0 10px;
+}
+.rate:not(:checked) > input {
+  position:absolute;
+  top:-9999px;
+}
+.rate:not(:checked) > label {
+  float:right;
+  width:1em;
+  overflow:hidden;
+  white-space:nowrap;
+  cursor:pointer;
+  font-size:30px;
+  color:#ccc;
+}
+.rate:not(:checked) > label:before {
+  content: '★ ';
+}
+.rate > input:checked ~ label {
+  color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+  color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+  color: #c59b08;
+}
+
 </style>
 </head>
 <body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));">
+  <br><br><br><br>
+  <div id="ab">
     <div class="watermark">
         <!-- Watermark container -->
         <div class="watermark__inner">
@@ -93,14 +135,14 @@ button:hover, a:hover {
     
         <!-- Other content -->
         
-    
+   
 <div class="card">
   {% if user.image %}
      <img src="{{user.image.url}}"  width="150px" height="150px" style="margin-left: 2%;margin-top:2%;border-radius: 10px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
   {% endif %}
   <div style="margin-left:5%; float:right; margin-right:35%;height:fit-content;width:fit-content;">
     <h1>{{user.fullname}}</h1>
-    <p class="title">{{user.about}}</p>
+    <p class="title"><b>{{user.about}}</b></p>
   </div>
   <div style="margin-left:2%;">
     <table>
@@ -116,11 +158,36 @@ button:hover, a:hover {
         </tr>
         
     </table>
-  <img src="{% static 'images/seal.jpg'%}"  width="100px" height="100px" style="margin-left: 2%;margin-top:-21%;border-radius: 10px; float:right;margin-right:5%;">
+  <img src="{% static 'images/seal.jpg'%}"  width="100px" height="100px" style="margin-left: 2%;margin-top:-21%;border-radius: 70px; float:right;margin-right:5%;">
 
   </div>
 </div>
 </div>
+</div>
+<br><br>
+<center>
+<button id="download" style="width: 43%; border-radius:10px;">Download ID</button>
+</center>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+  window.onload = function () {
+      document.getElementById("download")
+          .addEventListener("click", () => {
+              const invoice = this.document.getElementById("ab");
+              console.log(invoice);
+              console.log(window);
+              var opt = {
+                  margin: 1,
+                  filename: 'JobSnatch_ID.pdf',
+                  image: { type: 'jpeg', quality: 0.99 },
+                  html2canvas: { scale: 2 },
+                  jsPDF: { unit: 'in', format: 'a3', orientation: 'p' }
+              };
+              html2pdf().from(invoice).set(opt).save();
+          })
+  }
+  </script>
+  
 </body>
 {% endblock %}
 </html>

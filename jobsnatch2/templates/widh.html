@@ -1,0 +1,83 @@
+<html>
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+<style>
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 150%;
+  }
+  
+  td, th {
+    text-align: left;
+    padding: 8px;
+  }
+  
+  </style>
+<body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));background-repeat:no-repeat">
+  <br>
+<h1 style="color: black; text-align:center;margin-left:10%;">Hi {{user.username}}, your wishlisted jobs </h1><br><br>
+{% for j in data8 %}
+ {% for i in data3 %}
+  {% if j.jobb_id == i.job_id %}
+ 
+   {% if user.cat == i.cat %}
+    <br>
+    <div style="height:fit-content; width:60%;background-color:rgba(234, 234, 234, 0.58);border-radius:10px;margin-left: 25%;padding-top: 2%;padding-left: 2%;">
+      <form method="post" action="comppage">
+        {% csrf_token %}
+         <div class="d-flex justify-content-center align-items-center rounded" style="height: 100px;width:100px;">
+          {% if i.image %}
+           <img src="{{i.image.url}}" alt="..."width=100px height="100px" style="margin-top: 40%;margin-left:3%;border-radius:10px;">
+          {% endif %}
+         </div>
+          <div style="padding: 6%; margin-left:10%;margin-top:-30%;width:40%;text-align:left;">
+            
+            <table>
+              <tr>
+                <td><h2 style="margin-top:25%">{{ i.username}}</h2></td> 
+                <td></td> 
+              </tr>
+              <tr>
+                <td><h4>Job Title : {{ i.job_title}}</h4></td> 
+                <td><h4>Qualification : {{ i.qualification }}</h4></p></td> 
+              </tr>
+              <tr>
+               <td><h4>Last Date : {{ i.lastdate }}</h4></p></td>
+               <td><h4>Location : {{ i.loc }}</h4></td>
+             </tr>
+             <tr>
+              <td><h4>Destination : {{ i.desti }}</h4></p></td>
+              <td><h4>Job-Type : {{ i.jobtype }}</h4></p></td>
+            </tr>
+          </table>
+          </div>
+          <div style="padding: 10%; margin-left:75%;margin-top:-29%;width:70%;">
+            <button  style="background-color: rgb(73, 198, 73); border-radius:7px;height:35px;width:80px;font-weight:bold;color:white;border:none" type="submit" id="try2">View More</button>
+            <input type="text" name="cmpid" value="{{ i.job_id}}" hidden>
+          </div>
+      </form>
+    </div>
+    <br>
+   {% endif %}
+  {% endif %}
+ {% endfor %}
+{% endfor %}
+<br><br>
+
+{% endblock %}
+
+<script>
+  function a(){
+    b=document.getElementById("b2");
+    if(b.style.display==="block")
+    {
+      b.style.display="none";
+    }
+  }
+</script>
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</body>
+</html>

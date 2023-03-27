@@ -2,6 +2,7 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
 
+
 urlpatterns = [
     path('', views.index, name= 'index'),
     path('login/', views.login, name='login'),
@@ -29,10 +30,12 @@ urlpatterns = [
     path('comppage', views.comppage, name='comppage'),
     path('comppage2', views.comppage2, name='comppage2'),
     path('comppage3', views.comppage3, name='comppage3'),
+    path('comppage4', views.comppage4, name='comppage4'),
     path('comppages', views.comppages, name='comppages'),
     path('canpage', views.canpage, name='canpage'),
     path('canpage2', views.canpage2, name='canpage2'),
     path('canpage3', views.canpage3, name='canpage3'),
+    path('canpage4', views.canpage4, name='canpage4'),
     path('comaccept', views.comaccept, name='comaccept'),
     path('comreject', views.comreject, name='comreject'),
     path('acceptedcan', views.acceptedcan, name='acceptedcan'),
@@ -83,7 +86,7 @@ urlpatterns = [
     path('scheaccept', views.scheaccept, name='scheaccept'),
     path('schedec', views.schedec, name='schedec'),
     path('schedec2', views.schedec2, name='schedec2'),
-    path('notifi/<int:id>', views.notifi, name='notifi/<int:id>'),
+    path('notifi', views.notifi, name='notifi'),
     path('appr1', views.appr1, name='appr1'),
     path('appr2', views.appr2, name='appr2'),
     path('progress', views.progress, name='progress'),
@@ -96,6 +99,18 @@ urlpatterns = [
     path('interinfo', views.interinfo, name='interinfo'),
     path('inadd', views.inadd, name='inadd'),
     path('idcard', views.idcard, name='idcard'),
+    path('pdf', views.pdf, name='pdf'),
+    # path('pdff', views.get, name='pdff'),
+    path('my_pdf', views.my_view, name='my_pdf'),
+    path('my_pd', views.my_vi, name='my_pd'),
+    path('wish', views.wish, name='wish'),
+    path('wiish', views.wiish, name='wiish'),
+    path('paymenthandler/', views.paymenthandler, name='paymenthandler'),
+    path('homepage', views.homepage, name='homepage'),
+    path('homepage', views.homepage, name='homepage'),
+    # path('pdf_view', views.pdf_view, name='pdf_view'),
+
+    
          
     # path("createresume", views.createresume, name="createresume"),
     # path("resumes", views.resumes, name="resumes"),

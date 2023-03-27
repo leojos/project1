@@ -2,14 +2,16 @@
     <style>
         .topnav {
             overflow: hidden;
-            background-color: #333;
+            background-color: #ffffff3a;
             margin-bottom: -2%;
+            margin-left: -1%;
+            font-family: Arial, Helvetica, sans-serif;
           }
           
           .topnav a {
             float: left;
             display: block;
-            color: #f2f2f2;
+            color: #050505;
             text-align: center;
             padding: 14px 16px;
             text-decoration: none;
@@ -18,7 +20,8 @@
           
           .active {
             background-color: #04AA6D;
-            color: white;
+            color: rgb(255, 253, 253);
+            font-weight: bold;
           }
           
           .topnav .icon {
@@ -145,10 +148,12 @@
           </style>
           <body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));">
             <div class="topnav" id="myTopnav" style="width:1500px;margin-top:-10">
-                <a href="{% url 'company'%}" class="active">Dashboard</a>
+                <a href="{% url 'company'%}" class="active">DASH</a>
                 <a href="{% url 'jobpost'%}">Post Job</a>
                 <a href="{% url 'avlcandidates'%}">Available Candidates</a>
-                <a href="notifi/{{ user.id }}">Notifications</a>
+                <a href="{% url 'acceptedcan'%}">Accepted Candidates</a>
+                <a href="{% url 'compoffer'%}">Candidates</a>
+                <a href="{% url 'inadd'%}">Add Internship</a>
                 
                   {% if user.is_authenticated %}
                      <a href="{% url 'logout' %}">Logout</a>
@@ -157,6 +162,7 @@
              
             </div>
             <div style="text-align:center;background-color:rgba(255, 255, 255, 0.392);margin-top:5%;border-radius:10px;width:37%;height:50%;margin-left:1%;">
+              
               <h2 style="font-family:Arial, Helvetica, sans-serif;">CONFIRMED DATES</h2>
               <table style="margin-left: 2%;">
                 <th style="text-align: center;">Candidate</th>

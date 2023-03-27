@@ -116,6 +116,10 @@ USE_I18N = True
 USE_TZ = True
 
 
+RAZOR_KEY_ID = 'rzp_test_bZ9mrbitFF1lBk'
+RAZOR_KEY_SECRET = 'ixXALcx4TTWuojXIPaDByfTv'
+SECURE_CROSS_ORIGIN_OPENER_POLICY='same-orgin-allow-popups'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 

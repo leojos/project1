@@ -1,6 +1,8 @@
+{% extends 'base4.html'%}
 {% load static %}
-<!DOCTYPE html>
+
 <html>
+{% block content %}
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -8,9 +10,9 @@
   box-sizing: border-box;
 }
 
-input[type=text], select, textarea {
+.a {
   width: 100%;
-  padding: 12px;
+  padding: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
   resize: vertical;
@@ -40,7 +42,7 @@ input[type=submit]:hover {
   background-color: rgba(255, 255, 255, 0.352);
   padding: 20px;
   margin-top: 2%;
-  margin-left: 2.5%;
+  margin-left: 2%;
   width: 95%;
   height:fit-content;
 }
@@ -76,153 +78,17 @@ input[type=submit]:hover {
 
 
 
-body {margin:0;font-family:Arial}
+body {font-family:Arial}
 
-.topnav {
-  overflow: hidden;
-  background-color: #333;
-  margin-bottom: -2%;
-}
-
-.topnav a {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-.active {
-  background-color: #04AA6D;
-  color: white;
-}
-
-.topnav .icon {
-  display: none;
-}
-
-.dropdown {
-  float: left;
-  overflow: hidden;
-}
-
-.dropdown .dropbtn {
-  font-size: 17px;    
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit;
-  margin: 0;
-}
-
-.dropdown-content {
-  display: none;
-  position: relative;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index:1;
-}
-
-.dropdown-content a {
-  float: none;
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-.topnav a:hover, .dropdown:hover .dropbtn {
-  background-color: #555;
-  color: white;
-}
-
-.dropdown-content a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-  
-}
-
-@media screen and (max-width: 600px) {
-  .topnav a:not(:first-child), .dropdown .dropbtn {
-    display: none;
-  }
-  .topnav a.icon {
-    float: right;
-    display: block;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .topnav.responsive {position: relative;}
-  .topnav.responsive .icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .topnav.responsive a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
-  .topnav.responsive .dropdown {float: none;}
-  .topnav.responsive .dropdown-content {position: relative;}
-  .topnav.responsive .dropdown .dropbtn {
-    display: block;
-    width: 100%;
-    text-align: left;
-  }
-}
 
 </style>
 </head>
 <body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));">
-    <div class="topnav" id="myTopnav">
-        <a href="{% url 'company'%}" class="active">Dashboard</a>
-        <a href="{% url 'jobpost'%}">Post Job</a>
-        <a href="{% url 'avlcandidates'%}">Available Candidates</a>
-        <a href="{% url 'acceptedcan'%}">Accepted Candidates</a>
-        
-        <div style="float: right;margin-right:5%;">
-          {% if user.is_authenticated %}
-            <p style=" margin-top:15%">
-              <div class="d-flex justify-content-center align-items-center rounded" style="height: 30px;width:30px;">
-                {% if user.image %}
-                <img src="{{user.image.url}}" alt="..."width=30px height="30px" style="border-radius: 50%;" >
-                {% endif %}
-              </div>
-              <div style="margin-top:-60%;margin-left:60%;color: white;font-weight:bold">{{user.username}}</div>
-              <div style="margin-top:-65%;margin-left:120%;"><a href="{% url 'logout'%}"><img src="{% static 'images/logout.png'%}" width="25" height="25" style="color: white;"></a></div>
-            </p>
-             <!-- <a href="{% url 'logout' %}">Logout</a> -->
-          {% endif %}
-        </div>
-        <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
-    </div>
     
-      <script>
-      function myFunction() {
-        var x = document.getElementById("myTopnav");
-        if (x.className === "topnav") {
-          x.className += " responsive";
-        } else {
-          x.className = "topnav";
-        }
-      }
-      </script>
   {% if user.approved is True %}
-    <h1 style="text-align:center;font-family: 'Franklin Gothic Medium', Arial Narrow, 'Arial', sans-serif;font-weight: bolder; margin-top: 5%;"> Post Jobs </h1>
-    <P style="color: white;text-align:center;font-weight:bold;font-size:12px;">HOME >> PROFILE</P>
-  <div class="container">
+    <!-- <h1 style="text-align:center;font-family: 'Franklin Gothic Medium', Arial Narrow, 'Arial', sans-serif;font-weight: bolder; margin-top: 5%;"> Post Jobs </h1> -->
+    
+  <div class="container" style="width: 70%;float:right;margin-top:4%;margin-right:7%;">
    <form action="{% url 'postjob'%}" method="post">
     {% csrf_token %}
     <div class="row">
@@ -230,15 +96,15 @@ body {margin:0;font-family:Arial}
         <label for="title">Job Title</label>
       </div>
       <div class="col-75">
-        <input type="text" id="fname" name="title" placeholder="Title" style="border-radius:7px;border:none;text-align:center;" required>
+        <input type="text" id="fname" name="title" placeholder="Title" style="border-radius:7px;border:none;text-align:center;" class="a" required>
       </div>
     </div>
     <div class="row">
       <div class="col-25">
-        <label for="salary">Salary</label>
+        <label for="salary">Salary in Rupees</label>
       </div>
       <div class="col-75">
-        <input type="number" id="lname" name="salary" style="border-radius:7px;border:none;text-align:center;height:25px;" required>
+        <input type="text" id="lname" name="salary" style="border-radius:7px;border:none;text-align:center;height:25px;" maxlength="6" minlength="4"  onkeypress="return /[0-9]/i.test(event.key)" class="a" required>
       </div>
     </div>
     <div class="row">
@@ -246,7 +112,27 @@ body {margin:0;font-family:Arial}
           <label for="experience">Experience</label>
         </div>
         <div class="col-75">
-          <input type="number" id="exp" name="experience" style="border-radius:7px;border:none;text-align:center;height:25px;" required>
+          <input type="text" id="exp" class="a" name="experience" placeholder="Least - most" style="border-radius:7px;border:none;text-align:center;height:25px;"onkeypress="return /[0-9,-]/i.test(event.key)"  maxlength="3" minlength="1" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="experiencein">Experience in</label>
+        </div>
+        <div class="col-75">
+          <select name="experiencein" class="a" style="border-radius:7px;border:none;text-align:center;" required>
+            <option value="Yr">Yr</option>
+            <option value="Mon">Mon</option>
+           
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="date">Start Date</label>
+        </div>
+        <div class="col-75">
+          <input type="date" id="txtStartDate" name="sdate" style="border-radius:7px;text-align:center;" onmouseleave="TDate()" required>
         </div>
       </div>
       <div class="row">
@@ -254,7 +140,7 @@ body {margin:0;font-family:Arial}
           <label for="date">Last Date</label>
         </div>
         <div class="col-75">
-          <input type="date" id="userdate" name="date" style="border-radius:7px;border:none;text-align:center;" onmouseleave="TDate()" required>
+          <input type="date" id="txtEndDate" name="date" style="border-radius:7px;text-align:center;" onmouseleave="DateCheck()" required>
         </div>
       </div>
       <div class="row">
@@ -262,11 +148,19 @@ body {margin:0;font-family:Arial}
           <label for="desti">Destination</label>
         </div>
         <div class="col-75">
-          <select name="desti" style="border-radius:7px;border:none;text-align:center;" required>
+          <select name="desti" class="a" style="border-radius:7px;border:none;text-align:center;" required>
             <option value="Abroad">Abroad</option>
             <option value="Within">Within</option>
             <option value="Depends">Depends</option>
           </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="expl">Exact Place</label>
+        </div>
+        <div class="col-75">
+        <input type="text" id="fname" name="expl" class="a" style="border-radius:7px;border:none;text-align:center;" required>
         </div>
       </div>
     <div class="row">
@@ -274,7 +168,7 @@ body {margin:0;font-family:Arial}
         <label for="vacancies">No.of vacancies</label>
       </div>
       <div class="col-75">
-        <input type="number" id="va" name="vacancies" style="border-radius:7px;border:none;text-align:center;height:25px;" required>
+        <input type="text" id="va" name="vacancies" class="a" style="border-radius:7px;border:none;text-align:center;height:25px;" onkeypress="return /[0-9]/i.test(event.key)"  maxlength="3" minlength="1" required>
       </div>
       <!-- <div class="col-75">
         <select id="country" name="country">
@@ -288,7 +182,7 @@ body {margin:0;font-family:Arial}
         <label for="desc">Job Description</label>
       </div>
       <div class="col-75">
-        <textarea id="subject" name="desc" placeholder="Write something.." style="height:190px ;border-radius:7px;border:none;" required></textarea>
+        <textarea id="subject" name="desc" class="a" placeholder="Write something.." style="height:190px ;border-radius:7px;border:none;" required></textarea>
       </div>
     </div>
     <div class="row">
@@ -296,9 +190,9 @@ body {margin:0;font-family:Arial}
         <label for="jtype">Job Type</label>
       </div>
       <div class="col-75">
-        <select name="jtype" style="border-radius:7px;border:none;text-align:center;" required>
-          <option value="10th">Part-Time</option>
-          <option value="12th">Full-Time</option>
+        <select name="jtype" class="a" style="border-radius:7px;border:none;text-align:center;" required>
+          <option value="Part-Time">Part-Time</option>
+          <option value="Full-Time">Full-Time</option>
         </select>
       </div>
     </div>
@@ -307,18 +201,66 @@ body {margin:0;font-family:Arial}
         <label for="quali">Qualification</label>
       </div>
       <div class="col-75">
-        <select name="quali" style="border-radius:7px;border:none;text-align:center;" required>
+        <select name="quali" class="a" style="border-radius:7px;border:none;text-align:center;width:30%;"  multiple required>
           <option value="10th">10th</option>
           <option value="12th">12th</option>
-          <option value="B-Tech/M-Tech">B-Tech/M-Tech</option>
-          <option value="MCA/BCA">MCA/BCA</option>
-          <option value="MBA/BBA">MBA/BBA</option>
-          <option value="MSC/BSC">MSC/BSC</option>
-          <option value="MCOM/BCOM">MCOM/BCOM</option>
+          <option value="BCA">BCA</option>
+          <option value="MCA">MCA</option>
+          <option value="BBA">BBA</option>
+          <option value="MBA">MBA</option>
+          <option value="BSC">BSC</option>
+          <option value="MSC">MSC</option>
+          <option value="BCOM">BCOM</option>
+          <option value="MCOM">MCOM</option>
+          <option value="B-Tech">B-Tech</option>
+          <option value="M-Tech">M-Tech</option>
           <option value="Diploma">Diploma</option>
         </select>
       </div>
-    </div><br>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="tenth">10th percentage required </label>
+      </div>
+      <div class="col-75">
+        <select name="tenth" class="a" style="border-radius:7px;border:none;text-align:center;" required>
+          <option value="min 50">min 50</option>
+          <option value="min 60">min 60</option>
+          <option value="min 70">min 70</option>
+          <option value="min 80">min 80</option>
+          <option value="min 90">min 90</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="pltwo">+2 percentage required </label>
+      </div>
+      <div class="col-75">
+        <select name="pltwo" class="a" style="border-radius:7px;border:none;text-align:center;" required>
+          <option value="min 50">min 50</option>
+          <option value="min 60">min 60</option>
+          <option value="min 70">min 70</option>
+          <option value="min 80">min 80</option>
+          <option value="min 90">min 90</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="crse">Course percentage required </label>
+      </div>
+      <div class="col-75">
+        <select name="crse" class="a" style="border-radius:7px;border:none;text-align:center;" required>
+          <option value="min 50">min 50</option>
+          <option value="min 60">min 60</option>
+          <option value="min 70">min 70</option>
+          <option value="min 80">min 80</option>
+          <option value="min 90">min 90</option>
+        </select>
+      </div>
+    </div>
+    <br>
       <!-- <div class="row">
         <div class="col-25">
           <label for="vacancies">Cid</label>
@@ -326,7 +268,7 @@ body {margin:0;font-family:Arial}
         <div class="col-75">
           <input type="number" id="lname" value = {{user.id}} name="cid">
         </div> -->
-      <input type="submit" value="Submit" id="try2"> 
+      <input type="submit" value="Submit" id="try2" onsubmit="myFunction2()"> 
     </form><br><br>
    </div>
   {% else %}
@@ -336,7 +278,7 @@ body {margin:0;font-family:Arial}
 <!-- </div> -->
 <script>
   function TDate() {
-    var UserDate = document.getElementById("userdate").value;
+    var UserDate = document.getElementById("txtStartDate").value;
     var ToDate = new Date();
 
     if (new Date(UserDate).getTime() <= ToDate.getTime()) {
@@ -345,6 +287,30 @@ body {margin:0;font-family:Arial}
      }
     return true;
 }
+function myFunction2() {
+  alert("Job is Sucessfully posted!!");
+}
+
+function DateCheck()
+{
+  var StartDate= document.getElementById('txtStartDate').value;
+  var EndDate= document.getElementById('txtEndDate').value;
+  var eDate = new Date(EndDate);
+  var sDate = new Date(StartDate);
+  if(StartDate!= '' && StartDate!= '' && sDate> eDate)
+    {
+    alert("Please ensure that the End Date is greater than or equal to the Start Date.");
+    return false;
+    }
+  var ToDate = new Date();
+
+  if (new Date(EndDate).getTime() <= ToDate.getTime()) {
+          alert("The Date must be Bigger or Equal to today date");
+          return false;
+     }
+    return true;
+}
 </script>
 </body>
+{% endblock %}
 </html>

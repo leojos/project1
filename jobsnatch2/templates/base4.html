@@ -1,0 +1,146 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>JobSnatch</title>
+<style>
+body {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+}
+
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color:rgba(234, 234, 234, 0.346);
+  height:110%;
+  font-size:16px;
+  overflow:visible;
+  position: fixed;
+  border-radius: 5px;
+  margin-top: 0%;
+}
+
+.sidebar a {
+  display: block;
+  color: rgb(0, 0, 0);
+  padding: 16px;
+  text-decoration: none;
+}
+ 
+.sidebar a.active {
+  background-color: #000000da;
+  color: white;
+}
+
+.sidebar a:hover:not(.active) {
+  background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));
+  color: white;
+}
+
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+.dropbtn {
+  background-color:transparent;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color:rgb(50, 147, 166);
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));}
+</style>
+
+</head>
+<body>
+  
+<div class="sidebar">
+    <a href="{% url 'company'%}" class="active" style="text-decoration: none;">Dashboard</a>
+    <a href="{% url 'jobpost'%}" id="try">Post Job</a>
+    <a href="{% url 'avlcandidates'%}">Available Candidates</a>
+    <a href="{% url 'acceptedcan'%}">Accepted Candidates</a>
+    <a href="{% url 'compoffer'%}">Candidates</a>
+    <a href="{% url 'inadd'%}">Add Internship</a>
+    <a href="{% url 'notifi' %}">Notifications</a>
+        
+</div>
+<div style="float:left;width:5%;margin-top:1%;margin-left:17%;" id="google_element">
+  <script src="http://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script>
+        <script >
+          function loadGoogleTranslate(){
+             new google.translate.TranslateElement("google_element");
+          }
+        </script> 
+</div>
+<div style="float: right;margin-right:4%;width:5%;margin-top:1%;">
+  {% if user.is_authenticated %}
+      
+        <div class="d-flex justify-content-center align-items-center rounded" style="height: 30px;width:30px;">
+          {% if user.image %}
+          <img src="{{user.image.url}}" alt="..."width=30px height="30px" style="border-radius: 50%;" >
+          {% endif %}
+        </div>
+        <div style="float:right; color: rgb(2, 2, 2);font-weight:bold;margin-top:-42%;">{{user.username}}</div>
+        <div style="float:right;margin-right:-50%;margin-top:-44%;"><a href="{% url 'logout'%}"><img src="{% static 'images/logout.png'%}" width="25" height="25" style="color: white;"></a></div>
+      
+      
+  {% endif %}
+</div>
+
+{% block content %}
+
+
+{% endblock %}
+</body>
+</html>
+       

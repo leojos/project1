@@ -67,7 +67,21 @@
             <form method="post" action="{% url 'applyjob'%}">
               {% csrf_token %}
               <input type="text" name="idvalue" value="{{x.job_id}}" hidden>
-              <button  style="background-color: rgb(73, 198, 73); border-radius:7px;height:35px;width:60px;font-weight:bold;color:white;border:none" type="submit">Apply</button>
+              <button  style="background-color: rgb(73, 198, 73); border-radius:7px;height:35px;width:60px;font-weight:bold;color:white;border:none" type="submit" id="btn" onclick="myFunction2()">Apply</button>
+              {% for i in data1 %}
+                {% if i.jobs_id_id == x.job_id %}
+                  <button  style="background-color: rgb(73, 198, 73); border-radius:7px;height:35px;width:70px;font-weight:bold;color:white;border:none" type="submit" id="btn2">Applied</button>
+                  <script>
+                    document.getElementById("btn").style.display='none';
+                    document.getElementById("btn2").disabled=true;
+                    
+                     function myFunction2() {
+                       document.getElementById("btn2").disabled = true;
+                     }
+                    
+                  </script>
+                {% endif %}
+              {% endfor %}
             </form>
             {% endfor %}  
             </div>

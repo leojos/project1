@@ -89,9 +89,8 @@
  </style>
 
 <body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));">
-
-    <h1 style="text-align:center;font-family: 'Franklin Gothic Medium', Arial Narrow, 'Arial', sans-serif;font-weight: bolder; margin-top: 5%;"> PROFILE </h1>
-    <P style="color: white;text-align:center;font-weight:bold;font-size:12px;">HOME >> PROFILE</P><br>
+    
+    <h1 style="text-align:center;font-family:Arial, Helvetica, sans-serif;font-weight: bolder; margin-top: 0%;margin-left:25%;"> PROFILE </h1>
     <!-- <div class="container" style="height: 100%;">
         <div class="row gutters">
         <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
@@ -153,7 +152,7 @@
         </div>  -->
 
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container">
+<div class="container" style="float:right;width:85%;">
 <div class="row flex-lg-nowrap">
  
   
@@ -272,8 +271,13 @@
                     <a href="{% url 'reset_password' %}" class="forgot-pass" >Change Password</a>
                     <div class="row">
                       <div class="col d-flex justify-content-end">
-                        <button class="btn btn-primary" type="submit">Save Changes</button>
+                        <button class="btn btn-primary" type="submit" onclick="myFunction3()">Save Changes</button>
                       </div>
+                      <script>
+                        function myFunction3() {
+                          alert("Changes Saved Succefully!!");
+                        }
+                        </script>
                     </div>
                   </form>
 
@@ -289,15 +293,23 @@
 </div>
 
 <div id="id01" class="w3-modal">
-  <div class="w3-modal-content" style="padding:5%;width:fit-content; text-align:center;">
+  <div class="w3-modal-content" style="height: 30%;width:40%;border-radius:10px;">
     <div class="w3-container">
+      <h5><b>Please provide a profile photo : </b></h5>
+      <div style="margin-top: 10%;margin-left: 20%;">
       <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
       <form class="form"  action="updatecan/{{ user.id }}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <label for="avatar" style="background-color:rgb(10, 62, 87) ;border-color:rgb(10, 62, 87);color:white;border-radius:5px;padding-left:7%;padding-right:7%;padding-top:2%;padding-bottom:2%;">Choose Profile</label>
         <input type="file" d="avatar" name="avatar" id="avatar" accept="image/png, image/jpeg" style="display: none;">
-          <button type="submit" class="btn btn-primary">Update</button>
+          <button type="submit" class="btn btn-primary" onclick="myFunction2()">Update</button>
       </form>
+     </div>
+      <script>
+        function myFunction2() {
+          alert("Profile Picture updated Succeffully!!");
+        }
+        </script>
     </div>
   </div>
 </div>

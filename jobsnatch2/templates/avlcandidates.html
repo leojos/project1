@@ -1,118 +1,17 @@
+{% extends 'base4.html'%}
 {% load static %}
 <html>
+  {% block content %}
     <style>
-    .topnav {
-        overflow: hidden;
-        background-color: #333;
-        margin-bottom: -2%;
-      }
-      
-      .topnav a {
-        float: left;
-        display: block;
-        color: #f2f2f2;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        font-size: 17px;
-      }
-      
-      .active {
-        background-color: #04AA6D;
-        color: white;
-      }
-      
-      .topnav .icon {
-        display: none;
-      }
-      
-      .dropdown {
-        float: left;
-        overflow: hidden;
-      }
-      
-      .dropdown .dropbtn {
-        font-size: 17px;    
-        border: none;
-        outline: none;
-        color: white;
-        padding: 14px 16px;
-        background-color: inherit;
-        font-family: inherit;
-        margin: 0;
-      }
-      
-      .dropdown-content {
-        display: none;
-        position: relative;
-        background-color: #f9f9f9;
-        min-width: 160px;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index:1;
-      }
-      
-      .dropdown-content a {
-        float: none;
-        color: black;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-        text-align: left;
-      }
-      
-      .topnav a:hover, .dropdown:hover .dropbtn {
-        background-color: #555;
-        color: white;
-      }
-      
-      .dropdown-content a:hover {
-        background-color: #ddd;
-        color: black;
-      }
-      
-      .dropdown:hover .dropdown-content {
-        display: block;
-        
-      }
-      
-      @media screen and (max-width: 600px) {
-        .topnav a:not(:first-child), .dropdown .dropbtn {
-          display: none;
-        }
-        .topnav a.icon {
-          float: right;
-          display: block;
-        }
-      }
-      
-      @media screen and (max-width: 600px) {
-        .topnav.responsive {position: relative;}
-        .topnav.responsive .icon {
-          position: absolute;
-          right: 0;
-          top: 0;
-        }
-        .topnav.responsive a {
-          float: none;
-          display: block;
-          text-align: left;
-        }
-        .topnav.responsive .dropdown {float: none;}
-        .topnav.responsive .dropdown-content {position: relative;}
-        .topnav.responsive .dropdown .dropbtn {
-          display: block;
-          width: 100%;
-          text-align: left;
-        }
-      }
+    
         table {
           font-family: arial, sans-serif;
-          border-collapse: collapse;
-          width: 70%;
+          border-collapse:separate;
+          width: 100%;
         }
         
         td, th {
-          border: 1px solid #dddddd;
+          border: 1px solid #272727;
           text-align: left;
           padding: 8px;
         }
@@ -121,42 +20,18 @@
           background-color: #ffffff;
         }
       </style>
-    <body style="background-image: linear-gradient( rgb(198, 201, 202),rgb(50, 147, 166));">
-        <div class="topnav" id="myTopnav" style="width:1500px;margin-top:-10;margin-left:-1%;">
-            <a href="{% url 'company'%}" class="active">Dashboard</a>
-            <a href="{% url 'jobpost'%}">Post Job</a>
-            <a href="{% url 'acceptedcan'%}">Accepted Candidates</a>
-            <a href="{% url 'compoffer'%}">Candidates</a>
-            <a href="notifi/{{ user.id }}">Notifications</a>
-            
-            
-              {% if user.is_authenticated %}
-                <!-- <p style=" margin-top:15%;margin-left:20%">
-                 <div class="d-flex justify-content-center align-items-center rounded" style="height: 30px;width:30px; background-color: rgb(233, 236, 239);">
-                   {% if user.image %}
-                     <img src="{{user.image.url}}" alt="..."width=30px height="30px" style="border-radius: 50%;" >
-                   {% endif %}
-                 </div>
-                 <div style="margin-top:-60%;margin-left:60%;color: white;font-weight:bold">{{user.username}}</div>
-                 <div style="margin-top:-65%;margin-left:120%;"><a href="{% url 'logout'%}"><img src="{% static 'images/logout.png'%}" width="25" height="25" style="color: white;"></a></div>
-                </p> -->
-                 <a href="{% url 'logout' %}">Logout</a>
-              {% endif %}
-            </div>
-            <!-- <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a> -->
-       <h1 style="color: black; text-align:center">Available Candidates :</h1>
-       
-       
-       
-       <div style="background-color: rgba(234, 234, 234, 0.58);padding:2%;" >
-         <div class="w3-third" style="margin-left: 22%;">
+    <body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));">
+<br><br><br><br>
+       <div style="background-color: rgba(255, 255, 255, 0.501);padding:2%;width:50%;margin-left: 33%;margin-top:2%;border-radius:5px;" >
+         <div class="w3-third" >
+          <h2 style="color: black; text-align:center">Available Candidates :</h2>
           <table>
             
             <tr>
               <th style="text-align: center;">CANDIDATE</th>
               <th style="text-align: center;">ABOUT</th>
               <th style="text-align: center;">EMAIL</th>
-              <th style="text-align: center;"></th>
+              <th style="text-align: center;">More</th>
             </tr>
             {% for x in data %}
               {% if user.cat == x.cat %}
@@ -169,7 +44,7 @@
                         <td style="text-align: center;"><a href="#">{{ x.email}}</a></td>
                         <td style="text-align: center;" hidden><input type="text" name="jobid" value="{{ x.jobs_id_id}}"></td>
                         <td style="text-align: center;"  hidden><input type="text" name="canid" value="{{ x.can_id_id}}"></td>
-                        <td style="text-align: center;"><button  style="background-color: rgb(73, 198, 73); border-radius:7px;height:35px;width:80px;font-weight:bold;color:white;border:none" type="submit">View More</button></td>
+                        <td style="text-align: center;"><button  style="background-color: rgb(73, 198, 73); border-radius:7px;height:35px;width:80px;font-weight:bold;color:white;border:none" type="submit">View</button></td>
                         <!-- <td style="text-align: center;">{{ x.username}}</td> -->
                         
                         
@@ -185,16 +60,43 @@
                 </table>
            </div>  
          </div>
-          <script>
-          function myFunction() {
-            var x = document.getElementById("myTopnav");
-            if (x.className === "topnav") {
-              x.className += " responsive";
-            } else {
-              x.className = "topnav";
-            }
-          }
-          </script>
+
+         {% for i in data %}
+              {% if user.cat == i.cat %}
+         <div style="width:60%;background-color:rgba(234, 234, 234, 0.58);border-radius:10px;margin-left: 25%;padding-top: 2%;padding-left: 2%;">
+          <form method="post" action="{% url 'canpage' %}">
+            {% csrf_token %}
+            {% if user.username in i.username %}
+             <div class="d-flex justify-content-center align-items-center rounded" style="height: 100px;width:100px;">
+              {% if i.image %}
+               <img src="{{i.image.url}}" alt="..."width=100px height="100px" style="margin-top: 15%;margin-left:3%;border-radius:10px;">
+              {% endif %}
+             </div>
+              <div style="padding: 6%; margin-left:10%;margin-top:-30%;width:40%;text-align:left;">
+                <br><br><br>
+                <table style="width: 150%;">
+                  <tr>
+                    <td><h2 style="margin-top:15%">Candidate : </h2></td> 
+                    <td><h2 style="margin-top:15%">{{ i.username}}</h2></td> 
+                  </tr>
+                  <tr>
+                    <td><h4>About : {{ i.about}}</h4></td> 
+                    <td><h4>Email : {{ i.email }}</h4></p></td> 
+                  </tr>
+              </table>
+              </div>
+              <div style="padding: 10%; margin-top:-15%;width:70%;float:left;margin-left:-9%;">
+                <input type="hidden" name="jobid" value="{{ i.jobs_id_id}}">
+                <input type="hidden" name="canid" value="{{ i.can_id_id}}">
+                <button  style="background-color: rgb(73, 198, 73); border-radius:7px;height:35px;width:100px;font-weight:bold;color:white;border:none" type="submit">View</button>
+              </div>
+            {% endif %}
+          </form>
+        </div>
+        {% endif %}
+      {% endfor %}
+    </body>
+          {% endblock %}
 </html>
 
 

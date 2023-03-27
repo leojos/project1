@@ -8,16 +8,16 @@
   </head>
   <style>
     .homedi {
-        width: 250px;
-        margin-top: 5%;
+        width: 32%;
+        
         height: 250px;
         display: inline-block;
         *display: inline;
         zoom: 1;
         background:rgba(0, 0, 0, 0.322);
-        border-radius: 5%;
-        margin-left: 6%;
+        border-radius: 10px;
         margin-bottom: 2%;
+        margin-left:17%;
         
       }
       .homed:hover{
@@ -63,8 +63,9 @@
      }
   </style>
   <body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));">
+    <br><br><br><br>
     {% for x in acti %}
-        <div class="container mt-3 homedi homed"  style="background-color: rgba(255, 255, 255, 0.187);width: 40%;"><p style="text-align: center;margin-top:5%;">Training</p>
+        <div class="container mt-3 homedi homed"  style="background-color: rgba(255, 255, 255, 0.187);"><p style="text-align: center;margin-top:5%;">Training</p>
             <div class="card " style="background-color: rgba(255, 255, 255, 0.644); margin-top:5%;text-align:center;">
               <div class="card-body" ><h3>Enrolled For : {{x.type}}</h3>
                 <h5>Start Date : {{x.train_date}}</h5>
@@ -73,7 +74,7 @@
           </div>
     {% endfor %}
     {% for y in acti2 %}
-        <div class="container mt-3 homedi homed"  style="background-color: rgba(255, 255, 255, 0.187);width: 40%;"><p style="text-align: center;margin-top:5%;">Internship</p>
+        <div class="container mt-3 homedi homed"  style="background-color: rgba(255, 255, 255, 0.187);"><p style="text-align: center;margin-top:5%;">Internship</p>
             <div class="card " style="background-color: rgba(255, 255, 255, 0.644); margin-top:5%;text-align:center;">
             <div class="card-body" ><h3>Enrolled For : {{y.inid}}</h3>
                 <h5>Start Date : {{y.interndate}}</h5>
@@ -82,7 +83,8 @@
         </div>
    {% endfor %}
    {% for z in acti3 %}
-        <div class="container mt-3 homedi homed"  style="background-color: rgba(255, 255, 255, 0.187);width: 40%;"><p style="text-align: center;margin-top:5%;">Job Interview</p>
+     {% if z.acc == False and z.dec == True %}
+        <div class="container mt-3 homedi homed"  style="background-color: rgba(255, 255, 255, 0.187);"><p style="text-align: center;margin-top:5%;">Job Interview</p>
             <div class="card " style="background-color: rgba(255, 255, 255, 0.644); margin-top:5%;text-align:center;">
             <div class="card-body" ><h3>{{z.typp}}</h3>
                 <h5>Date : {{z.train_date}}</h5>
@@ -98,10 +100,31 @@
               </div>
             </div>
         </div>
+     {% endif %}
+   {% endfor %}
+   {% for z in acti3 %}
+     {% if z.dec == False and z.acc == True %}
+        <div class="container mt-3 homedi homed"  style="background-color: rgba(255, 255, 255, 0.187);"><p style="text-align: center;margin-top:5%;">Job Interview</p>
+            <div class="card " style="background-color: rgba(255, 255, 255, 0.644); margin-top:5%;text-align:center;">
+            <div class="card-body" ><h3>{{z.typp}}</h3>
+                <h5>Date : {{z.train_date}}</h5>
+                <h5>Duration : {{z.dura}}</h5>
+              <form action="{% url 'scheaccept' %}" method="post">
+                {% csrf_token %}
+                 <input type="text" name="scheu" value="{{z.sche_id}}" hidden>
+                 <button type="submit" class="bt" onclick="myFunction()" >Accept</button>
+              </form>
+              <button type="button" class="btn btn-primary bt2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Decline
+              </button>
+              </div>
+            </div>
+        </div>
+     {% endif %}
    {% endfor %}
 
    {% for v in acti4 %}
-        <div class="container mt-3 homedi homed"  style="background-color: rgba(255, 255, 255, 0.187);width: 40%;"><p style="text-align: center;margin-top:4%;">Job Offers</p>
+        <div class="container mt-3 homedi homed"  style="background-color: rgba(255, 255, 255, 0.187);"><p style="text-align: center;margin-top:4%;">Job Offers</p>
             <div class="card " style="background-color: rgba(255, 255, 255, 0.644); margin-top:5%;text-align:justify;">
             <div class="card-body" ><h4>Hi {{user.username}}, {{v.username}} company has shown interest to your profile.
               Check their jobs offered as per your interest in the Avaliable Jobs section in your portal.
