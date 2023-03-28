@@ -306,7 +306,7 @@ class resumme(models.Model):
     certi=models.TextField(blank=True)
     achi=models.TextField(blank=True)
     interns=models.TextField(blank=True)
-    refe=models.TextField(blank=True)
+    refe=models.TextField(blank=True,null=True)
     phone=models.IntegerField(blank=True, null=True,default=0)
     address=models.TextField(blank=True)
     strength=models.TextField(null=True,blank=True)
@@ -395,6 +395,12 @@ class offerr(models.Model):
 class wishlist(models.Model):
     wi_id=models.AutoField(primary_key=True)
     checkk=models.BooleanField('checkk', default=False) 
+    cann_id=models.IntegerField(blank=True, null=True)
+    comm_id=models.IntegerField(blank=True, null=True)
+    jobb_id=models.IntegerField(blank=True, null=True)
+
+class payment(models.Model):
+    pay_id=models.AutoField(primary_key=True)
     cann_id=models.IntegerField(blank=True, null=True)
     comm_id=models.IntegerField(blank=True, null=True)
     jobb_id=models.IntegerField(blank=True, null=True)

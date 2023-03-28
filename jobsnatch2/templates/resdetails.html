@@ -1,74 +1,46 @@
 {% extends 'base.html'%}
+
+
 <html>
   
  {% block content %}
-
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@yaireo/tagify@4.3.0/dist/tagify.css">
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<!-- Bootstrap Tags Input CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css">
- <style>
-  /* bootstrap-tagsinput.css file - add in local */
-/*
-.bootstrap-tagsinput {
-  background-color: #ffffff;
-  border: 1px solid #888787;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  display: inline-block;
-  padding: 4px 6px;
-  color: #000000;
-  vertical-align: middle;
+ <script type='text/javascript' src='/JavaScriptSpellCheck/include.js' ></script>
+<style>
+  
+.tags-input-wrapper{
+  background: transparent;
+  padding: 10px;
   border-radius: 4px;
-  max-width: 100%;
-  line-height: 22px;
-  cursor: text;
-  margin-bottom: 2%;
+  max-width: 400px;
+  border: 1px solid #ccc
 }
-.bootstrap-tagsinput input {
+.tags-input-wrapper input{
   border: none;
-  box-shadow: none;
+  background: transparent;
   outline: none;
-  background-color: transparent;
-  padding: 0 6px;
-  margin: 0;
-  width: auto;
-  max-width: inherit;
-}
-.bootstrap-tagsinput.form-control input::-moz-placeholder {
-  color: #777;
-  opacity: 1;
-}
-.bootstrap-tagsinput.form-control input:-ms-input-placeholder {
-  color: #777;
-}
-.bootstrap-tagsinput.form-control input::-webkit-input-placeholder {
-  color: #777;
-}
-.bootstrap-tagsinput input:focus {
-  border: none;
-  box-shadow: none;
-}
-.bootstrap-tagsinput .tag {
-  margin-right: 2px;
-  color: rgb(37, 35, 35);
-}
-.bootstrap-tagsinput .tag [data-role="remove"] {
+  width: 140px;
   margin-left: 8px;
+}
+.tags-input-wrapper .tag{
+  display: inline-block;
+  background-color: #0ab65d;
+  color: white;
+  border-radius: 40px;
+  padding: 0px 3px 0px 7px;
+  margin-right: 5px;
+  margin-bottom:5px;
+  box-shadow: 0 5px 15px -2px rgba(61, 61, 61, 0.7)
+}
+.tags-input-wrapper .tag a {
+  margin: 0 7px 3px;
+  display: inline-block;
   cursor: pointer;
 }
-.bootstrap-tagsinput .tag [data-role="remove"]:after {
-  content: "x";
-  padding: 0px 2px;
-}
-.bootstrap-tagsinput .tag [data-role="remove"]:hover {
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-.bootstrap-tagsinput .tag [data-role="remove"]:hover:active {
-  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-} 
-
-*/
-
- </style>
+</style>
+ 
+ 
   <body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));">
     <br><br>
     <div style="width: 80%;margin-left:18%;">
@@ -76,7 +48,7 @@
       <div class="card">
           <div class="row">
               <div class="col-lg-12">
-                  <form action="{% url 'resdetails' %}"  method="post" enctype="multipart/form-data" class="shadow p-5"> 
+                  <form action="{% url 'resubmit' %}"  method="post" enctype="multipart/form-data" class="shadow p-5"> 
                       {% csrf_token %}
                       <h5 class="mt-3 mb-3">Resume Builder</h5>
                       <div class="form-group">
@@ -86,17 +58,20 @@
                      
                       <div class="form-group">
                         <label>Position</label>
-                        <input type="text" name="pos" class="form-control mt-2 mb-2" placeholder="Enter your name">
+                        <script type='text/javascript'>$Spelling.SpellCheckAsYouType('pos')</script>
+                        <input type="text" name="pos" class="form-control mt-2 mb-2" placeholder="Enter your name" oninput="$Spelling.SpellCheckInWindow('pos')">
                      </div>
 
                       <div class="form-group">
                           <label>Career Objective</label>
-                          <textarea  class="form-control mt-2 mb-2 " name="co" placeholder="Enter your career objective"></textarea>
+                          <script type='text/javascript'>$Spelling.SpellCheckAsYouType('co')</script>
+                          <textarea  class="form-control mt-2 mb-2 " name="co" placeholder="Enter your career objective" oninput="$Spelling.SpellCheckInWindow('co')"></textarea>
                       </div>
                       
                       <div class="form-group">
                           <label>Address</label>
-                          <input type="text" name="address" class="form-control mt-2 mb-2" placeholder="Enter your address">
+                          <textarea  class="form-control mt-2 mb-2 " name="address" placeholder="Enter your address"></textarea>
+                          
                       </div>
                      
                       <div class="form-group">
@@ -108,25 +83,36 @@
                           <label>Email</label>
                           <input type="email" name="email" class="form-control mt-2 mb-2" placeholder="Enter your email">
                       </div>
-                      <div class="form-group">
+
+                      <div id="tenth-container">
+                        <div class="form-group2">
+                          <div class="row">
+                            <div class="col-md-4">
                           <label>Skills</label>
-                          <input type="text" name="skills" class="form-control mt-2 mb-2" data-role="tagsinput" placeholder="Enter your skills" >
+                          <script type='text/javascript'>$Spelling.SpellCheckAsYouType('skills')</script>
+                          <input type="text" id="tag-input1" name="skills" oninput="$Spelling.SpellCheckInWindow('skills')">
                       </div>
-                      <div class="form-group">
+
+                      <div class="col-md-4">
                         <label>Strengths</label>
-                        <input rows="3" name="stre" class="form-control mt-2 mb-2" data-role="tagsinput" placeholder="Enter your Strengths">
+                        <script type='text/javascript'>$Spelling.SpellCheckAsYouType('stre')</script>
+                        <input type="text" id="tag-input2" name="stre" oninput="$Spelling.SpellCheckInWindow('stre')">
                     </div>
-                    <div class="form-group">
+                    <div class="col-md-4">
                       <label>Languages</label>
-                      <input rows="3" name="lang" class="form-control mt-2 mb-2" data-role="tagsinput" placeholder="Enter your Languages">
+                      <script type='text/javascript'>$Spelling.SpellCheckAsYouType('lang')</script>
+                      <input type="text" id="tag-input3" name="lang" oninput="$Spelling.SpellCheckInWindow('lang')">
                   </div>
-                  <div class="form-group">
+                  <div class="col-md-4">
                     <label>Hobbies</label>
-                    <input rows="3" name="hob" class="form-control mt-2 mb-2" data-role="tagsinput" placeholder="Enter your Hobbies">
+                    <script type='text/javascript'>$Spelling.SpellCheckAsYouType('hob')</script>
+                    <input type="text" name="hob" id="tag-input4" oninput="$Spelling.SpellCheckInWindow('hob')">
                 </div>
+                          </div></div></div>
                 <div class="form-group">
                   <label>User URL</label>
-                  <input type="text" name="soli" class="form-control mt-2 mb-2" placeholder="Enter your address">
+                  <script type='text/javascript'>$Spelling.SpellCheckAsYouType('soli')</script>
+                  <input type="text" name="soli" class="form-control mt-2 mb-2" placeholder="Enter your address" oninput="$Spelling.SpellCheckInWindow('soli')">
                 </div>
                 <div class="form-group">
                   <label>Country</label>
@@ -384,27 +370,31 @@
                 </div>
                 <div class="form-group">
                   <label> Gender</label>
-                  <input type="text" name="gen" class="form-control mt-2 mb-2" placeholder="Enter your address">
+                  <select name="gen" id="">
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Other">Other</option>
+                  </select>
+                  <!-- <input type="text" name="gen" class="form-control mt-2 mb-2" placeholder="Enter your address"> -->
                 </div>
                       <div id="education-container">
                           <div class="form-group2">
                             <div class="row">
                               <div class="col-md-4">
                                   <label>College Name</label>
-                                  <input  class="form-control mt-2 mb-2" type="text" placeholder="Enter the college name" name="col">
+                                  <script type='text/javascript'>$Spelling.SpellCheckAsYouType('col')</script>
+                                  <input  class="form-control mt-2 mb-2" type="text" placeholder="Enter the college name" name="col" oninput="$Spelling.SpellCheckInWindow('col')">
                                 </div>
                               <div class="col-md-4">
                                 <label>Course Name</label>
-                                <input  class="form-control mt-2 mb-2" type="text" placeholder="Enter the course name" name="colcourse">
+                                <script type='text/javascript'>$Spelling.SpellCheckAsYouType('colcourse')</script>
+                                <input  class="form-control mt-2 mb-2" type="text" placeholder="Enter the course name" name="colcourse" oninput="$Spelling.SpellCheckInWindow('colcourse')">
                               </div>
                               <div class="col-md-4">
                                   <label>Passing year</label>
-                                  <!-- <input  class="form-control mt-2 mb-2" type="date" placeholder="Enter the year" name="colpy"> -->
-                                  <select name="passingyear" id="year" class="form-control">
-                                      {% for year, year_label in YEAR_CHOICES %}
-                                        <option value="{{ year }}">{{ year_label }}</option>
-                                      {% endfor %}
-                                  </select>
+                                  <!-- /<input  class="form-control mt-2 mb-2" type="date" placeholder="Enter the year" name="colpy"> -->
+                                  <input type="number" placeholder="YYYY" min="1999" max="2023" class="form-control mt-2 mb-2" name="colpy">
+                                  
                               </div>
                               
                              
@@ -418,7 +408,8 @@
                             <div class="row">
                               <div class="col-md-4">
                                   <label>Higher Secondary school name</label>
-                                  <input  class="form-control mt-2 mb-2" type="text" placeholder="Enter the school name" name="plus">
+                                  <script type='text/javascript'>$Spelling.SpellCheckAsYouType('plus')</script>
+                                  <input  class="form-control mt-2 mb-2" type="text" placeholder="Enter the school name" name="plus" oninput="$Spelling.SpellCheckInWindow('plus')">
                                 </div>
                               <div class="col-md-4">
                                 <label>Marks</label>
@@ -427,11 +418,7 @@
                               <div class="col-md-4">
                                   <label>Year of completion</label>
                                   <!-- <input  class="form-control mt-2 mb-2" type="date" placeholder="Enter the year" name="pluspy"> -->
-                                  <select name="yearcompletion" id="twyear" class="form-control">
-                                      {% for year, year_label in YEAR_CHOICES %}
-                                        <option value="{{ year }}">{{ year_label }}</option>
-                                      {% endfor %}
-                                  </select>
+                                  <input type="number" placeholder="YYYY" min="1999" max="2023" class="form-control mt-2 mb-2" name="pluspy">
                               </div>
                               
                              
@@ -447,7 +434,8 @@
                             <div class="row">
                               <div class="col-md-4">
                                   <label>High School Name</label>
-                                  <input  class="form-control mt-2 mb-2" type="text" placeholder="Enter the high school name" name="scho">
+                                  <script type='text/javascript'>$Spelling.SpellCheckAsYouType('scho')</script>
+                                  <input  class="form-control mt-2 mb-2" type="text" placeholder="Enter the high school name" name="scho" oninput="$Spelling.SpellCheckInWindow('scho')">
                                 </div>
                               <div class="col-md-4">
                                 <label>Tenth marks</label>
@@ -456,11 +444,7 @@
                               <div class="col-md-4">
                                   <label>Year of passing</label>
                                   <!-- <input  class="form-control mt-2 mb-2" type="date" placeholder="Enter the year" name="schopy"> -->
-                                  <select name="tenthpassingyear" id="tyear" class="form-control">
-                                      {% for year, year_label in YEAR_CHOICES %}
-                                        <option value="{{ year }}">{{ year_label }}</option>
-                                      {% endfor %}
-                                  </select>
+                                  <input type="number" placeholder="YYYY" min="1999" max="2023" class="form-control mt-2 mb-2" name="schopy">
                               </div>
                               
                              
@@ -473,15 +457,16 @@
                       <div id="project-container">
                           <div class="form-group2">
                             <div class="row">
-                              <div class="col-md-12">
+                              <!-- <div class="col-md-12">
                                   <label>Project Title</label>
-                                  <!-- <textarea class="form-control mt-2 mb-2"name="projectdetails" placeholder="Enter project details"></textarea> -->
-                                  <input  class="form-control mt-2 mb-2" type="text" placeholder="Enter the project title" name="pro">
-                                </div>
+                                  
+                                  
+                                </div> -->
                               <div class="col-md-12">
-                                <label>Project Description</label>
-                                <textarea class="form-control mt-2 mb-2"name="projectdescription" placeholder="Enter project details"></textarea>
-                                <!-- <input  class="form-control mt-2 mb-2" > -->
+                                <label>Project</label>
+                                <script type='text/javascript'>$Spelling.SpellCheckAsYouType('pro')</script>
+                                <textarea class="form-control mt-2 mb-2" name="pro" placeholder="Enter project details" oninput="$Spelling.SpellCheckInWindow('pro')"></textarea>
+                               
                               </div>
                             
                               
@@ -491,15 +476,16 @@
                       <div id="project-container">
                         <div class="form-group2">
                           <div class="row">
-                            <div class="col-md-12">
+                            <!-- <div class="col-md-12">
                                 <label>Internship Title</label>
-                                <!-- <textarea class="form-control mt-2 mb-2"name="projectdetails" placeholder="Enter project details"></textarea> -->
-                                <input  class="form-control mt-2 mb-2" type="text" placeholder="Enter the project title" name="intern">
-                              </div>
+                                
+                                
+                              </div> -->
                             <div class="col-md-12">
-                              <label>Internship Description</label>
-                              <textarea class="form-control mt-2 mb-2"name="projectdescription" placeholder="Enter project details"></textarea>
-                              <!-- <input  class="form-control mt-2 mb-2" > -->
+                              <script type='text/javascript'>$Spelling.SpellCheckAsYouType('intern')</script>
+                              <label>Internship</label>
+                              <textarea class="form-control mt-2 mb-2" name="intern" placeholder="Enter internship details" oninput="$Spelling.SpellCheckInWindow('intern')"></textarea>
+                              
                             </div>
                           
                             
@@ -509,15 +495,16 @@
                     <div id="project-container">
                       <div class="form-group2">
                         <div class="row">
-                          <div class="col-md-12">
+                          <!-- <div class="col-md-12">
                               <label>Achievements</label>
-                              <!-- <textarea class="form-control mt-2 mb-2"name="projectdetails" placeholder="Enter project details"></textarea> -->
-                              <input  class="form-control mt-2 mb-2" type="text" placeholder="Enter the project title" name="achi">
-                            </div>
+                              
+                              
+                            </div> -->
                           <div class="col-md-12">
-                            <label>Description</label>
-                            <textarea class="form-control mt-2 mb-2"name="projectdescription" placeholder="Enter project details"></textarea>
-                            <!-- <input  class="form-control mt-2 mb-2" > -->
+                            <label>Achievements</label>
+                            <script type='text/javascript'>$Spelling.SpellCheckAsYouType('achi')</script>
+                            <textarea class="form-control mt-2 mb-2" name="achi" placeholder="Enter achievement details" oninput="$Spelling.SpellCheckInWindow('achi')"></textarea>
+                            
                           </div>
                         
                           
@@ -528,15 +515,16 @@
                   <div id="project-container">
                     <div class="form-group2">
                       <div class="row">
-                        <div class="col-md-12">
+                        <!-- <div class="col-md-12">
                             <label>Certifications</label>
-                            <!-- <textarea class="form-control mt-2 mb-2"name="projectdetails" placeholder="Enter project details"></textarea> -->
-                            <input  class="form-control mt-2 mb-2" type="text" placeholder="Enter the project title" name="certi">
-                          </div>
+                            
+                           
+                          </div> -->
                         <div class="col-md-12">
-                          <label>Description</label>
-                          <textarea class="form-control mt-2 mb-2"name="projectdescription" placeholder="Enter project details"></textarea>
-                          <!-- <input  class="form-control mt-2 mb-2" > -->
+                          <label>Certifications</label>
+                          <script type='text/javascript'>$Spelling.SpellCheckAsYouType('certi')</script>
+                          <textarea class="form-control mt-2 mb-2" name="certi" placeholder="Enter certification details" oninput="$Spelling.SpellCheckInWindow('certi')"></textarea>
+                          
                         </div>
                       
                         
@@ -551,41 +539,214 @@
                             <label>Reference</label>
                           </div>
                         <div class="col-md-12">
-                          <label>Reference Details</label>
-                          <textarea class="form-control mt-2 mb-2"name="projectdescription" placeholder="Enter project details"></textarea>
-                          <!-- <input  class="form-control mt-2 mb-2" > -->
+                          <script type='text/javascript'>$Spelling.SpellCheckAsYouType('ref')</script>
+                          <textarea class="form-control mt-2 mb-2" name="ref" placeholder="Enter reference details" oninput="$Spelling.SpellCheckInWindow('ref')"></textarea>
+                         
                         </div>
                       
                         
                       </div>
                     </div>
                 </div>
-                     
-                          <!-- {% for message in messages %}  
-                          <div id="msg" class="alert alert-info alert-dismissable p-1">
-                          <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true">&times;</button>
-                          <small style="color: green;"> {{message}} </small>
-                          </div>
-                          {% endfor %} -->
-  
-                          <!-- displays forms -->
-                          <!-- {% for fm in form %}
-                          <div class="form-group mb-3">
-                          {{fm.label_tag}} {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small>
-                          </div>
-                          {% endfor %}
-                          <input type="submit" class="btn btn-success col-md-12" value="Create"> 
-                          -->
-                          <button type="submit" class="btn btn-primary col-md-12">CREATE</button>
+                          <button type="submit" class="btn btn-primary col-md-12">CREATE RESUME</button>
                   </form>
               </div>
           </div>
       </div>
+
       
     </body>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+    <script>
+      (function(){
+
+        "use strict"
+    
+        
+        // Plugin Constructor
+        var TagsInput = function(opts){
+            this.options = Object.assign(TagsInput.defaults , opts);
+            this.init();
+        }
+    
+        // Initialize the plugin
+        TagsInput.prototype.init = function(opts){
+            this.options = opts ? Object.assign(this.options, opts) : this.options;
+    
+            if(this.initialized)
+                this.destroy();
+                
+            if(!(this.orignal_input = document.getElementById(this.options.selector)) ){
+                console.error("tags-input couldn't find an element with the specified ID");
+                return this;
+            }
+    
+            this.arr = [];
+            this.wrapper = document.createElement('div');
+            this.input = document.createElement('input');
+            init(this);
+            initEvents(this);
+    
+            this.initialized =  true;
+            return this;
+        }
+    
+        // Add Tags
+        TagsInput.prototype.addTag = function(string){
+    
+            if(this.anyErrors(string))
+                return ;
+    
+            this.arr.push(string);
+            var tagInput = this;
+    
+            var tag = document.createElement('span');
+            tag.className = this.options.tagClass;
+            tag.innerText = string;
+    
+            var closeIcon = document.createElement('a');
+            closeIcon.innerHTML = '&times;';
+            
+            // delete the tag when icon is clicked
+            closeIcon.addEventListener('click' , function(e){
+                e.preventDefault();
+                var tag = this.parentNode;
+    
+                for(var i =0 ;i < tagInput.wrapper.childNodes.length ; i++){
+                    if(tagInput.wrapper.childNodes[i] == tag)
+                        tagInput.deleteTag(tag , i);
+                }
+            })
+    
+    
+            tag.appendChild(closeIcon);
+            this.wrapper.insertBefore(tag , this.input);
+            this.orignal_input.value = this.arr.join(',');
+    
+            return this;
+        }
+    
+        // Delete Tags
+        TagsInput.prototype.deleteTag = function(tag , i){
+            tag.remove();
+            this.arr.splice( i , 1);
+            this.orignal_input.value =  this.arr.join(',');
+            return this;
+        }
+    
+        // Make sure input string have no error with the plugin
+        TagsInput.prototype.anyErrors = function(string){
+            if( this.options.max != null && this.arr.length >= this.options.max ){
+                console.log('max tags limit reached');
+                return true;
+            }
+            
+            if(!this.options.duplicate && this.arr.indexOf(string) != -1 ){
+                console.log('duplicate found " '+string+' " ')
+                return true;
+            }
+    
+            return false;
+        }
+    
+        // Add tags programmatically 
+        TagsInput.prototype.addData = function(array){
+            var plugin = this;
+            
+            array.forEach(function(string){
+                plugin.addTag(string);
+            })
+            return this;
+        }
+    
+        // Get the Input String
+        TagsInput.prototype.getInputString = function(){
+            return this.arr.join(',');
+        }
+    
+    
+        // destroy the plugin
+        TagsInput.prototype.destroy = function(){
+            this.orignal_input.removeAttribute('hidden');
+    
+            delete this.orignal_input;
+            var self = this;
+            
+            Object.keys(this).forEach(function(key){
+                if(self[key] instanceof HTMLElement)
+                    self[key].remove();
+                
+                if(key != 'options')
+                    delete self[key];
+            });
+    
+            this.initialized = false;
+        }
+    
+        // Private function to initialize the tag input plugin
+        function init(tags){
+            tags.wrapper.append(tags.input);
+            tags.wrapper.classList.add(tags.options.wrapperClass);
+            tags.orignal_input.setAttribute('hidden' , 'true');
+            tags.orignal_input.parentNode.insertBefore(tags.wrapper , tags.orignal_input);
+        }
+    
+        // initialize the Events
+        function initEvents(tags){
+            tags.wrapper.addEventListener('click' ,function(){
+                tags.input.focus();           
+            });
+            
+    
+            tags.input.addEventListener('keydown' , function(e){
+                var str = tags.input.value.trim(); 
+    
+                if( !!(~[9 , 13 , 188].indexOf( e.keyCode ))  )
+                {
+                    e.preventDefault();
+                    tags.input.value = "";
+                    if(str != "")
+                        tags.addTag(str);
+                }
+    
+            });
+        }
+    
+    
+        // Set All the Default Values
+        TagsInput.defaults = {
+            selector : '',
+            wrapperClass : 'tags-input-wrapper',
+            tagClass : 'tag',
+            max : null,
+            duplicate: false
+        }
+    
+        window.TagsInput = TagsInput;
+    
+    })();
+    
+     var tagInput1 = new TagsInput({
+                selector: 'tag-input1',
+                duplicate : false,
+                max : 10
+            });
+     var tagInput2 = new TagsInput({
+              selector: 'tag-input2',
+              duplicate : false,
+              max : 10
+          });
+    var tagInput3 = new TagsInput({
+            selector: 'tag-input3',
+            duplicate : false,
+            max : 10
+        });
+    var tagInput4 = new TagsInput({
+          selector: 'tag-input4',
+          duplicate : false,
+          max : 10
+      });
+           // tagInput1.addData(['PHP' , 'JavaScript' , 'CSS'])
+        
+    </script>
  {% endblock %}
 </html>

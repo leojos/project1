@@ -1011,35 +1011,35 @@ def resdetails(request):
     return render(request,'resdetails.html')
 
 def resubmit(request):
-    username= request.POST['username']
-    pos= request.POST['pos']
-    co= request.POST['co']
-    email= request.POST['email']
-    col= request.POST['col']
-    colcourse= request.POST['colcourse']
-    colpy= request.POST['colpy']
-    plus= request.POST['plus']
-    plusmarks= request.POST['plusmarks']
-    pluspy= request.POST['pluspy']
-    scho= request.POST['scho']
-    schomarks= request.POST['schomarks']
-    schopy= request.POST['schopy']
-    pro= request.POST['pro']
-    certi= request.POST['certi']
-    achi= request.POST['achi']
-    intern= request.POST['intern']
-    ref= request.POST['ref']
-    phone= request.POST['phone']
-    address= request.POST['address']
-    stre= request.POST['stre']
-    skills= request.POST['skills']
-    lang= request.POST['lang']
-    hob= request.POST['hob']
-    soli= request.POST['soli']
-    country= request.POST['country']
-    dob= request.POST['dob']
-    gen= request.POST['gen']
-    uid= request.POST['uid']
+    username= request.POST.get('username')
+    pos= request.POST.get('pos')
+    co= request.POST.get('co')
+    email= request.POST.get('email')
+    col= request.POST.get('col')
+    colcourse= request.POST.get('colcourse')
+    colpy= request.POST.get('colpy')
+    plus= request.POST.get('plus')
+    plusmarks= request.POST.get('plusmarks')
+    pluspy= request.POST.get('pluspy')
+    scho= request.POST.get('scho')
+    schomarks= request.POST.get('schomarks')
+    schopy= request.POST.get('schopy')
+    pro= request.POST.get('pro')
+    certi= request.POST.get('certi')
+    achi= request.POST.get('achi')
+    intern= request.POST.get('intern')
+    ref= request.POST.get('ref')
+    phone= request.POST.get('phone')
+    address= request.POST.get('address')
+    stre= request.POST.get('stre')
+    skills= request.POST.get('skills')
+    lang= request.POST.get('lang')
+    hob= request.POST.get('hob')
+    soli= request.POST.get('soli')
+    country= request.POST.get('country')
+    dob= request.POST.get('dob')
+    gen= request.POST.get('gen')
+    uid= request.POST.get('uid')
     userr = resumme(name=username,position=pos,email=email,carobj=co,college=col,plus=plus,ten=scho,projects=pro,certi=certi,achi=achi,interns=intern,refe=ref,phone=phone,address=address,strength=stre,skills=skills,lang=lang,hob=hob,soci=soli,coun=country,dob=dob,gender=gen,user_id=uid,colcourse=colcourse,colpy=colpy,plusmarks=plusmarks,pluspy=pluspy,schomarks=schomarks,schopy=schopy)
     userr.save()
     return redirect('res')
@@ -1305,6 +1305,7 @@ def paymenthandler(request):
  
                     # render success page on successful caputre of payment
                     # return render(request, 'paymentsuccess.html')
+                    
                     return redirect('candidate')
                 except:
  
