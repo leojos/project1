@@ -5,6 +5,7 @@
 {% block content %}
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script type='text/javascript' src='/JavaScriptSpellCheck/include.js' ></script>
 <style>
 * {
   box-sizing: border-box;
@@ -30,7 +31,8 @@ input[type=submit] {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  float: right;
+  width: 60%;
+  font-size: large;
 }
 
 input[type=submit]:hover {
@@ -80,7 +82,36 @@ input[type=submit]:hover {
 
 body {font-family:Arial}
 
-
+.tags-input-wrapper{
+  background: transparent;
+  padding: 10px;
+  border-radius: 4px;
+  max-width: 400px;
+  border: 1px solid #fffbfb
+}
+.tags-input-wrapper input{
+  border: none;
+  background: transparent;
+  outline: none;
+  width: 140px;
+  margin-left: 8px;
+}
+.tags-input-wrapper .tag{
+  display: inline-block;
+  background-color: #f5f8f6;
+  color: rgb(4, 4, 4);
+  border-radius: 40px;
+  padding: 0px 3px 0px 7px;
+  margin-right: 5px;
+  margin-bottom:5px;
+  box-shadow: 0 5px 15px -2px rgba(211, 207, 207, 0.854);
+  border: 1px solid #3f8be2;
+}
+.tags-input-wrapper .tag a {
+  margin: 0 7px 3px;
+  display: inline-block;
+  cursor: pointer;
+}
 </style>
 </head>
 <body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));">
@@ -170,12 +201,7 @@ body {font-family:Arial}
       <div class="col-75">
         <input type="text" id="va" name="vacancies" class="a" style="border-radius:7px;border:none;text-align:center;height:25px;" onkeypress="return /[0-9]/i.test(event.key)"  maxlength="3" minlength="1" required>
       </div>
-      <!-- <div class="col-75">
-        <select id="country" name="country">
-          <option value="australia">Within</option>
-          <option value="canada">Abroad</option>
-        </select>
-      </div>-->
+      
     </div> 
     <div class="row">
       <div class="col-25">
@@ -201,23 +227,11 @@ body {font-family:Arial}
         <label for="quali">Qualification</label>
       </div>
       <div class="col-75">
-        <select name="quali" class="a" style="border-radius:7px;border:none;text-align:center;width:30%;"  multiple required>
-          <option value="10th">10th</option>
-          <option value="12th">12th</option>
-          <option value="BCA">BCA</option>
-          <option value="MCA">MCA</option>
-          <option value="BBA">BBA</option>
-          <option value="MBA">MBA</option>
-          <option value="BSC">BSC</option>
-          <option value="MSC">MSC</option>
-          <option value="BCOM">BCOM</option>
-          <option value="MCOM">MCOM</option>
-          <option value="B-Tech">B-Tech</option>
-          <option value="M-Tech">M-Tech</option>
-          <option value="Diploma">Diploma</option>
-        </select>
+        <script type='text/javascript'>$Spelling.SpellCheckAsYouType('quali')</script>
+        <input type="text" rows="5" name="quali" id="tag-input1" oninput="$Spelling.SpellCheckInWindow('quali')">
       </div>
     </div>
+    <br>
     <div class="row">
       <div class="col-25">
         <label for="tenth">10th percentage required </label>
@@ -268,8 +282,8 @@ body {font-family:Arial}
         <div class="col-75">
           <input type="number" id="lname" value = {{user.id}} name="cid">
         </div> -->
-      <input type="submit" value="Submit" id="try2" onsubmit="myFunction2()"> 
-    </form><br><br>
+      <center><input type="submit" value="Post Job" id="try2" onsubmit="myFunction2()"></center>
+    </form>
    </div>
   {% else %}
     <center><h1 style="margin-top: 20%;">You can post Jobs only after Admin approves you!!!</h1></center>
@@ -310,6 +324,183 @@ function DateCheck()
      }
     return true;
 }
+</script>
+<script>
+  (function(){
+
+    "use strict"
+
+    
+    // Plugin Constructor
+    var TagsInput = function(opts){
+        this.options = Object.assign(TagsInput.defaults , opts);
+        this.init();
+    }
+
+    // Initialize the plugin
+    TagsInput.prototype.init = function(opts){
+        this.options = opts ? Object.assign(this.options, opts) : this.options;
+
+        if(this.initialized)
+            this.destroy();
+            
+        if(!(this.orignal_input = document.getElementById(this.options.selector)) ){
+            console.error("tags-input couldn't find an element with the specified ID");
+            return this;
+        }
+
+        this.arr = [];
+        this.wrapper = document.createElement('div');
+        this.input = document.createElement('input');
+        init(this);
+        initEvents(this);
+
+        this.initialized =  true;
+        return this;
+    }
+
+    // Add Tags
+    TagsInput.prototype.addTag = function(string){
+
+        if(this.anyErrors(string))
+            return ;
+
+        this.arr.push(string);
+        var tagInput = this;
+
+        var tag = document.createElement('span');
+        tag.className = this.options.tagClass;
+        tag.innerText = string;
+
+        var closeIcon = document.createElement('a');
+        closeIcon.innerHTML = '&times;';
+        
+        // delete the tag when icon is clicked
+        closeIcon.addEventListener('click' , function(e){
+            e.preventDefault();
+            var tag = this.parentNode;
+
+            for(var i =0 ;i < tagInput.wrapper.childNodes.length ; i++){
+                if(tagInput.wrapper.childNodes[i] == tag)
+                    tagInput.deleteTag(tag , i);
+            }
+        })
+
+
+        tag.appendChild(closeIcon);
+        this.wrapper.insertBefore(tag , this.input);
+        this.orignal_input.value = this.arr.join(',');
+
+        return this;
+    }
+
+    // Delete Tags
+    TagsInput.prototype.deleteTag = function(tag , i){
+        tag.remove();
+        this.arr.splice( i , 1);
+        this.orignal_input.value =  this.arr.join(',');
+        return this;
+    }
+
+    // Make sure input string have no error with the plugin
+    TagsInput.prototype.anyErrors = function(string){
+        if( this.options.max != null && this.arr.length >= this.options.max ){
+            console.log('max tags limit reached');
+            return true;
+        }
+        
+        if(!this.options.duplicate && this.arr.indexOf(string) != -1 ){
+            console.log('duplicate found " '+string+' " ')
+            return true;
+        }
+
+        return false;
+    }
+
+    // Add tags programmatically 
+    TagsInput.prototype.addData = function(array){
+        var plugin = this;
+        
+        array.forEach(function(string){
+            plugin.addTag(string);
+        })
+        return this;
+    }
+
+    // Get the Input String
+    TagsInput.prototype.getInputString = function(){
+        return this.arr.join(',');
+    }
+
+
+    // destroy the plugin
+    TagsInput.prototype.destroy = function(){
+        this.orignal_input.removeAttribute('hidden');
+
+        delete this.orignal_input;
+        var self = this;
+        
+        Object.keys(this).forEach(function(key){
+            if(self[key] instanceof HTMLElement)
+                self[key].remove();
+            
+            if(key != 'options')
+                delete self[key];
+        });
+
+        this.initialized = false;
+    }
+
+    // Private function to initialize the tag input plugin
+    function init(tags){
+        tags.wrapper.append(tags.input);
+        tags.wrapper.classList.add(tags.options.wrapperClass);
+        tags.orignal_input.setAttribute('hidden' , 'true');
+        tags.orignal_input.parentNode.insertBefore(tags.wrapper , tags.orignal_input);
+    }
+
+    // initialize the Events
+    function initEvents(tags){
+        tags.wrapper.addEventListener('click' ,function(){
+            tags.input.focus();           
+        });
+        
+
+        tags.input.addEventListener('keydown' , function(e){
+            var str = tags.input.value.trim(); 
+
+            if( !!(~[9 , 13 , 188].indexOf( e.keyCode ))  )
+            {
+                e.preventDefault();
+                tags.input.value = "";
+                if(str != "")
+                    tags.addTag(str);
+            }
+
+        });
+    }
+
+
+    // Set All the Default Values
+    TagsInput.defaults = {
+        selector : '',
+        wrapperClass : 'tags-input-wrapper',
+        tagClass : 'tag',
+        max : null,
+        duplicate: false
+    }
+
+    window.TagsInput = TagsInput;
+
+})();
+
+ var tagInput1 = new TagsInput({
+            selector: 'tag-input1',
+            duplicate : false,
+            max : 10
+        });
+        tagInput1.addData(['10th' , '+2' , 'BCA','MCA','BBA','MBA','BSC','MSC','B-COM','M-COM','B-TECH','M-TECH','DIPLOMA'])
+    
 </script>
 </body>
 {% endblock %}

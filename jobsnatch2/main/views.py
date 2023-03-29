@@ -18,6 +18,7 @@ from .models import resumme
 from .models import scheduling
 from .models import offerr
 from .models import wishlist
+from .models import payment
 from django.contrib.auth.decorators import login_required
 from django import forms
 from django.db.models.functions import Now
@@ -1011,6 +1012,7 @@ def resdetails(request):
     return render(request,'resdetails.html')
 
 def resubmit(request):
+ if 'can' in request.session:
     username= request.POST.get('username')
     pos= request.POST.get('pos')
     co= request.POST.get('co')
@@ -1278,7 +1280,7 @@ def homepage(request):
 # and it won't have the csrf token.
 @csrf_exempt
 def paymenthandler(request):
- 
+ if 'can' in request.session:
     # only accept POST request.
     if request.method == "POST":
         try:
@@ -1305,7 +1307,8 @@ def paymenthandler(request):
  
                     # render success page on successful caputre of payment
                     # return render(request, 'paymentsuccess.html')
-                    
+                    member = payment(cann_id=request.user.id,paid=True,payment_id=payment_id,razorpay_order_id=razorpay_order_id,signature=signature)
+                    member.save()
                     return redirect('candidate')
                 except:
  

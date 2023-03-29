@@ -402,5 +402,8 @@ class wishlist(models.Model):
 class payment(models.Model):
     pay_id=models.AutoField(primary_key=True)
     cann_id=models.IntegerField(blank=True, null=True)
-    comm_id=models.IntegerField(blank=True, null=True)
-    jobb_id=models.IntegerField(blank=True, null=True)
+    paid=models.BooleanField('paid', default=False) 
+    payment_id=models.CharField(max_length=100,null=True)
+    razorpay_order_id=models.CharField(max_length=100,null=True)
+    signature=models.CharField(max_length=100,null=True)
+    
