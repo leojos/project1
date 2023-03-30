@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User,job,appliedjob,feedback,categ,blog,internship,classdetails,scheduling,offerr,resumme,wishlist,payment
+from .models import User,job,appliedjob,feedback,categ,blog,internship,classdetails,scheduling,offerr,resumme,wishlist,payment,training
 
 # Register your models here.
 admin.site.register(User)
@@ -15,3 +15,4 @@ admin.site.register(offerr)
 admin.site.register(resumme)
 admin.site.register(wishlist)
 admin.site.register(payment)
+admin.site.register(training)

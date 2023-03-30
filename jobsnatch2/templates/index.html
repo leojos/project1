@@ -224,7 +224,8 @@ div[role="progressbar"]::before {
       <a href="{% url 'resume' %}">Resume</a>
       <a href="{% url 'feedbacks' %}">Feedbacks</a>
       <a href="#cati">Internships</a>
-      <a href="{% url 'homepage' %}">Payment</a>
+      <a href="{% url 'get_news' %}">Payment</a>
+      <a href="{% url 'get_news' %}">Latest News</a>
       
       
       
@@ -319,6 +320,36 @@ div[role="progressbar"]::before {
   </div>
   </div>
 
+<div id="container3" class="row" style="background-color: rgba(255, 255, 255, 0.050);width:105%;margin-bottom: 0%;">
+  <div class="col-xs-2 col-sm-2 col-m-4 col-lg-2 col-xl-2 hiw">
+     <h2 style="text-align:center;">Chat Anything with us</h2>
+  </div>
+ 
+  <div style="margin-left: 15%;margin-top: 2%;margin-bottom: 2%;">
+      
+    <form method="post" action="{% url 'generate_completion' %}">
+      {% csrf_token %}
+      <label for="prompt">Enter Your Query's:</label>
+      <br><input type="text" id="prompt" name="prompt" placeholder=" Advanced Search"
+      style="
+     margin: 8px 0;
+     border:i px solid white;
+     box-sizing: border-box;
+     -webkit-transition: 0.5s;
+     transition: 0.5s;
+     width: 900px;
+     color: white;
+     font-size: large;
+     background-color: transparent;">
+      <br>
+      <input type="submit"  style="background-color:rgba(0, 0, 0, 0.644) ;color: white;border:none;width: 900px;">
+  </form>
+  {% if completion_text %}
+                <h2>Generated completion :</h2>
+                <p>{{ completion_text }}</p>
+  {% endif %}
+  </div>
+  </div>
 
 
 <div id="container3" class="row" style="background-color: rgba(255, 255, 255, 0.050);width:105%;">

@@ -108,6 +108,9 @@ urlpatterns = [
     path('paymenthandler/', views.paymenthandler, name='paymenthandler'),
     path('homepage', views.homepage, name='homepage'),
     path('homepage', views.homepage, name='homepage'),
+    path('generate_completion', views.generate_completion, name='generate_completion'),
+    path('trail6', views.trail6, name='trail6'),
+    path('news', views.get_news, name='get_news'),
     # path('pdf_view', views.pdf_view, name='pdf_view'),
 
     

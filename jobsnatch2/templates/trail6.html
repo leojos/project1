@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="cart_content col-lg-10">
+            <div class="cart-top-border">
+                
+                <form method="post" action="{% url 'generate_completion' %}">
+                    {% csrf_token %}
+                    <label for="prompt">Enter Your Query's:</label>
+                    <br><input type="text" id="prompt" name="prompt" placeholder=" Advanced Search"
+                    style="border: 3px solid #000000;
+                   margin: 8px 0;
+                   box-sizing: border-box;
+                   border: 3px solid #000000;
+                   -webkit-transition: 0.5s;
+                   transition: 0.5s;
+                   outline: none;
+                   width: 900px;">
+                    <br>
+                    <input type="submit" class="btn btn-danger btn-block">
+                </form>
+                {% if completion_text %}
+                <h2>Generated completion :</h2>
+                <p>{{ completion_text }}</p>
+                {% endif %}
+                
+               
+                
+            </div>
+        </div>
+    </div>	
+</div>	
+</section>

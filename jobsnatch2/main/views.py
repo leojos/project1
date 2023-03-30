@@ -47,6 +47,9 @@ from django.http import HttpResponseBadRequest
 
 from django.http import JsonResponse
 
+import openai
+import requests
+
 # from django.template.loader import get_template
 # from xhtml2pdf import pisa
 # from io import BytesIO
@@ -1325,3 +1328,35 @@ def paymenthandler(request):
     else:
        # if other than POST request is made.
         return HttpResponseBadRequest()
+
+openai.api_key = "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" # Replace with your actual API key
+model_engine = "text-davinci-003"
+def generate_completion(request):
+    
+        prompt = request.POST.get('prompt', '')
+        response = openai.Completion.create(
+            engine=model_engine,
+            prompt=prompt,
+            max_tokens=1024,
+            n=1,
+            stop=None,
+            temperature=0.5
+        )
+        completion_text = response.choices[0].text
+        context = {
+            'completion_text': completion_text
+        }
+        return render(request, 'index.html', context)
+   
+
+def trail6(request):
+    return render(request, 'trail6.html')
+
+def get_news(request):
+    url = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=e92090481bc24996a2a89b1f90299cdf'
+    response = requests.get(url)
+    articles = response.json()['articles']
+    return render(request, 'news.html', {
+                    "page": "Newsplatform",
+                    "articles": articles
+                })

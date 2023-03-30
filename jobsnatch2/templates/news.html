@@ -1,0 +1,35 @@
+<html>
+    <style>
+        h4,p{
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: justify;
+        }
+    </style>
+    <body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));">
+        <script>
+        // Define a function to check if a job post is fake
+          function isFakeJob(title, description) {
+    // Define a list of keywords commonly used in fake job posts
+    const fakeJobKeywords = ['earn money fast', 'work from home', 'no experience necessary', 'make money online', 'get rich quick', 'pyramid scheme', 'multi-level marketing', 'MLM', 'commission only', 'pay to play', 'investment required', 'no salary', 'unlimited income potential', 'financial freedom', 'part-time/full-time', 'flexible schedule', 'easy money', 'no boss', 'no office', 'no commute'];
+  
+    // Check if the job title or description contains any of the fake job keywords
+    for (let i = 0; i < fakeJobKeywords.length; i++) {
+      if (title.toLowerCase().includes(fakeJobKeywords[i]) || description.toLowerCase().includes(fakeJobKeywords[i])) {
+        return true; // The job post is fake
+      }
+    }
+  
+    // The job post is not fake
+    return false;
+  }
+  
+  // Example usage:
+  const title = 'Earn money fast with our amazing opportunity!';
+  const description = 'Join our MLM scheme and make unlimited income with no experience necessary!';
+  const isFake = isFakeJob(title, description);
+  console.log(isFake); // true
+  
+        </script>
+        <button onclick="isFakeJob"> click here</button>
+    </body>
+</html>
