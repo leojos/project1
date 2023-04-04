@@ -1,130 +1,384 @@
 
 {% load static %}
 <html>
-   
     <style>
-        .box-centerside {
-            margin-left: 2%;
-            text-align: justify;
-            margin-right:2%;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
           }
-          .boxx {
-            margin-left: 2%;
-            width:fit-content;
-            margin-right:2%;
-          }
-          .boxy {
-            height:fit-content;
-            width: fit-content;
-            margin-left:15px;
+          html {
+            height: 100%;  
           }
           
+          body {
+            min-height: 100%;  
+            background: #eee;
+            font-family: 'Lato', sans-serif;
+            font-weight: 400;
+            color: #222;
+            font-size: 14px;
+            line-height: 26px;
+            padding-bottom: 50px;
+          }
+          
+          .containerres {
+            max-width: 700px;   
+            background: #fff;
+            margin: 0px auto 0px; 
+            box-shadow: 1px 1px 2px #DAD7D7;
+            border-radius: 3px;  
+            padding: 40px;
+            margin-top: 50px;
+          }
+          
+          .header 
+          {
+            margin-bottom: 30px;
+          }
+          
+            
+            .full-name {
+              font-size: 40px;
+              text-transform: uppercase;
+              margin-bottom: 5px;
+            }
+            
+            .first-name {
+              font-weight: 700;
+            }
+            
+            .last-name {
+              font-weight: 300;
+            }
+            
+            .contact-info {
+              margin-bottom: 20px;
+            }
+            
+            .email ,
+            .phone {
+              color: #999;
+              font-weight: 300;
+            } 
+            
+            .separator {
+              height: 10px;
+              display: inline-block;
+              border-left: 2px solid #999;
+              margin: 0px 10px;
+            }
+            
+            .position {
+              font-weight: bold;
+              display: inline-block;
+              margin-right: 10px;
+              text-decoration: underline;
+            }
+          
+          
+          .details {
+            line-height: 20px;
+          }
+            
+            .sectionres {
+              margin-bottom: 40px;  
+            }
+            
+            .section:last-of-type {
+              margin-bottom: 0px;  
+            }
+            
+            .section__title {
+              letter-spacing: 2px;
+              color: #54AFE4;
+              font-weight: bold;
+              margin-bottom: 10px;
+              text-transform: uppercase;
+            }
+            
+            .section__list-item {
+              margin-bottom: 40px;
+            }
+            
+            .section__list-item:last-of-type {
+              margin-bottom: 0;
+            }
+            
+            .left ,
+            .right {
+              vertical-align: top;
+              display: inline-block;
+            }
+            
+            .left {
+              width: 60%;    
+            }
+            
+            .right {
+              tex-align: right;
+              width: 39%;    
+            }
+            
+            .name {
+              font-weight: bold;
+            }
+            
+            a {
+              text-decoration: none;
+              color: #000;
+              font-style: italic;
+            }
+            
+            a:hover {
+              text-decoration: underline;
+              color: #000;
+            }
+            
+            .skills {
+              
+            }
+              
+            .skills__item {
+              margin-bottom: 10px;  
+            }
+            
+            /* .skills__item .right {
+              
+              
+              
+              
+            } */
+            input {
+                display: none;
+              }
+              
+            label {
+                display: inline-block;  
+                width: 20px;
+                height: 20px;
+                background: #C3DEF3;
+                border-radius: 20px;
+                margin-right: 3px;
+              }
+            input:checked + label {
+                background: #79A9CE;
+              }
+          
     </style>
-    <body style="padding:2%;background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));">
-      <!-- <button id="ab" style="background-color:transparent;border:none;float:right;" onclick="window.print()">Print this page</button> -->
-
-     {% for i in data1 %}
-       
-          <div id="ab" style="margin-left: 20%;">
-               <div style="height:fit-content;width:30%;background-color:rgba(96, 179, 199, 0.746);float:left;border:1px solid rgba(0, 0, 0, 0.515);">
-                  <div style="height:160px;width:160px; float:left;margin-left:15%;margin-top:8%;">
-                     <img src="{% static 'images/blog1.jpg'%}" width="160px" height="160px" style="border-radius:50%;">
-                  </div>
-                  
-                  <div class="boxy" style="float: left;">
-                     <h4 style="font-weight: bold;text-align:left;">CONTACT</h4>
-                     <p style="text-align:left;">Address : {{i.address}}</p>
-                     <p style="text-align:left;">Phone : {{i.phone}}</p>
-                     <p style="text-align:left;">Email : {{i.email}}</p>
-                     <p style="text-align:left;">Link : {{i.soci}}</p>
-                  </div>
-                  <div class="boxy" style="float: left;">
-                     <h4 style="font-weight: bold;text-align:left;">SKILL</h4>
-                     <p style="text-align:left;">{{i.skills}}</p>
-                  </div>
-                  <div class="boxy" style="float: left;">
-                     <h4 style="font-weight: bold;text-align:left;">STRENGTH</h4>
-                     <p style="text-align:left;">{{i.strength}}</p>
-                  </div>
-                  <div class="boxy">
-                     <h4 style="font-weight: bold;text-align:left;">PERSONAL DETAILS</h4>
-                     <p style="text-align:left;">Gender : {{i.gender}}</p>
-                     <p style="text-align:left;">DOB : {{i.dob}}</p>
-                     <p style="text-align:left;">Country : {{i.coun}}</p>
-                     <p style="text-align:left;">Hobbies : {{i.hob}}</p>
-                  </div>
-                  <div class="boxy">
-                     <h4 style="text-align:left;">LANGUAGE</h4>
-                     <p style="text-align:left;">{{i.lang}}</p>
-                  </div>
-               </div>
-               <div style="float:left;height:fit-content;width:50%;text-align:left; background-color: rgb(248, 247, 247);border:1px solid rgba(0, 0, 0, 0.515);">
-                  <div class="box-centerside">
-                     <h2 style="font-weight: bold;text-align:left;">{{i.name}}</h2>
-                     <h4 style="font-weight: bold;text-align:left;margin-bottom:5%;">{{i.position}}</h4>
-                  </div>
-                  <div class="box-centerside">
-                     <h3 style="font-weight: bold;text-align:left;">CAREER OBJECTIVE</h3>
-                     <p >{{i.carobj}}</p>
-                  </div>
-                  <div class="box-centerside">
-                     <h3 style="font-weight: bold;text-align:left;">EDUCATION</h3>
-                     <p style="text-align:left;">{{i.college}}</p>
-                     <p style="text-align:left;">{{i.plus}}</p>
-                     <p style="text-align:left;">{{i.ten}}</p>
-                  </div>
-                  <div class="box-centerside">
-                     <h3 style="font-weight: bold;text-align:left;">PROJECTS</h3>
-                     <p style="text-align:left;">{{i.projects}}</p>
-                  </div>
-                  <div class="box-centerside">
-                     <h3 style="font-weight: bold;text-align:left;">CERTIFICATIONS</h3>
-                     <p style="text-align:left;">{{i.certi}}</p>
-                  </div>
-                  <div class="box-centerside">
-                     <h3 style="font-weight: bold;text-align:left;">ACHIEVEMENTS</h3>
-                     <p style="text-align:left;">{{i.achi}}</p>
-                  </div>
-                  <div class="box-centerside">
-                     <h3 style="font-weight: bold;text-align:left;">INTERNSHIPS</h3>
-                     <p style="text-align:left;">{{i.interns}}</p>
-                  </div>
-                  <div class="boxx" style="height: 165px;">
-                     <h3 style="font-weight: bold;text-align:left;">REFERENCES</h3>
-                     <div style="text-align:start;width:70%">{{i.refe}}</div>
-                  </div>
-                  
-               </div>
-               
-            </div>
-           
-         
-     
-    {% endfor %}
+<body>
+{% for i in data1 %}
     
-    <button id="download" style="background-color: rgba(10, 63, 87, 0.623);border-radius:2px;padding:1%;border:none;color:white;margin-left:2%;"><b>Download Resume</b></button>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
-  window.onload = function () {
-      document.getElementById("download")
-          .addEventListener("click", () => {
-              const invoice = this.document.getElementById("ab");
-              console.log(invoice);
-              console.log(window);
-              var opt = {
-                  margin: 1,
-                  filename: 'Resume.pdf',
-                  image: { type: 'jpeg', quality: 0.99 },
-                  html2canvas: { scale: 2 },
-                  jsPDF: { unit: 'in', format: 'a3', orientation: 'p' }
-              };
-              html2pdf().from(invoice).set(opt).save();
-          })
-  }
-  </script>
+    <div class="container" id="ab">
+       
+       
+        <!-- Resume  Templates-->
+        <div class="d-grid gap-2 d-md-block justify-content-md-end">
+        </div>
+        
+       
+                        <div class="containerres">
+                                <div class="header">
+                                    <div class="full-name">
+                                        <span class="first-name">{{i.name}}</span> 
+                                    </div><br>
+                                    <div class="contact-info">
+                                        <span class="email">Email: </span>
+                                        <span class="email-val"> {{i.email}}</span>
+                                        <span class="separator"></span>
+                                        <span class="phone">Phone: </span>
+                                        <span class="phone-val">{{i.phone}}</span>
+                                        <span class="separator"></span>
+                                        <span class="phone">Site: </span>
+                                        <span class="phone-val">{{i.soci}}</span>
+                                        <span class="separator"></span>
+                                        <span class="phone">Country: </span>
+                                        <span class="phone-val">{{i.coun}}</span><br>
+                                        <span class="phone">Address: </span>
+                                        <span class="phone-val">{{i.address}}</span><br>
+                                        <span class="phone">Date of Birth: </span>
+                                        <span class="phone-val">{{i.dob}}</span><br>
+                                        <span class="phone">Gender: </span>
+                                        <span class="phone-val">{{i.gender}}</span>
+                                    </div>
+                                
+                                    <div >
+                                        <div class="section__title">Careeobjective</div>
+                                        <span class="desc">
+                                          {{i.carobj}}
+                                        </span>
+                                    </div>
+                                </div>
+                            <div class="details">
+                                
+                                <div class="sectionres">
+                                    <div class="section__title">Education</div>
+                                    <div class="section__list">
+                                        <div class="section__list-item">
+                                            <div class="left">
+                                                <div class="name">College : {{i.college}}</div>
+                                                <!-- <div class="addr">San Fr, CA</div> -->
+                                                <div class="duration">Passing Year : {{i.colpy}}</div>
+                                            </div>
+                                            <div class="left">
+                                                <div class="name">Course : {{i.colcourse}}</div>
+                                                <!-- <div class="desc">did This and that</div> -->
+                                            </div>
+                                        </div>
+                                        <div class="section__list-item">
+                                            <div class="left">
+                                                <div class="name">Plus Two</div>
+                                             
+                                            </div>
+                                            <div class="left">
+                                                <div class="name">School Name : {{i.plus}}</div>
+                                                <div class="addr">Marks : {{i.plusmarks}} % marks</div>
+                                                <div class="duration">Passing Year : {{i.pluspy}}</div>
+                                            </div>
+                                            
+                                        </div>
 
-   </body>
+                                        <div class="section__list-item">
+                                            <div class="left">
+                                                <div class="name">Tenth</div>
+                                          
+                                            </div>
+                                            <div class="left">
+                                                <div class="name">School Name : {{i.ten}}</div>
+                                                <div class="addr">Marks : {{i.schomarks}} % marks</div>
+                                                <div class="duration">Passing Year : {{i.schopy}}</div>
+                                            </div>
+                                            
+                                        </div>
+                            
+                                    </div>
+                                    
+                                </div>
+                                <div class="sectionres">
+                                    <div class="section__title">Projects</div> 
+                                    <div class="section__list mb-2">
+                                    <div class="section__list-item ">
+                                        <!-- <div class="name mb-2">{{allresumes.projecttitle}}</div> -->
+                                        <div class="text mb-2">{{i.projects}}</div>
+                                    </div>
+                                </div>
+                                <div class="sectionres">
+                                    <div class="section__title">Skills</div>
+                                        <div class="skills">
+                                            <div class="skills__item">
+                                                
+                                                    <div class="left">
+                                                        <div class="name">{{i.skills}}</div>
+                                                    </div>
+                                            </div>
+                                        
+                                        </div>
+                                        
+                                </div>  
+                                <div class="sectionres">
+                                    <div class="section__title">Certifications</div>
+                                        <div class="skills">
+                                            <div class="skills__item">
+                                                
+                                                    <div class="left">
+                                                        <div class="name">{{i.certi}}</div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="sectionres">
+                                    <div class="section__title">Achievments</div>
+                                        <div class="skills">
+                                            <div class="skills__item">
+                                                
+                                                    <div class="left">
+                                                        <div class="name">{{i.achi}}</div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="sectionres">
+                                    <div class="section__title">Internships</div>
+                                        <div class="skills">
+                                            <div class="skills__item">
+                                                
+                                                    <div class="left">
+                                                        <div class="name">{{i.interns}}</div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="sectionres">
+                                    <div class="section__title">Strengths</div>
+                                        <div class="skills">
+                                            <div class="skills__item">
+                                                
+                                                    <div class="left">
+                                                        <div class="name">{{i.strength}}</div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="sectionres">
+                                    <div class="section__title">Language</div>
+                                        <div class="skills">
+                                            <div class="skills__item">
+                                                
+                                                    <div class="left">
+                                                        <div class="name">{{i.lang}}</div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="sectionres">
+                                    <div class="section__title">Hobbies</div>
+                                        <div class="skills">
+                                            <div class="skills__item">
+                                                
+                                                    <div class="left">
+                                                        <div class="name">{{i.hob}}</div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="sectionres">
+                                    <div class="section__title">References</div>
+                                        <div class="skills">
+                                            <div class="skills__item">
+                                                
+                                                    <div class="left">
+                                                        <div class="name">{{i.refe}}</div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                
+                                
+                        </div>
+                        </div>
+    </div>
+</div>
+{% endfor %}
+<button id="download" style="background-color: rgba(10, 63, 87, 0.623);border-radius:2px;padding:1%;border:none;color:white;margin-left:2%;"><b>Download Resume</b></button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    window.onload = function () {
+        document.getElementById("download")
+            .addEventListener("click", () => {
+                const invoice = this.document.getElementById("ab");
+                console.log(invoice);
+                console.log(window);
+                var opt = {
+                    margin: 1,
+                    filename: 'Resume.pdf',
+                    image: { type: 'jpeg', quality: 0.99 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'in', format: 'a3', orientation: 'p' }
+                };
+                html2pdf().from(invoice).set(opt).save();
+            })
+    }
+    </script>
+</body>
 
 </html>
-
-

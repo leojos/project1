@@ -1329,7 +1329,7 @@ def paymenthandler(request):
        # if other than POST request is made.
         return HttpResponseBadRequest()
 
-openai.api_key = "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" # Replace with your actual API key
+openai.api_key = "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" # Replace with your actual API key
 model_engine = "text-davinci-003"
 def generate_completion(request):
     

@@ -21,7 +21,6 @@ class LoginForm(forms.Form):
     captcha = CaptchaField(
         
     )
-
 class SignUpForm(UserCreationForm):
     username = forms.CharField(
         widget=forms.TextInput(
