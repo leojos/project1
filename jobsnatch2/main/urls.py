@@ -78,6 +78,7 @@ urlpatterns = [
     path('map', views.map, name='map'),
     path('setdate', views.setdate, name='setdate'),
     path('res', views.res, name='res'),
+    path('resno', views.resno, name='resno'),
     path('resdetails', views.resdetails, name='resdetails'),
     path('resubmit', views.resubmit, name='resubmit'),
     path('sche', views.sche, name='sche'),

@@ -17,7 +17,7 @@
   }
   
   </style>
-<body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));">
+<body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));overflow-x: hidden;">
   <br>
   
   <div style="margin-left:86%;">
@@ -25,7 +25,7 @@
     <button style="background-color: rgb(226, 43, 43); width:fit-content;border-radius:50%;border:none;margin-left:-4.5%;color:white;">{{data9}}</button>
     <!-- <p style="margin-left: 12%;margin-top:-8%;">Wishlist</p> -->
   </div>
-  <div style="height: fit-content;background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));background-repeat:no-repeat">
+  <div style="height: fit-content;background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));background-repeat:no-repeat;width:100%;margin-top:1%;">
   <br> 
 <h1 style="color: black; text-align:center;margin-left:10%;">Hi {{user.username}}, Jobs as per your preference</h1><br><br>
 
@@ -89,6 +89,7 @@
  {% for i in data3 %}
   {% if user.cat == i.cat %}
     <br>
+    
     <div style="width:50%;background-color:rgba(234, 234, 234, 0.58);border-radius:10px;margin-left: 30%;padding:1%;height:210px;">
       <form method="post" action="comppage">
         {% csrf_token %}

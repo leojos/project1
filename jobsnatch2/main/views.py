@@ -1008,8 +1008,13 @@ def my_vi(request):
 #             return response
 #         return HttpResponse("Page Not Found")
 def res(request):
-    data1=resumme.objects.filter(user_id = request.user.id)
+    iid=request.POST['iid']
+    data1=resumme.objects.filter(res_id = iid)
     return render(request,'res.html',{'data1':data1})
+
+def resno(request):
+    data1=resumme.objects.filter(user_id = request.user.id)
+    return render(request,'resno.html',{'data1':data1})
 
 def resdetails(request):
     return render(request,'resdetails.html')
