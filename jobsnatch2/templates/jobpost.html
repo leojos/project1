@@ -114,8 +114,8 @@ body {font-family:Arial}
 }
 </style>
 </head>
-<body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));">
-    
+<body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));overflow-x: hidden;">
+  <div style="width: 100%;">
   {% if user.approved is True %}
     <!-- <h1 style="text-align:center;font-family: 'Franklin Gothic Medium', Arial Narrow, 'Arial', sans-serif;font-weight: bolder; margin-top: 5%;"> Post Jobs </h1> -->
     
@@ -285,10 +285,11 @@ body {font-family:Arial}
       <center><input type="submit" value="Post Job" id="try2" onsubmit="myFunction2()"></center>
     </form>
    </div>
+  
   {% else %}
     <center><h1 style="margin-top: 20%;">You can post Jobs only after Admin approves you!!!</h1></center>
   {% endif %}
-  
+  </div>
 <!-- </div> -->
 <script>
   function TDate() {

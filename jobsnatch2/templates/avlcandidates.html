@@ -7,63 +7,24 @@
         table {
           font-family: arial, sans-serif;
           border-collapse:separate;
-          width: 100%;
+          width:fit-content;
         }
         
         td, th {
-          border: 1px solid #272727;
+          
           text-align: left;
-          padding: 8px;
+          padding: 2px;
         }
         
-        tr:nth-child(even) {
-          background-color: #ffffff;
-        }
+       
       </style>
-    <body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));">
+    <body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));overflow-x: hidden;">
 <br><br><br><br>
-       <div style="background-color: rgba(255, 255, 255, 0.501);padding:2%;width:50%;margin-left: 33%;margin-top:2%;border-radius:5px;" >
-         <div class="w3-third" >
-          <h2 style="color: black; text-align:center">Available Candidates :</h2>
-          <table>
-            
-            <tr>
-              <th style="text-align: center;">CANDIDATE</th>
-              <th style="text-align: center;">ABOUT</th>
-              <th style="text-align: center;">EMAIL</th>
-              <th style="text-align: center;">More</th>
-            </tr>
-            {% for x in data %}
-              {% if user.cat == x.cat %}
-                 <tr>
-                  <form method="POST" action="canpage">
-                     {% csrf_token %}
-                     {% if user.username in x.username %}
-                        <td style="text-align: center;">{{ x.name}}</td>
-                        <td style="text-align: center;">{{ x.abt}}</td>
-                        <td style="text-align: center;"><a href="#">{{ x.email}}</a></td>
-                        <td style="text-align: center;" hidden><input type="text" name="jobid" value="{{ x.jobs_id_id}}"></td>
-                        <td style="text-align: center;"  hidden><input type="text" name="canid" value="{{ x.can_id_id}}"></td>
-                        <td style="text-align: center;"><button  style="background-color: rgb(73, 198, 73); border-radius:7px;height:35px;width:80px;font-weight:bold;color:white;border:none" type="submit">View</button></td>
-                        <!-- <td style="text-align: center;">{{ x.username}}</td> -->
-                        
-                        
-                        <!-- <td style="text-align: center;">{{ user.id}}</td> -->
-                      {% endif %}
-                     <!-- <td style="text-align: center;"><a href="#">{{ x.email }}{{ x.about}}</a></td> -->
-                     
-                     <!-- <td style="text-align: center;" hidden><input type="text" name="cmpid" value="{{ x.job_id}}"></td> -->
-                   </form>
-                 </tr>
-                  {% endif %}
-                 {% endfor %}
-                </table>
-           </div>  
-         </div>
-
+      
+      <div style="width: 100%;">
          {% for i in data %}
               {% if user.cat == i.cat %}
-         <div style="width:60%;background-color:rgba(234, 234, 234, 0.58);border-radius:10px;margin-left: 25%;padding-top: 2%;padding-left: 2%;">
+         <div style="width:50%;background-color:rgba(234, 234, 234, 0.58);border-radius:10px;margin-left: 25%;padding-top: 1%;padding-left: 2%;padding-bottom: 1%;">
           <form method="post" action="{% url 'canpage' %}">
             {% csrf_token %}
             {% if user.username in i.username %}
@@ -95,6 +56,7 @@
         </div>
         {% endif %}
       {% endfor %}
+      </div>
     </body>
           {% endblock %}
 </html>

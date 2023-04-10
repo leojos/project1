@@ -16,25 +16,27 @@
   }
   
 </style>
-<body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));">
+<body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973)); overflow-x: hidden;">
   <br>
   
   
-  <div style="height: fit-content;background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));background-repeat:no-repeat">
+  <div style="height: fit-content;background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));background-repeat:no-repeat;margin-top:3%;">
   <br> 
-<h1 style="color: black; text-align:center;margin-left:10%;">Hi {{user.username}}, Jobs as per your preference</h1><br><br>
+  <center>
+<h1 style="color: black; text-align:center;">Hi {{user.username}}, These are the cv's you created</h1><br><br>
 
 {% for i in data1 %}
-<div style="width:30%;background-color:rgba(234, 234, 234, 0.58);border-radius:10px;margin-left: 30%;padding:1%;height:50%;">
+<div style="width:30%;background-color:rgba(234, 234, 234, 0.58);border-radius:10px;padding:1%;height:50%;">
         <form action="{% url 'res' %}" method="post">
             {% csrf_token %}
             
-            <h2>Resumme - {{ forloop.counter }}</h2>
+            <h2 style="margin-left: -60%;">Resumme - {{ forloop.counter }}</h2>
                 <input type="hidden" name="iid" value="{{i.res_id}}">
                 <button type="submit" style="background-color: rgb(39, 202, 39);border-radius:5px; color:white;border:none;width:70px;height:40px;float:right;margin-top:-15%;">View</button>
        </form>
 </div><br>
 {% endfor %}
+</center>
 <br>
 </body>
 {% endblock %}
