@@ -1,6 +1,10 @@
 
 {% load static %}
 <html>
+  <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  </head>
     <style>
         * {
             margin: 0;
@@ -167,17 +171,9 @@
           
     </style>
 <body>
-{% for i in data1 %}
-    
-    <div class="container" id="ab">
-       
-       
-        <!-- Resume  Templates-->
-        <div class="d-grid gap-2 d-md-block justify-content-md-end">
-        </div>
-        
-       
-                        <div class="containerres">
+  {% for i in data1 %}
+
+                        <div class="containerres" id="dddd">
                                 <div class="header">
                                     <div class="full-name">
                                         <span class="first-name">{{i.name}}</span> 
@@ -211,7 +207,7 @@
                                 </div>
                             <div class="details">
                                 
-                                <div class="sectionres">
+                               
                                     <div class="section__title">Education</div>
                                     <div class="section__list">
                                         <div class="section__list-item">
@@ -254,15 +250,17 @@
                                     </div>
                                     
                                 </div>
-                                <div class="sectionres">
+                                
                                     <div class="section__title">Projects</div> 
                                     <div class="section__list mb-2">
                                     <div class="section__list-item ">
                                         <!-- <div class="name mb-2">{{allresumes.projecttitle}}</div> -->
-                                        <div class="text mb-2">{{i.projects}}</div>
+                                        {% for i in data3 %}
+                                          <div class="text mb-2"><b>{{i.proname}}</b><br>{{i.prodetails}}</div>
+                                        {% endfor %}
                                     </div>
                                 </div>
-                                <div class="sectionres">
+                                
                                     <div class="section__title">Skills</div>
                                         <div class="skills">
                                             <div class="skills__item">
@@ -274,41 +272,45 @@
                                         
                                         </div>
                                         
-                                </div>  
-                                <div class="sectionres">
+                                
+                                
                                     <div class="section__title">Certifications</div>
                                         <div class="skills">
                                             <div class="skills__item">
                                                 
                                                     <div class="left">
-                                                        <div class="name">{{i.certi}}</div>
+                                                      {% for i in data5 %}
+                                                        <div class="text mb-2"><b>{{i.certiname}} - {{i.certidate}}</b><br>{{i.cerinfo}}</div>
+                                                      {% endfor %}
                                                     </div>
                                             </div>
                                         </div>
-                                </div>
-                                <div class="sectionres">
+                               
+                                
                                     <div class="section__title">Achievments</div>
                                         <div class="skills">
                                             <div class="skills__item">
                                                 
                                                     <div class="left">
-                                                        <div class="name">{{i.achi}}</div>
+                                                      {% for i in data4 %}
+                                                        <div class="text mb-2"><b>{{i.achiname}} - {{i.achidate}}</b><br>{{i.achiinfo}}</div>
+                                                      {% endfor %}
                                                     </div>
                                             </div>
                                         </div>
-                                </div>
-                                <div class="sectionres">
+                               
                                     <div class="section__title">Internships</div>
                                         <div class="skills">
                                             <div class="skills__item">
                                                 
                                                     <div class="left">
-                                                        <div class="name">{{i.interns}}</div>
+                                                      {% for i in data2 %}
+                                                        <div class="text mb-2"><b>{{i.internname}} - {{i.interndate}}</b><br>{{i.interns}}</div>
+                                                      {% endfor %}
                                                     </div>
                                             </div>
                                         </div>
-                                </div>
-                                <div class="sectionres">
+                               
                                     <div class="section__title">Strengths</div>
                                         <div class="skills">
                                             <div class="skills__item">
@@ -318,8 +320,7 @@
                                                     </div>
                                             </div>
                                         </div>
-                                </div>
-                                <div class="sectionres">
+                               
                                     <div class="section__title">Language</div>
                                         <div class="skills">
                                             <div class="skills__item">
@@ -329,8 +330,7 @@
                                                     </div>
                                             </div>
                                         </div>
-                                </div>
-                                <div class="sectionres">
+                                
                                     <div class="section__title">Hobbies</div>
                                         <div class="skills">
                                             <div class="skills__item">
@@ -340,8 +340,7 @@
                                                     </div>
                                             </div>
                                         </div>
-                                </div>
-                                <div class="sectionres">
+                               
                                     <div class="section__title">References</div>
                                         <div class="skills">
                                             <div class="skills__item">
@@ -351,34 +350,9 @@
                                                     </div>
                                             </div>
                                         </div>
-                                </div>
-                                
-                                
                         </div>
-                        </div>
-    </div>
-</div>
 {% endfor %}
-<button id="download" style="background-color: rgba(10, 63, 87, 0.623);border-radius:2px;padding:1%;border:none;color:white;margin-left:2%;"><b>Download Resume</b></button>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
-    window.onload = function () {
-        document.getElementById("download")
-            .addEventListener("click", () => {
-                const invoice = this.document.getElementById("ab");
-                console.log(invoice);
-                console.log(window);
-                var opt = {
-                    margin: 1,
-                    filename: 'Resume.pdf',
-                    image: { type: 'jpeg', quality: 0.99 },
-                    html2canvas: { scale: 2 },
-                    jsPDF: { unit: 'in', format: 'a3', orientation: 'p' }
-                };
-                html2pdf().from(invoice).set(opt).save();
-            })
-    }
-    </script>
+
 </body>
 
 </html>

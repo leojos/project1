@@ -43,7 +43,7 @@
          
          <div style="width:50%;background-color:rgba(234, 234, 234, 0.58);border-radius:10px;margin-left: 33%;padding:2%;height:150%;">
           {% if user.username in i.username %}
-          <form method="post" action="{% url 'canpage2' %}">
+          <form method="post" action="{% url 'canpage4' %}">
             {% csrf_token %}
              <div class="d-flex justify-content-center align-items-center rounded" style="height: 100px;width:100px;">
               {% if i.image %}

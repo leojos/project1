@@ -45,6 +45,7 @@
   td, th {
     border: 1px solid #000000;
     padding: 5px;
+   
   }
   
   tr:nth-child(even) {
@@ -61,9 +62,7 @@
   <th>Interview start date</th>
   <!-- <th>Start-date</th> -->
   <!-- <th>End-date</th> -->
-  <th>Type</th>
-  <th>Status</th>
-  <th></th>
+  
   <tr>
  {% for i in sc %}
   
@@ -80,9 +79,9 @@
    
   
    <td>{% if i.status == False %}
-    <button type="submit" class="bt" style="margin-left:20%;">Done</button>
+    <button type="submit" class="bt" style="margin-left:2%;">Done</button>
     {% else %}
-      <button type="button" class="bt" style="margin-left:20%;">Pending</button>
+      <button type="button" class="bt" style="margin-left:5%;">Pending</button>
   {% endif %}
 </td>
 <form action="{% url 'sch' %}" method="post">

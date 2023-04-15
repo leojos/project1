@@ -19,6 +19,10 @@ from .models import scheduling
 from .models import offerr
 from .models import wishlist
 from .models import payment
+from .models import interdetails
+from .models import projectdetails
+from .models import achidetails
+from .models import certidetails
 from django.contrib.auth.decorators import login_required
 from django import forms
 from django.db.models.functions import Now
@@ -50,8 +54,8 @@ from django.http import JsonResponse
 import openai
 import requests
 
-# from django.template.loader import get_template
-# from xhtml2pdf import pisa
+from django.template.loader import get_template
+from xhtml2pdf import pisa
 # from io import BytesIO
 # from faunadb import query as q
 # import pytz
@@ -962,11 +966,16 @@ def setdate(request):
 
 def my_view(request):
     # Retrieve data from the database
-            data1=resumme.objects.filter(user_id = request.user.id)
-            data2=request.user.image
+            iid=request.POST['iid']
+            data1=resumme.objects.filter(res_id = iid)
+            data2=interdetails.objects.filter(cann_id = request.user.id)
+            data3=projectdetails.objects.filter(cann_id = request.user.id)
+            data4=achidetails.objects.filter(cann_id = request.user.id)
+            data5=certidetails.objects.filter(cann_id = request.user.id)
+           
     # Render an HTML template using the retrieved data
             template = get_template('res.html')
-            html = template.render({'data1': data1,'data2': data2})
+            html = template.render({'data1': data1,'data2': data2,'data3': data3,'data4': data4,'data5': data5})
 
             # Generate a PDF from the HTML using xhtml2pdf
             response = HttpResponse(content_type='application/pdf')
@@ -994,6 +1003,21 @@ def my_vi(request):
                 return HttpResponse('Error generating PDF file')
             return response
 
+def generate_pdf(request):
+    template_path = 'my_template.html'
+    context = {'my_key': 'my_value'}
+    # Create a Django template object
+    template = get_template(template_path)
+    # Render the template with the context
+    html = template.render(context)
+    # Create a PDF object
+    pdf = pisa.CreatePDF(html, dest=response)
+    # Check if the PDF was created successfully
+    if not pdf.err:
+        # Return the PDF as a response
+        return HttpResponse(pdf.content, content_type='application/pdf')
+    else:
+        return HttpResponse('Error generating PDF')
 
 # def get(*args, **kwargs):
 #         r=resumme.objects.all()
@@ -1010,14 +1034,20 @@ def my_vi(request):
 def res(request):
     iid=request.POST['iid']
     data1=resumme.objects.filter(res_id = iid)
-    return render(request,'res.html',{'data1':data1})
+    data2=interdetails.objects.filter(cann_id = request.user.id)
+    data3=projectdetails.objects.filter(cann_id = request.user.id)
+    data4=achidetails.objects.filter(cann_id = request.user.id)
+    data5=certidetails.objects.filter(cann_id = request.user.id)
+    return render(request,'res.html',{'data1':data1,'data2':data2,'data3':data3,'data4':data4,'data5':data5})
 
 def resno(request):
     data1=resumme.objects.filter(user_id = request.user.id)
     return render(request,'resno.html',{'data1':data1})
 
 def resdetails(request):
+  if 'can' in request.session:
     return render(request,'resdetails.html')
+  return redirect('index')
 
 def resubmit(request):
  if 'can' in request.session:
@@ -1334,7 +1364,7 @@ def paymenthandler(request):
        # if other than POST request is made.
         return HttpResponseBadRequest()
 
-openai.api_key = "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" # Replace with your actual API key
+openai.api_key = "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" # Replace with your actual API key
 model_engine = "text-davinci-003"
 def generate_completion(request):
     
@@ -1365,3 +1395,78 @@ def get_news(request):
                     "page": "Newsplatform",
                     "articles": articles
                 })
+
+def interdetail(request):
+    if 'can' in request.session:
+        interns=request.POST['interns']
+        internname=request.POST['internname']
+        interndate=request.POST['interndate']
+        member = interdetails(cann_id=request.user.id,interns=interns,internname=internname,interndate=interndate)
+        member.save()
+        return redirect('resdetails')
+    return redirect('index')
+
+def projectdetail(request):
+    if 'can' in request.session:
+        proname=request.POST['proname']
+        prodetails=request.POST['prodetails']
+        member = projectdetails(cann_id=request.user.id,proname=proname,prodetails=prodetails)
+        member.save()
+        return redirect('resdetails')
+    return redirect('index')
+
+def achidetail(request):
+    if 'can' in request.session:
+        achiname=request.POST['achiname']
+        achiinfo=request.POST['achiinfo']
+        achidate=request.POST['achidate']
+        member = achidetails(cann_id=request.user.id,achiname=achiname,achiinfo=achiinfo,achidate=achidate)
+        member.save()
+        return redirect('resdetails')
+    return redirect('index')
+
+def certidetail(request):
+    if 'can' in request.session:
+        certiname=request.POST['certiname']
+        cerinfo=request.POST['cerinfo']
+        certidate=request.POST['certidate']
+        member = certidetails(cann_id=request.user.id,certiname=certiname,cerinfo=cerinfo,certidate=certidate)
+        member.save()
+        return redirect('resdetails')
+    return redirect('index')
+
+def coverletterform(request):
+    userid=request.user.id
+    # profileid=JobseekerProfile.objects.get(user_id=userid)
+    # coverlettertitle=request.POST.get('covertitle')  
+    candidatename = request.POST.get('name')    
+    role_you_apply = request.POST.get('designation') 
+    company_apply = request.POST.get('companyname')    
+    skills= request.POST.get('skills') 
+
+
+    prompt = f"Generate cover letter for applicant name {candidatename} and I am applying for the position of {role_you_apply} at {company_apply}. I have experience in {skills}."
+    response = openai.Completion.create(
+        model="text-davinci-003", 
+        prompt=prompt,
+        temperature=0.5,
+        max_tokens=1024
+        )
+    completion_text = response.choices[0].text
+    print(completion_text)
+    context={
+'completion_text':completion_text
+    }
+    if completion_text:
+        return render(request,"cl.html",context)
+    # if request.method == 'POST':
+    #         letterdetails=CoverLetterDetails(
+    #         coverlettertitle=coverlettertitle,
+    #         profile_id=  profileid.id,
+    #         coverletter=completion_text,
+    #         )
+    #         letterdetails.save()
+            # value=CoverLetterDetails.objects.get(coverletter_id=letterdetails.pk)
+            # return redirect(reverse('resumepreview',args=[value.coverletter_id]))
+           
+    return render(request,"coverletter.html")

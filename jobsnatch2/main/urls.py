@@ -112,6 +112,13 @@ urlpatterns = [
     path('generate_completion', views.generate_completion, name='generate_completion'),
     path('trail6', views.trail6, name='trail6'),
     path('news', views.get_news, name='get_news'),
+    path('interdetail', views.interdetail, name='interdetail'),
+    path('projectdetail', views.projectdetail, name='projectdetail'),
+    path('achidetail', views.achidetail, name='achidetail'),
+    path('certidetail', views.certidetail, name='certidetail'),
+    # path('coverletter', views.coverletter, name='coverletter'),
+    # path('cl', views.cl, name='cl'),
+    path('coverletterform', views.coverletterform, name='coverletterform'),
     # path('pdf_view', views.pdf_view, name='pdf_view'),
 
     

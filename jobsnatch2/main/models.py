@@ -302,10 +302,6 @@ class resumme(models.Model):
     ten=models.CharField(max_length=100,blank=True)
     schomarks=models.CharField(max_length=100,blank=True)
     schopy=models.CharField(max_length=100,blank=True)
-    projects=models.TextField(blank=True)
-    certi=models.TextField(blank=True)
-    achi=models.TextField(blank=True)
-    interns=models.TextField(blank=True)
     refe=models.TextField(blank=True,null=True)
     phone=models.IntegerField(blank=True, null=True,default=0)
     address=models.TextField(blank=True)
@@ -407,3 +403,34 @@ class payment(models.Model):
     razorpay_order_id=models.CharField(max_length=100,null=True)
     signature=models.CharField(max_length=100,null=True)
     
+class interdetails(models.Model):
+    in_id=models.AutoField(primary_key=True)
+    cann_id=models.IntegerField(blank=True, null=True)
+    status=models.BooleanField('status', default=False) 
+    interns=models.CharField(max_length=100,null=True)
+    internname=models.CharField(max_length=100,null=True)
+    interndate=models.DateField()
+
+class projectdetails(models.Model):
+    pro_id=models.AutoField(primary_key=True)
+    cann_id=models.IntegerField(blank=True, null=True)
+    status=models.BooleanField('status', default=False) 
+    proname=models.CharField(max_length=100,null=True)
+    prodetails=models.CharField(max_length=100,null=True)
+    
+
+class achidetails(models.Model):
+    achi_id=models.AutoField(primary_key=True)
+    cann_id=models.IntegerField(blank=True, null=True)
+    status=models.BooleanField('status', default=False) 
+    achiname=models.CharField(max_length=100,null=True)
+    achiinfo=models.CharField(max_length=100,null=True)
+    achidate=models.DateField()
+
+class certidetails(models.Model):
+    cer_id=models.AutoField(primary_key=True)
+    cann_id=models.IntegerField(blank=True, null=True)
+    status=models.BooleanField('status', default=False) 
+    certiname=models.CharField(max_length=100,null=True)
+    cerinfo=models.CharField(max_length=100,null=True)
+    certidate=models.DateField()
