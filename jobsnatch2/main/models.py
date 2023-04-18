@@ -329,6 +329,7 @@ class scheduling(models.Model):
         reason=models.TextField(null=True,blank=True)
         can_date =  models.DateTimeField(null=True)
         approvedd=models.BooleanField('approveds', default=False)
+        job_id=models.IntegerField(blank=True, null=True)
         
 
         @property

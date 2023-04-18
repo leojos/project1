@@ -1,0 +1,85 @@
+/* CSS Document */
+body{padding:0px; margin:0px; background:#052b58; color:#fff; font:10px/14px Tahoma, sans-serif;}
+div, p, ul, h2, h3, h4, img{padding:0px; margin:0px;}
+ul{list-style-type:none;}
+
+.clear {clear: both; margin: 0px; height:0}
+
+p a{font:10px/14px Tahoma, sans-serif; color:#c2ecff; text-decoration:underline;}
+p a:hover{ color:#fff; text-decoration:none;}
+
+p a.a2{font:10px/14px Tahoma, sans-serif; color:#fff; text-decoration:underline;}
+p a.a2:hover{ color:#c2ecff; text-decoration:none;}
+
+.headline{font:10px/14px Tahoma, sans-serif; color:#f2ad01; font-weight:bold}
+
+#container{width:775px; position:relative; margin:0 auto; border:#FFF 1px solid}
+
+/* HEADER */
+
+#header{width:775px; height:258px;  position:relative; background:url(../images/img_header.jpg) 0 0 repeat-x;}
+#header img#logo{position:absolute; top:7px; left:40px}
+#header img#slogan{position:absolute; top:114px; left:44px}
+
+#header ul.presentation{position:absolute; top:22px; left:583px; width:175px}
+#header ul.presentation li{padding-left:12px; background:url(../images/arrow1.gif) 0 4px no-repeat}
+#header ul.presentation li a{font:10px/14px Tahoma, sans-serif; color:#d9f1ff; text-decoration:none; font-weight:bold}
+#header ul.presentation li a:hover{color:#fff}
+
+#header ul.menu{position:absolute; top:77px; left:610px; width:102px}
+#header ul.menu li{width:102px; height:22px; margin-bottom:9px}
+#header ul.menu li a{width:102px; height:22px; display:block; text-indent:-20000px; }
+#header ul.menu li a:hover{width:102px; height:22px;}
+
+#header ul.menu li.btn_1 a{background:url(../images/btn_1.jpg) 0 0 no-repeat; }
+#header ul.menu li.btn_1 a:hover{background:url(../images/btn_1_over.jpg) 0 0 no-repeat;}
+
+#header ul.menu li.btn_2 a{background:url(../images/btn_2.jpg) 0 0 no-repeat; }
+#header ul.menu li.btn_2 a:hover{background:url(../images/btn_2_over.jpg) 0 0 no-repeat;}
+
+#header ul.menu li.btn_3 a{background:url(../images/btn_3.jpg) 0 0 no-repeat; }
+#header ul.menu li.btn_3 a:hover{background:url(../images/btn_3_over.jpg) 0 0 no-repeat;}
+
+#header ul.menu li.btn_4 a{background:url(../images/btn_4.jpg) 0 0 no-repeat; }
+#header ul.menu li.btn_4 a:hover{background:url(../images/btn_4_over.jpg) 0 0 no-repeat;}
+
+#header ul.menu li.btn_5 a{background:url(../images/btn_5.jpg) 0 0 no-repeat; }
+#header ul.menu li.btn_5 a:hover{background:url(../images/btn_5_over.jpg) 0 0 no-repeat;}
+
+/* CONTENT */
+
+#content{width:775px; position:relative; margin-top:23px}
+
+#leftPan{width:365px; float:left; margin-right:30px; margin-left:64px; display:inline}
+#rightPan{width:260px; float:left;; margin-top:2px}
+
+#welcome{margin-bottom:25px}
+#welcome h2{height:37px; position:relative; background:url(../images/h_welcome.gif) 0 0 no-repeat; margin-bottom:12px}
+#welcome img{float:left; margin-right:15px; margin-left:7px}
+#welcome p{float:left; width:220px}
+
+#services h2{height:19px; position:relative; background:url(../images/h_services.gif) 0 0 no-repeat; margin-bottom:12px}
+#services p.headline{display:block; margin-bottom:15px; margin-left:4px}
+#services p#servTxt{width:168px; margin:0 18px 0 4px; float:left}
+#services ul{float:left}
+#services ul li{font:10px/14px Tahoma, sans-serif; background:url(../images/bullet1.gif) 0 5px no-repeat; padding-left:14px; height:22px;}
+#services ul li a{color:#fff; text-decoration:underline;}
+#services ul li a:hover{color:#fff; text-decoration:none; background:#081c34}
+
+#news{margin-bottom:20px}
+#news h2{height:19px; position:relative; background:url(../images/h_news.gif) 0 0 no-repeat; margin-bottom:10px}
+#news p{padding-left:19px; margin:0 0 15px 6px; background:url(../images/file.gif) 0 3px no-repeat}
+
+#solutions h2{height:19px; position:relative; background:url(../images/h_solutions.gif) 0 0 no-repeat; margin-bottom:17px}
+#solutions img{float:left; margin-right:18px; margin-left:6px}
+#solutions p#txt01{float:left; width:150px; padding-top:2px}
+#solutions p#txt02{float:left; width:240px;margin-left:10px;}
+#solutions .clear#space01{height:10px}
+
+/* FOOTER */
+
+
+#footer{height:50px; clear:both; width:775px; margin-top:20px; background:#052345}
+#footer p{padding: 10px 0 0 0; font:10px/16px Tahoma, sans-serif; font-weight:normal; text-align:center; color:#c2ecff;}
+#footer p a{font:10px/16px Tahoma, sans-serif; font-weight:normal; color:#c2ecff; text-decoration:none; padding: 0 3px }
+#footer p a:hover{text-decoration:none; background:#c2ecff; color:#fff}

@@ -60,6 +60,9 @@
   <th>Company</th>
   <th>Post</th>
   <th>Interview start date</th>
+  <th>Type</th>
+  <th>Status</th>
+  <th>Change</th>
   <!-- <th>Start-date</th> -->
   <!-- <th>End-date</th> -->
   
@@ -67,9 +70,13 @@
  {% for i in sc %}
   
    {% for x in comp %}
-    {% if x.cmp_id_id == i.com_id %}
+    {% if x.id == i.com_id %}
       <td>{{x.username}}</td>
-      <td>{{x.job_title}}</td>
+      {% for y in com %}
+       {% if y.job_id == i.job_id %}
+        <td>{{y.job_title}}</td>
+       {% endif %}
+      {% endfor %}
       <td>{{i.train_date}}</td>
       
     {% endif %}

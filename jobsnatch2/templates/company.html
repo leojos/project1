@@ -85,9 +85,9 @@
           </style>
  <body style="background-image: linear-gradient(to right, rgba(22, 172, 213, 0.973),rgba(15, 184, 227, 0.598),rgba(15, 184, 227, 0.598), rgba(22, 172, 213, 0.973));overflow-x: hidden;">   
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    <div class="container" style="width: 84%;float:right;margin-top: -5%;">
+    
     <h1 style="text-align:center;font-family: 'Franklin Gothic Medium', Arial Narrow, 'Arial', sans-serif;font-weight: bolder;"> PROFILE </h1>
-
+    <div class="container" style="width: 83%;float:right;">
     <div class="row flex-lg-nowrap">
      
       <div class="col">
@@ -232,7 +232,12 @@
           </div>
         </div>
             
-<!-- Modal -->
+
+
+      </div>
+    </div>
+    </div>
+    <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -284,40 +289,7 @@
       </div>
     </div>
   </div>
-<!-- Modal -->
-<!-- <div class="modal fade" id="exampleModall" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form class="form"  action="updatec/{{ user.id }}" method="post" enctype="multipart/form-data">
-          {% csrf_token %}
-            <label for="avatarr" style="background-color:rgb(10, 62, 87) ;border-color:rgb(10, 62, 87);color:white;border-radius:5px;padding-left:7%;padding-right:7%;padding-top:2%;padding-bottom:2%;">Choose Proof</label>
-            <input type="file" d="avatar" id="avatarr" name="proof" accept="image/png, image/jpeg" style="display: none;">
-            <button type="submit" class="btn btn-primary">Submit proof</button>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-       
-      </div>
-    </div>
-  </div>
-</div> -->
-
-      </div>
-    </div>
-    </div>
     {% include 'alerts.html'%}
-    <style type="text/css">
-    body{
-        margin-top:20px;
-        background:#f8f8f8
-    }
-    </style>
     
     <script type="text/javascript">
     

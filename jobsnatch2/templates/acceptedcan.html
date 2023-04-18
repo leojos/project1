@@ -77,7 +77,8 @@
            <form action="{% url 'interdate'%}" method="post">
             {% csrf_token %}
             <div style="margin-top: -5.5%;float:right;">
-             <input type="hidden" name="canid" value="{{ i.can_id_id}}"></td>
+             <input type="hidden" name="jobid" value="{{ i.jobs_id_id}}">
+             <input type="hidden" name="canid" value="{{ i.can_id_id}}">
              <button class="bt" type="submit">Set Date</button>
             </div>
            </form>

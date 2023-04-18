@@ -1090,7 +1090,8 @@ def sche(request):
     tim= request.POST['tim']
     caid= request.POST['caid']
     canid= request.POST['canid']
-    user = scheduling(user_id_id=canid,train_date=tim,typp=ty,com_id=caid,dura=timm)
+    jobid= request.POST['jobid']
+    user = scheduling(user_id_id=canid,train_date=tim,typp=ty,com_id=caid,dura=timm,job_id=jobid)
     user.save()
     # Download the helper library from https://www.twilio.com/docs/python/install
     account_sid = "ACcaf3a016ba44451632b6b9d52ec003f1"
@@ -1109,8 +1110,9 @@ def sche(request):
 def interdate(request):
     if request.method == 'POST':
      canid= request.POST['canid']
+     jobid= request.POST['jobid']
      ca=User.objects.filter(id=canid)
-     return render(request,'interdate.html',{'ca':ca,'can':canid})
+     return render(request,'interdate.html',{'ca':ca,'can':canid,'jobid':jobid})
 
 def scheaccept(request):
     if request.method == 'POST':
@@ -1174,10 +1176,11 @@ def appr2(request):
     
 def progress(request):
 
-  comp=job.objects.all()
+  comp=User.objects.all()
+  com=job.objects.all()
     
   sc=scheduling.objects.filter(user_id_id=request.user.id,approvedd=True,train_date__gt=Now())
-  return render(request,'progress.html',{'sc':sc,'comp':comp})
+  return render(request,'progress.html',{'sc':sc,'comp':comp,'com':com})
 
 
 def notifi(request):
